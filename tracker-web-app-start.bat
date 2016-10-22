@@ -14,13 +14,13 @@ if "%1"=="" (
 
 if not exist %filepath% (
 	echo File not found
-	echo File not found >%log%
+	echo File not found >>%log%
 	pause >nul
 	exit /B 1
 ) 
 
 echo Starting server...
-start "tracker-web-app" /i /min cmd /c "java -jar %filepath% >%log% 2>&1"
+start "tracker-web-app" /i /min cmd /c "java -jar %filepath% >>%log% 2>&1"
 timeout /T 1 /NOBREAK >nul
 
 findstr /B "Error:" %log%
