@@ -16,20 +16,23 @@ public class IssueController {
 
     static {
 
-        Issue iss1 = new Issue();
-        iss1.setHash(0);
-        iss1.setSummary("first issue");
-        iss1.setDescription("first issues description");
-        iss1.setStatus(Issue.Status.OPEN);
+        Issue firstIssue = new Issue(
+                0L,
+                "First issue",
+                "First issue's description",
+                Issue.Status.OPEN
+        );
 
-        Issue iss2 = new Issue();
-        iss2.setHash(1);
-        iss2.setSummary("second issue");
-        iss2.setDescription("second issues description");
-        iss2.setStatus(Issue.Status.CLOSED);
+        Issue secondIssue = new Issue(
+                1L,
+                "Second issue",
+                "Second issue's description",
+                Issue.Status.CLOSED
+        );
 
-        issueMap.put(0L, iss1);
-        issueMap.put(1L, iss2);
+
+        issueMap.put(0L, firstIssue);
+        issueMap.put(1L, secondIssue);
 
     }
 
