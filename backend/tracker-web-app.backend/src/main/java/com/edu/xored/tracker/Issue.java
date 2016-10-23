@@ -7,6 +7,9 @@ public class Issue {
     private String description;
     private String status;
 
+    public Issue() {
+    }
+
     public Issue(long hash, String summary, String description, String status) {
         this.hash = hash;
         this.summary = summary;
