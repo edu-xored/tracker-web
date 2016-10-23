@@ -1,9 +1,5 @@
 package com.edu.xored.tracker;
 
-enum Status {
-    OPEN, CLOSED;
-}
-
 public class Issue {
 
     private long hash;
@@ -51,5 +47,9 @@ public class Issue {
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    enum Status {
+        OPEN, CLOSED;
     }
 }
