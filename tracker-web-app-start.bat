@@ -20,11 +20,12 @@ if not exist %filepath% (
 ) 
 
 echo Starting server...
-start "tracker-web-app" /i /min cmd /c "java -jar %filepath% >>%log% 2>&1"
+start "tracker-web-app" /i /min cmd /c "get-cmd-pid.bat & java -jar %filepath% >%log% 2>&1"
 timeout /T 1 /NOBREAK >nul
 
 findstr /B "Error:" %log%
 if %ERRORLEVEL%==0 (
+	del /F PID.tmp
 	pause > nul
 	exit /B 1
 )
@@ -41,7 +42,9 @@ del /F %TCP%
 start http://localhost:8080
 
 echo Press any button to quit
+set /p PID=< PID.tmp
 pause > nul
-taskkill /fi "windowtitle eq tracker-web-app" /im cmd.exe >nul
+taskkill /pid %PID% > nul
+del /F PID.tmp
 echo Server stopped
 exit /B 0
