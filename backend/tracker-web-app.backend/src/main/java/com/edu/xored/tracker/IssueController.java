@@ -20,13 +20,13 @@ public class IssueController {
         iss1.setHash(0);
         iss1.setSummary("first issue");
         iss1.setDescription("first issues description");
-        iss1.setStatus("Open");
+        iss1.setStatus(Status.OPEN);
 
         Issue iss2 = new Issue();
         iss2.setHash(1);
         iss2.setSummary("second issue");
         iss2.setDescription("second issues description");
-        iss2.setStatus("Close");
+        iss2.setStatus(Status.CLOSED);
 
         issueMap.put(0L, iss1);
         issueMap.put(1L, iss2);

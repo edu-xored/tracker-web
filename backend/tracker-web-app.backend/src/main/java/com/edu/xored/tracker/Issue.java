@@ -1,16 +1,20 @@
 package com.edu.xored.tracker;
 
+enum Status {
+    OPEN, CLOSED;
+}
+
 public class Issue {
 
     private long hash;
     private String summary;
     private String description;
-    private String status;
+    private Status status;
 
     public Issue() {
     }
 
-    public Issue(long hash, String summary, String description, String status) {
+    public Issue(long hash, String summary, String description, Status status) {
         this.hash = hash;
         this.summary = summary;
         this.description = description;
@@ -41,11 +45,11 @@ public class Issue {
         this.description = description;
     }
 
-    public String getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 }
