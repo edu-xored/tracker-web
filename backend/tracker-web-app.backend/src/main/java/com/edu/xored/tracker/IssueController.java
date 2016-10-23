@@ -31,8 +31,8 @@ public class IssueController {
         );
 
 
-        issueMap.put(0L, firstIssue);
-        issueMap.put(1L, secondIssue);
+        issueMap.put(firstIssue.getHash(), firstIssue);
+        issueMap.put(secondIssue.getHash(), secondIssue);
 
     }
 
