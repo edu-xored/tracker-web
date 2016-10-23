@@ -17,7 +17,7 @@ public class IssueController {
     Issue issue1 = new Issue(0, "first issue", "description of first issue", "Open");
     Issue issue2 = new Issue(1, "second issue", "description of second issue", "Closed");
     Issue issue3 = new Issue(2, "third issue", "description of third issue", "Open");
-    
+
     @GetMapping
     public ResponseEntity<Issue> get(@PathVariable("hash") long hash) {
         return ResponseEntity.status(HttpStatus.OK).body(issueMap.get(hash));
