@@ -17,14 +17,14 @@ public class IssueController {
     static {
 
         Issue firstIssue = new Issue(
-                0L,
+                hashCounter++,
                 "First issue",
                 "First issue's description",
                 Issue.Status.OPEN
         );
 
         Issue secondIssue = new Issue(
-                1L,
+                hashCounter++,
                 "Second issue",
                 "Second issue's description",
                 Issue.Status.CLOSED
