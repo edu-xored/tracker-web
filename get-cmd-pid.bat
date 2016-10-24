@@ -22,4 +22,4 @@ endlocal & set "uid=%uid%"
   (call )
 ))||goto :getLock
 del "%lock%" 2>nul
-endlocal & if "%~1" equ "" (echo(%PID%)>PID.tmp else set "%~1=%PID%"
+endlocal & (echo(%PID%) > %1
