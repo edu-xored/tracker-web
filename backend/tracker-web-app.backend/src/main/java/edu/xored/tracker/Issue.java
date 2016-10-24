@@ -1,4 +1,4 @@
-package com.edu.xored.tracker;
+package edu.xored.tracker;
 
 public class Issue {
 
