@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping(value = {"/issue", "/issue/{hash}"})
+@RequestMapping(value = "/issues")
 public class IssueController {
     // TODO: temporary issues storage for testing purposes. Remove when implement access to real issues through CLI core.
     private static Map<Long, Issue> issueMap = new HashMap<Long, Issue>();
@@ -35,11 +35,11 @@ public class IssueController {
         issueMap.put(secondIssue.getHash(), secondIssue);
     }
 
-    @GetMapping
-    public ResponseEntity<Issue> get(@PathVariable("hash") long hash) {
+    @GetMapping(value = "/{hash}")
+    public Issue getIssue(@PathVariable("hash") long hash) {
         if (!issueMap.containsKey(hash)) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+            return null;
         }
-        return ResponseEntity.status(HttpStatus.OK).body(issueMap.get(hash));
+        return issueMap.get(hash);
     }
 }
