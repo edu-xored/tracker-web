@@ -1,4 +1,4 @@
-package com.edu.xored.tracker;
+package edu.xored.tracker;
 
 import java.util.ArrayList;
 import java.util.Collection;
