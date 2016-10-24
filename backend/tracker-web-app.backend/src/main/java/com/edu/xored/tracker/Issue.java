@@ -46,7 +46,7 @@ public class Issue {
         this.status = status;
     }
 
-    enum Status {
+    public enum Status {
         OPEN, CLOSED;
     }
 }
