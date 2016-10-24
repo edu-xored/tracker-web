@@ -1,9 +1,7 @@
 package com.edu.xored.tracker;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -35,9 +33,17 @@ public class IssueController {
 
     @GetMapping(value = "/{hash}")
     public Issue getIssue(@PathVariable("hash") long hash) {
-        if (!issueMap.containsKey(hash)) {
-            return null;
+        Issue issue = issueMap.get(hash);
+        if (issue == null) {
+            throw new IssueNotFoundException();
         }
-        return issueMap.get(hash);
+        return issue;
     }
+
+    @ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "Issue not found")
+    public class IssueNotFoundException extends RuntimeException {
+        public IssueNotFoundException() {
+        }
+    }
+
 }
