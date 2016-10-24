@@ -41,9 +41,7 @@ public class IssueController {
     }
 
     @ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "Issue not found")
-    public class IssueNotFoundException extends RuntimeException {
-        public IssueNotFoundException() {
-        }
+    private class IssueNotFoundException extends RuntimeException {
     }
 
 }
