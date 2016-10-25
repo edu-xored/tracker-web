@@ -57,10 +57,18 @@ public class Issue {
     }
 
     public void addComment(Comment comment) {
+        if (comment == null) {
+            return;
+        }
+        
         comments.add(comment);
     }
 
     public void addComments(Collection<Comment> comments) {
+        if (comments == null) {
+            return;
+        }
+
         this.comments.addAll(comments);
     }
 
