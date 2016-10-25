@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+	<head>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+		<script src="/js/postcomment.js"></script>
+		<link rel="stylesheet" href="/css/todo.css">
+	</head>
+	<body ng-app="postApp" ng-controller="postController">
+		<form ng-submit="submitForm()" name="submitForm">
+		<table>
+			<tr>
+				<td><input type="text" ng-model="comment.issue" placeholder="Enter a number of issue"></td>
+			</tr>
+			<tr>
+				<td><input type="text" ng-model="comment.text" placeholder="Leave a comment"></td>
+				<td><input type="submit" value="Comment"></td>
+			</tr>
+		<table>
+		</form>
+	</body>
+</html>
