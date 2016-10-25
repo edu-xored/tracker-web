@@ -8,6 +8,22 @@ public class Comment {
     private LocalDateTime createdDateTime;
     private String content;
 
+    public Comment() {
+        createdDateTime = LocalDateTime.now();
+    }
+
+    public Comment(String author) {
+        this();
+
+        this.author = author;
+    }
+
+    public Comment(String author, String content) {
+        this(author);
+
+        this.content = content;
+    }
+
     public String getAuthor() {
         return author;
     }
@@ -25,22 +41,6 @@ public class Comment {
     }
 
     public void setContent(String content) {
-        this.content = content;
-    }
-
-    public Comment() {
-        createdDateTime = LocalDateTime.now();
-    }
-
-    public Comment(String author) {
-        this();
-
-        this.author = author;
-    }
-
-    public Comment(String author, String content) {
-        this(author);
-
         this.content = content;
     }
 }
