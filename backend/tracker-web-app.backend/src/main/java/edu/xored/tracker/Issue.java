@@ -9,15 +9,9 @@ public class Issue {
     private String summary;
     private String description;
     private Status status;
-    private Collection<Comment> comments;
-
-    private Issue(){
-        comments = new ArrayList<>();
-    }
+    private Collection<Comment> comments = new ArrayList<>();
 
     public Issue(long hash, String summary, String description, Status status) {
-        this();
-
         this.hash = hash;
         this.summary = summary;
         this.description = description;
