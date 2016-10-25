@@ -4,15 +4,9 @@ import java.time.LocalDateTime;
 
 public class Comment {
 
-    //region Fields
-
     private String author;
     private LocalDateTime createdDateTime;
     private String content;
-
-    //endregion Fields
-
-    //region Get
 
     public String getAuthor() {
         return author;
@@ -26,10 +20,6 @@ public class Comment {
         return content;
     }
 
-    //endregion Get
-
-    //region Set
-
     public void setAuthor(String author) {
         this.author = author;
     }
@@ -37,10 +27,6 @@ public class Comment {
     public void setContent(String content) {
         this.content = content;
     }
-
-    //endregion Set
-
-    //region Constructors
 
     public Comment() {
         createdDateTime = LocalDateTime.now();
@@ -57,7 +43,4 @@ public class Comment {
 
         this.content = content;
     }
-
-    //endregion Constructors
-
 }
