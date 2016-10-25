@@ -8,19 +8,10 @@ public class Comment {
     private LocalDateTime createdDateTime;
     private String content;
 
-    public Comment() {
+    public Comment(String author, String content) {
         createdDateTime = LocalDateTime.now();
-    }
-
-    public Comment(String author) {
-        this();
 
         this.author = author;
-    }
-
-    public Comment(String author, String content) {
-        this(author);
-
         this.content = content;
     }
 
