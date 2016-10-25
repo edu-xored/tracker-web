@@ -2,6 +2,8 @@ package edu.xored.tracker;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 public class Issue {
 
@@ -9,7 +11,7 @@ public class Issue {
     private String summary;
     private String description;
     private Status status;
-    private Collection<Comment> comments = new ArrayList<>();
+    private List<Comment> comments = new ArrayList<>();
 
     public Issue(long hash, String summary, String description, Status status) {
         this.hash = hash;
@@ -51,14 +53,14 @@ public class Issue {
     }
 
     public Collection<Comment> getAllComments() {
-        return comments;
+        return Collections.unmodifiableCollection(comments);
     }
 
-    public void addComment(Comment comment){
+    public void addComment(Comment comment) {
         comments.add(comment);
     }
 
-    public void addComments(Collection<Comment> comments){
+    public void addComments(Collection<Comment> comments) {
         this.comments.addAll(comments);
     }
 
