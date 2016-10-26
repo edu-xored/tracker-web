@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.List;
+import java.util.ArrayList;
 
 @RestController
 @RequestMapping(value = "/issues")
@@ -27,8 +29,24 @@ public class IssueController {
                 Issue.Status.CLOSED
         );
 
+        Issue thirdIssue = new Issue(
+                2L,
+                "Third issue",
+                "Third issue's description",
+                Issue.Status.OPEN
+        );
+
+        Issue fourthIssue = new Issue(
+                3L,
+                "Fourth issue",
+                "Fourth issue's description",
+                Issue.Status.CLOSED
+        );
+
         issueMap.put(firstIssue.getHash(), firstIssue);
         issueMap.put(secondIssue.getHash(), secondIssue);
+        issueMap.put(thirdIssue.getHash(), thirdIssue);
+        issueMap.put(fourthIssue.getHash(), fourthIssue);
     }
 
     @GetMapping(value = "/{hash}")
@@ -40,8 +58,18 @@ public class IssueController {
         return issue;
     }
 
+    @GetMapping(params = {"status"})
+    public List<Issue> getIssuesByStatus(@RequestParam("status") Issue.Status status) {
+        List<Issue> statusIssueList = new ArrayList<Issue>();
+        for(Map.Entry<Long, Issue> entry : issueMap.entrySet()) {
+            if(status==entry.getValue().getStatus()) {
+                statusIssueList.add(entry.getValue());
+            }
+        }
+        return statusIssueList;
+    }
+
     @ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "Issue not found")
     private class IssueNotFoundException extends RuntimeException {
     }
-
 }
