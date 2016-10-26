@@ -57,19 +57,15 @@ public class Issue {
     }
 
     public void addComment(Comment comment) {
-        if (comment == null) {
-            return;
+        if (comment != null) {
+            comments.add(comment);
         }
-        
-        comments.add(comment);
     }
 
     public void addComments(Collection<Comment> comments) {
-        if (comments == null) {
-            return;
+        if (comments != null) {
+            this.comments.addAll(comments);
         }
-
-        this.comments.addAll(comments);
     }
 
     public enum Status {
