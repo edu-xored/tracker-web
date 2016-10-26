@@ -5,16 +5,10 @@
 		<script src="/js/postcomment.js"></script>
 	</head>
 	<body ng-app="postApp" ng-controller="postController">
-		<form ng-submit="submitForm()" name="submitForm">
-		<table>
-			<tr>
-				<td><input type="text" ng-model="comment.issue.hash" placeholder="Enter a number of issue"></td>
-			</tr>
-			<tr>
-				<td><input type="text" ng-model="comment.content" placeholder="Leave a comment"></td>
-				<td><input type="submit" value="Comment"></td>
-			</tr>
-		<table>
+		<form ng-submit="submitForm()" name="commentForm">
+			<input type="text" ng-model="comment.issue.hash" placeholder="Enter a number of issue">
+			<input type="text" ng-model="comment.content" placeholder="Leave a comment">
+			<input type="submit" value="Comment">
 		</form>
 	</body>
 </html>
