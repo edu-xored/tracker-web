@@ -65,8 +65,8 @@ public class IssueController {
             return issueList;
         }
         issueList = new ArrayList<Issue>();
-        for(Map.Entry<Long, Issue> entry : issueMap.entrySet()) {
-            if(status==entry.getValue().getStatus()) {
+        for (Map.Entry<Long, Issue> entry : issueMap.entrySet()) {
+            if (status == entry.getValue().getStatus()) {
                 issueList.add(entry.getValue());
             }
         }
