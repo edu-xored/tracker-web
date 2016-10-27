@@ -53,6 +53,13 @@ public class IssueController {
         issueMap.put(fourthIssue.getHash(), fourthIssue);
     }
 
+    @PostMapping
+    public Issue postIssue(@RequestBody Issue issue) {
+        issue.setHash(issueCounter);
+        issueMap.put(issueCounter++, issue);
+        return issue;
+    }
+
     @GetMapping(value = "/{hash}")
     public Issue getIssue(@PathVariable("hash") long hash) {
         Issue issue = issueMap.get(hash);
