@@ -3,10 +3,7 @@ package edu.xored.tracker;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.List;
-import java.util.ArrayList;
+import java.util.*;
 
 @RestController
 @RequestMapping(value = "/issues")
@@ -60,15 +57,20 @@ public class IssueController {
         return issue;
     }
 
-    @GetMapping(params = {"status"})
-    public List<Issue> getIssuesByStatus(@RequestParam("status") Issue.Status status) {
-        List<Issue> statusIssueList = new ArrayList<Issue>();
-        for(Map.Entry<Long, Issue> entry : issueMap.entrySet()) {
-            if(status==entry.getValue().getStatus()) {
-                statusIssueList.add(entry.getValue());
+    @GetMapping
+    public List<Issue> getIssues(@RequestParam(value = "status", required = false) Issue.Status status) {
+        List<Issue> issueList;
+        if (status == null) {
+            issueList = new ArrayList<Issue>(issueMap.values());
+            return issueList;
+        }
+        issueList = new ArrayList<Issue>();
+        for (Map.Entry<Long, Issue> entry : issueMap.entrySet()) {
+            if (status == entry.getValue().getStatus()) {
+                issueList.add(entry.getValue());
             }
         }
-        return statusIssueList;
+        return issueList;
     }
 
     @ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "Issue not found")
