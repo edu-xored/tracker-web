@@ -5,13 +5,26 @@ import java.time.LocalDateTime;
 public class Comment {
 
     private String author;
-    private LocalDateTime createdDateTime;
     private String content;
+    private LocalDateTime createdDateTime;
+
+    public Comment() {
+        this.author = "";
+        this.content = "";
+        createdDateTime = null;
+    }
 
     public Comment(String author, String content) {
-        createdDateTime = LocalDateTime.now();
-
         this.author = author;
+        this.content = content;
+        this.createdDateTime = LocalDateTime.now();
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
         this.content = content;
     }
 
@@ -19,19 +32,15 @@ public class Comment {
         return author;
     }
 
-    public LocalDateTime getCreatedDateTime() {
-        return createdDateTime;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
     public void setAuthor(String author) {
         this.author = author;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public LocalDateTime getCreatedDateTime() {
+        return createdDateTime;
+    }
+
+    public void setCreatedDateTime() {
+        this.createdDateTime = LocalDateTime.now();
     }
 }
