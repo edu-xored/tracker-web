@@ -89,6 +89,22 @@ public class IssueController {
         issueMap.remove(hash);
     }
 
+    @PatchMapping(value = "/{hash}")
+    public Issue patchIssue(@PathVariable("hash") long hash,
+                            @RequestBody Issue patchedIssue) {
+        Issue issue = issueMap.get(hash);
+        if (patchedIssue.getSummary() != null) {
+            issue.setSummary(patchedIssue.getSummary());
+        }
+        if (patchedIssue.getDescription() != null) {
+            issue.setDescription(patchedIssue.getDescription());
+        }
+        if (patchedIssue.getStatus() != null) {
+            issue.setStatus(patchedIssue.getStatus());
+        }
+        return issue;
+    }
+
     @GetMapping(params = {"status"})
     public List<Issue> getIssuesByStatus(@RequestParam("status") Issue.Status status) {
         List<Issue> statusIssueList = new ArrayList<Issue>();
