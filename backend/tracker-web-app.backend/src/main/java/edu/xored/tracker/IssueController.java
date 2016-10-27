@@ -21,6 +21,7 @@ public class IssueController {
                 "First issue's description",
                 Issue.Status.OPEN
         );
+        firstIssue.addComment(new Comment("some author", "some content"));
 
         Issue secondIssue = new Issue(
                 1L,
@@ -28,6 +29,7 @@ public class IssueController {
                 "Second issue's description",
                 Issue.Status.CLOSED
         );
+        secondIssue.addComment(new Comment("another author", "another content"));
 
         Issue thirdIssue = new Issue(
                 2L,
