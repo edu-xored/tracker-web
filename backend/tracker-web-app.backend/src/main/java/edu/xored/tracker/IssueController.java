@@ -81,6 +81,14 @@ public class IssueController {
         return issue;
     }
 
+    @DeleteMapping(value = "/{hash}")
+    public void deleteIssue(@PathVariable("hash") long hash) {
+        if (issueMap.get(hash) == null) {
+            throw new IssueNotFoundException();
+        }
+        issueMap.remove(hash);
+    }
+
     @GetMapping(params = {"status"})
     public List<Issue> getIssuesByStatus(@RequestParam("status") Issue.Status status) {
         List<Issue> statusIssueList = new ArrayList<Issue>();
