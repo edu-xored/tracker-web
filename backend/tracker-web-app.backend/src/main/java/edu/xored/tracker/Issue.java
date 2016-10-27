@@ -13,6 +13,9 @@ public class Issue {
     private Status status;
     private List<Comment> comments = new ArrayList<>();
 
+    public Issue() {
+    }
+
     public Issue(long hash, String summary, String description, Status status) {
         this.hash = hash;
         this.summary = summary;
