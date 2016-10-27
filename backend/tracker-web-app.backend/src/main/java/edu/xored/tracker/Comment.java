@@ -9,9 +9,7 @@ public class Comment {
     private LocalDateTime createdDateTime;
 
     public Comment() {
-        author = null;
-        content = null;
-        createdDateTime = null;
+        createdDateTime = LocalDateTime.now();
     }
 
     public Comment(String author, String content) {
