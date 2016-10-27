@@ -37,8 +37,4 @@ public class Comment {
     public LocalDateTime getCreatedDateTime() {
         return createdDateTime;
     }
-
-    public void setCurrentTime() {
-        this.createdDateTime = LocalDateTime.now();
-    }
 }
