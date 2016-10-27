@@ -13,6 +13,8 @@ import java.util.ArrayList;
 public class IssueController {
     // TODO: temporary issues storage for testing purposes. Remove when implement access to real issues through CLI core.
     private static Map<Long, Issue> issueMap = new HashMap<Long, Issue>();
+    // TODO: temporary initialization, when we remove issueMap issueCounter will starts from 0
+    private static long issueCounter = 4;
 
     static {
         Issue firstIssue = new Issue(
