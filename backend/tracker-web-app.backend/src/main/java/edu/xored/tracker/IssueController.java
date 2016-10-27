@@ -65,11 +65,10 @@ public class IssueController {
             return issueList;
         }
         issueList = new ArrayList<Issue>();
-        for (Map.Entry<Long, Issue> entry : issueMap.entrySet()) {
-            if (status == entry.getValue().getStatus()) {
-                issueList.add(entry.getValue());
-            }
-        }
+        issueMap.entrySet()
+                .stream()
+                .filter(entry -> entry.getValue().getStatus() == status)
+                .forEach(entry -> issueList.add(entry.getValue()));
         return issueList;
     }
 
