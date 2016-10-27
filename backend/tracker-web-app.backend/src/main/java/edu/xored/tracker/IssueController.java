@@ -69,6 +69,18 @@ public class IssueController {
         return issue;
     }
 
+    @PutMapping(value = "/{hash}")
+    public Issue putIssue(@PathVariable("hash") long hash,
+                          @RequestBody Issue issue) {
+        if (!issueMap.containsKey(hash)) {
+            throw new IssueNotFoundException();
+        }
+        List<Comment> comments = issueMap.get(hash).getAllComments();
+        issueMap.put(hash, issue);
+        issue.addComments(comments);
+        return issue;
+    }
+
     @GetMapping(params = {"status"})
     public List<Issue> getIssuesByStatus(@RequestParam("status") Issue.Status status) {
         List<Issue> statusIssueList = new ArrayList<Issue>();
