@@ -4,11 +4,11 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class CommentController {
-    @RequestMapping(value = "/postcomment", method = RequestMethod.POST)
-    public void post(@RequestBody Comment comment, @RequestParam("issueHash") long issueHash) {
+    @PostMapping(value = "/issues/{hash}/comments")
+    public void post(@RequestBody Comment comment, @PathVariable("hash") long hash) {
         IssueController issueController = new IssueController();
-        Issue issue = issueController.getIssue(issueHash);
-        comment.setCreatedDateTime();
+        Issue issue = issueController.getIssue(hash);
+        comment.setCurrentTime();
         issue.addComment(comment);
     }
 }

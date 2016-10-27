@@ -9,8 +9,8 @@ public class Comment {
     private LocalDateTime createdDateTime;
 
     public Comment() {
-        this.author = "";
-        this.content = "";
+        author = null;
+        content = null;
         createdDateTime = null;
     }
 
@@ -40,7 +40,7 @@ public class Comment {
         return createdDateTime;
     }
 
-    public void setCreatedDateTime() {
+    public void setCurrentTime() {
         this.createdDateTime = LocalDateTime.now();
     }
 }

@@ -1,17 +1,15 @@
 var postApp = angular.module('postApp', []);
 postApp.controller('postController', function($scope, $http)
 {
-    $scope.comment = {};
+	$scope.comment = {};
 	$scope.submitForm = function() {
-	    if ($scope.comment.author == null) {
+	    if (!$scope.comment.author) {
                 $scope.comment.author = "Anonymous";
         }
 		$http({
 			method	:	'POST',
-			url	:	'/postcomment',
-			data	:	$scope.comment,
-			params  :   {issueHash: $scope.issueHash},
-			headers :   {'Content-Type': 'application/json'}
+			url	:	'/issues/'+$scope.issueHash+'/comments',
+			data	:	$scope.comment
 		});
 	};
 });
