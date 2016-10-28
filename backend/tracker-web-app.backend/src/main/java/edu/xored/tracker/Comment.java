@@ -9,6 +9,7 @@ public class Comment {
     private LocalDateTime createdDateTime;
 
     public Comment() {
+        author = "Anonymous";
         createdDateTime = LocalDateTime.now();
     }
 

@@ -11,9 +11,6 @@ postApp.controller('postController', function($scope, $http)
 			$scope.status = 'Enter a comment!';
 			return;
 		}
-	    if (!$scope.comment.author) {
-                $scope.comment.author = "Anonymous";
-        }
 		$http({
 			method	:	'POST',
 			url	:	'/issues/' + $scope.issueHash + '/comments',
