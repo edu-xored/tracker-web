@@ -23,6 +23,10 @@ public class Comment {
         return content;
     }
 
+    public void setContent(String content) {
+        this.content = content;
+    }
+
     public String getAuthor() {
         return author;
     }
