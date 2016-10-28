@@ -59,10 +59,6 @@ public class Issue {
         return comments;
     }
 
-    public void setComments(List<Comment> comments) {
-        this.comments = comments;
-    }
-
     public void addComment(Comment comment) {
         if (comment != null) {
             comments.add(comment);
