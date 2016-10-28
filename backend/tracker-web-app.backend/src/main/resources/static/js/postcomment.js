@@ -20,7 +20,7 @@ postApp.controller('postController', function($scope, $http)
 				$scope.status = 'Comment posted.';
 			})
 			.error(function() {
-				$scope.status = 'Comment didn\'t poste.';
+				$scope.status = 'Comment didn\'t post.';
 			});
 	};
 });
