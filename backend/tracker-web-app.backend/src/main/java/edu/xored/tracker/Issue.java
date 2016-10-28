@@ -55,8 +55,12 @@ public class Issue {
         this.status = status;
     }
 
-    public List<Comment> getAllComments() {
-        return Collections.unmodifiableList(comments);
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 
     public void addComment(Comment comment) {

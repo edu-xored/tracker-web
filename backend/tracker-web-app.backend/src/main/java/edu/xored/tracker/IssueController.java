@@ -75,7 +75,7 @@ public class IssueController {
         if (!issueMap.containsKey(hash)) {
             throw new IssueNotFoundException();
         }
-        List<Comment> comments = issueMap.get(hash).getAllComments();
+        List<Comment> comments = issueMap.get(hash).getComments();
         issueMap.put(hash, issue);
         issue.addComments(comments);
         return issue;
