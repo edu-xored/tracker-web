@@ -93,6 +93,9 @@ public class IssueController {
     public Issue patchIssue(@PathVariable("hash") long hash,
                             @RequestBody Issue patchedIssue) {
         Issue issue = issueMap.get(hash);
+        if (issue == null) {
+            throw new IssueNotFoundException();
+        }
         if (patchedIssue.getSummary() != null) {
             issue.setSummary(patchedIssue.getSummary());
         }
