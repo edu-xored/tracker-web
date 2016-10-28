@@ -105,6 +105,9 @@ public class IssueController {
         if (patchedIssue.getStatus() != null) {
             issue.setStatus(patchedIssue.getStatus());
         }
+        if (patchedIssue.getComments() != null) {
+            issue.getComments().addAll(patchedIssue.getComments());
+        }
         return issue;
     }
 
