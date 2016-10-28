@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/issues")
@@ -68,10 +69,10 @@ public class IssueController {
             return issueList;
         }
         issueList = new ArrayList<Issue>();
-        issueMap.entrySet()
+        issueMap.values()
                 .stream()
-                .filter(entry -> entry.getValue().getStatus() == status)
-                .forEach(entry -> issueList.add(entry.getValue()));
+                .filter(entry -> entry.getStatus() == status)
+                .collect(Collectors.toList());
         return issueList;
     }
 
