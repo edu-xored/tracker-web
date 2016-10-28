@@ -7,8 +7,7 @@ import org.springframework.web.bind.annotation.*;
 public class CommentController {
     @PostMapping
     public void post(@RequestBody Comment comment, @PathVariable("issueHash") long hash) {
-        IssueController issueController = new IssueController();
-        Issue issue = issueController.getIssue(hash);
+        Issue issue = IssueController.getIssue(hash);
         issue.addComment(comment);
     }
 }
