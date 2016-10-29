@@ -71,6 +71,22 @@ public class Issue {
         }
     }
 
+    public Issue updateIssue(Issue other) {
+        if (other.getSummary() != null) {
+            this.setSummary(other.getSummary());
+        }
+        if (other.getDescription() != null) {
+            this.setDescription(other.getDescription());
+        }
+        if (other.getStatus() != null) {
+            this.setStatus(other.getStatus());
+        }
+        if (other.getComments() != null) {
+            this.addComments(other.getComments());
+        }
+        return this;
+    }
+
     public enum Status {
         OPEN, CLOSED;
     }

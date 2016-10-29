@@ -95,18 +95,7 @@ public class IssueController {
         if (issue == null) {
             throw new IssueNotFoundException();
         }
-        if (patchedIssue.getSummary() != null) {
-            issue.setSummary(patchedIssue.getSummary());
-        }
-        if (patchedIssue.getDescription() != null) {
-            issue.setDescription(patchedIssue.getDescription());
-        }
-        if (patchedIssue.getStatus() != null) {
-            issue.setStatus(patchedIssue.getStatus());
-        }
-        if (patchedIssue.getComments() != null) {
-            issue.addComments(patchedIssue.getComments());
-        }
+        issue.updateIssue(patchedIssue);
         return issue;
     }
 
