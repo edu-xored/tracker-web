@@ -82,7 +82,7 @@ public class IssueController {
 
     @DeleteMapping(value = "/{hash}")
     public void deleteIssue(@PathVariable("hash") long hash) {
-        if (issueMap.get(hash) == null) {
+        if (!issueMap.containsKey(hash)) {
             throw new IssueNotFoundException();
         }
         issueMap.remove(hash);
