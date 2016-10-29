@@ -52,12 +52,18 @@ public class IssueController {
     }
 
     @GetMapping(value = "/{hash}")
-    public static Issue getIssue(@PathVariable("hash") long hash) {
+    public Issue getIssue(@PathVariable("hash") long hash) {
         Issue issue = issueMap.get(hash);
         if (issue == null) {
             throw new IssueNotFoundException();
         }
         return issue;
+    }
+
+    @PostMapping(value = "{issueHash}/comments")
+    public void postComment(@RequestBody Comment comment, @PathVariable("issueHash") long hash) {
+        Issue issue = issueMap.get(hash);
+        issue.addComment(comment);
     }
 
     @GetMapping(params = {"status"})
@@ -72,6 +78,6 @@ public class IssueController {
     }
 
     @ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "Issue not found")
-    private static class IssueNotFoundException extends RuntimeException {
+    private class IssueNotFoundException extends RuntimeException {
     }
 }
