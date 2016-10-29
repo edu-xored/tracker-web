@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html ng-app="routingApp">
 <head>
+    <base href="/html/routingExample.html">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
     <script src="/js/routingApp.js"></script>
     <meta charset="UTF-8">
@@ -8,5 +9,10 @@
 </head>
 <body>
 THIS IS ROUTIIIING!
+<div>
+    <a href="firstTemplate">First</a>
+    <a href="secondTemplate">Second</a>
+    <div ng-view></div>
+</div>
 </body>
 </html>
