@@ -5,8 +5,8 @@ import java.time.LocalDateTime;
 public class Comment {
 
     private String author;
-    private String content;
     private LocalDateTime createdDateTime;
+    private String content;
 
     public Comment() {
         author = "Anonymous";
@@ -15,15 +15,7 @@ public class Comment {
 
     public Comment(String author, String content) {
         this.author = author;
-        this.content = content;
         this.createdDateTime = LocalDateTime.now();
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
         this.content = content;
     }
 
@@ -33,5 +25,13 @@ public class Comment {
 
     public LocalDateTime getCreatedDateTime() {
         return createdDateTime;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 }
