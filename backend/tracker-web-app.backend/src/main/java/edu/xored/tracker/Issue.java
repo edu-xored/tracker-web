@@ -56,7 +56,7 @@ public class Issue {
     }
 
     public List<Comment> getComments() {
-        return comments;
+        return Collections.unmodifiableList(comments);
     }
 
     public void addComment(Comment comment) {

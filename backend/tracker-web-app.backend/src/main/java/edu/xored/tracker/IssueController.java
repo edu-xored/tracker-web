@@ -13,8 +13,6 @@ import java.util.ArrayList;
 public class IssueController {
     // TODO: temporary issues storage for testing purposes. Remove when implement access to real issues through CLI core.
     private static Map<Long, Issue> issueMap = new HashMap<Long, Issue>();
-    // TODO: temporary initialization, when we remove issueMap issueCounter will starts from 0
-    private static long issueCounter = 4;
 
     static {
         Issue firstIssue = new Issue(
@@ -55,8 +53,8 @@ public class IssueController {
 
     @PostMapping
     public Issue postIssue(@RequestBody Issue issue) {
-        issue.setHash(issueCounter);
-        issueMap.put(issueCounter++, issue);
+        issue.setHash(issueMap.size());
+        issueMap.put(issue.getHash(), issue);
         return issue;
     }
 
@@ -76,6 +74,7 @@ public class IssueController {
             throw new IssueNotFoundException();
         }
         List<Comment> comments = issueMap.get(hash).getComments();
+        issue.setHash(hash);
         issueMap.put(hash, issue);
         issue.addComments(comments);
         return issue;
@@ -106,7 +105,7 @@ public class IssueController {
             issue.setStatus(patchedIssue.getStatus());
         }
         if (patchedIssue.getComments() != null) {
-            issue.getComments().addAll(patchedIssue.getComments());
+            issue.addComments(patchedIssue.getComments());
         }
         return issue;
     }
