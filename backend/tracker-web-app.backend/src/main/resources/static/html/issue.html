@@ -1,0 +1,18 @@
+<!doctype html>
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+    <script src="/js/issue.js"></script>
+</head>
+<body ng-app="issueApp" ng-controller="issueController as issue">
+<p> {{issue.error}} </p>
+<table border="2" cellspacing="5" ng-hide="issue.error">
+    <tr>
+    <th>Hash</th>
+    <th>Summary</th>
+    <th>Description</th>
+    </tr>
+    <tr><td>{{issue.hash}}</td><td>{{issue.summary}}</td><td>{{issue.description}}</td></tr>
+</table>
+</body>
+</html>
