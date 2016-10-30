@@ -9,8 +9,7 @@ public class Comment {
     private String content;
 
     public Comment() {
-        author = "Anonymous";
-        createdDateTime = LocalDateTime.now();
+        this.Comment("Anonymous", null);
     }
 
     public Comment(String author, String content) {
