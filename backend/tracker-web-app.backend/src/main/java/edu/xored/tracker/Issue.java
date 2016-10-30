@@ -16,6 +16,9 @@ public class Issue {
     @JsonIgnore
     private List<Comment> comments = new ArrayList<>();
 
+    public Issue() {
+    }
+
     public Issue(long hash, String summary, String description, Status status) {
         this.hash = hash;
         this.summary = summary;
@@ -69,6 +72,22 @@ public class Issue {
         if (comments != null) {
             this.comments.addAll(comments);
         }
+    }
+
+    public Issue updateIssue(Issue other) {
+        if (other.getSummary() != null) {
+            setSummary(other.getSummary());
+        }
+        if (other.getDescription() != null) {
+            setDescription(other.getDescription());
+        }
+        if (other.getStatus() != null) {
+            setStatus(other.getStatus());
+        }
+        if (other.getComments() != null) {
+            addComments(other.getComments());
+        }
+        return this;
     }
 
     public enum Status {
