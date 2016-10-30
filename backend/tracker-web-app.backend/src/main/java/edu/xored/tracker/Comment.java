@@ -9,7 +9,7 @@ public class Comment {
     private String content;
 
     public Comment() {
-        this.Comment("Anonymous", null);
+        this("Anonymous", null);
     }
 
     public Comment(String author, String content) {

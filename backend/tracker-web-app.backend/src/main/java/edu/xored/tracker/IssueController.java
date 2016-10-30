@@ -110,13 +110,16 @@ public class IssueController {
                 .collect(Collectors.toList());
     }
 
-    @ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "Issue not found")
-    private class IssueNotFoundException extends RuntimeException {
-    }
-
     @PostMapping(value = "{issueHash}/comments")
     public void postComment(@RequestBody Comment comment, @PathVariable("issueHash") long hash) {
         Issue issue = issueMap.get(hash);
+        if (issue == null) {
+            throw new IssueNotFoundException();
+        }
         issue.addComment(comment);
+    }
+
+    @ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "Issue not found")
+    private class IssueNotFoundException extends RuntimeException {
     }
 }
