@@ -3,10 +3,11 @@ package edu.xored.tracker;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collection;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.List;
-import java.util.ArrayList;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/issues")
@@ -51,6 +52,13 @@ public class IssueController {
         issueMap.put(fourthIssue.getHash(), fourthIssue);
     }
 
+    @PostMapping
+    public Issue postIssue(@RequestBody Issue issue) {
+        issue.setHash(issueMap.size());
+        issueMap.put(issue.getHash(), issue);
+        return issue;
+    }
+
     @GetMapping(value = "/{hash}")
     public Issue getIssue(@PathVariable("hash") long hash) {
         Issue issue = issueMap.get(hash);
@@ -60,15 +68,46 @@ public class IssueController {
         return issue;
     }
 
-    @GetMapping(params = {"status"})
-    public List<Issue> getIssuesByStatus(@RequestParam("status") Issue.Status status) {
-        List<Issue> statusIssueList = new ArrayList<Issue>();
-        for(Map.Entry<Long, Issue> entry : issueMap.entrySet()) {
-            if(status==entry.getValue().getStatus()) {
-                statusIssueList.add(entry.getValue());
-            }
+    @PutMapping(value = "/{hash}")
+    public Issue putIssue(@PathVariable("hash") long hash,
+                          @RequestBody Issue issue) {
+        if (!issueMap.containsKey(hash)) {
+            throw new IssueNotFoundException();
         }
-        return statusIssueList;
+        List<Comment> comments = issueMap.get(hash).getComments();
+        issue.setHash(hash);
+        issueMap.put(hash, issue);
+        issue.addComments(comments);
+        return issue;
+    }
+
+    @DeleteMapping(value = "/{hash}")
+    public void deleteIssue(@PathVariable("hash") long hash) {
+        if (!issueMap.containsKey(hash)) {
+            throw new IssueNotFoundException();
+        }
+        issueMap.remove(hash);
+    }
+
+    @PatchMapping(value = "/{hash}")
+    public Issue patchIssue(@PathVariable("hash") long hash,
+                            @RequestBody Issue patchedIssue) {
+        Issue issue = issueMap.get(hash);
+        if (issue == null) {
+            throw new IssueNotFoundException();
+        }
+        return issue.updateIssue(patchedIssue);
+    }
+
+    @GetMapping
+    public Collection<Issue> getIssues(@RequestParam(value = "status", required = false) Issue.Status status) {
+        if (status == null) {
+            return issueMap.values();
+        }
+        return issueMap.values()
+                .stream()
+                .filter(entry -> entry.getStatus() == status)
+                .collect(Collectors.toList());
     }
 
     @ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "Issue not found")
