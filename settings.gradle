@@ -1,0 +1,3 @@
+include "xored"
+project(":xored").setProjectDir(new File("./backend/tracker-web-app.backend"))
+project(":xored").setName("tracker-web-app.backend")
