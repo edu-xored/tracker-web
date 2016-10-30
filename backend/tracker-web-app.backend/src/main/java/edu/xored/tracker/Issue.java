@@ -1,5 +1,7 @@
 package edu.xored.tracker;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -11,6 +13,7 @@ public class Issue {
     private String summary;
     private String description;
     private Status status;
+    @JsonIgnore
     private List<Comment> comments = new ArrayList<>();
 
     public Issue(long hash, String summary, String description, Status status) {
@@ -52,7 +55,7 @@ public class Issue {
         this.status = status;
     }
 
-    public List<Comment> getAllComments() {
+    public List<Comment> getComments() {
         return Collections.unmodifiableList(comments);
     }
 
