@@ -96,8 +96,7 @@ public class IssueController {
         if (issue == null) {
             throw new IssueNotFoundException();
         }
-        issue.updateIssue(patchedIssue);
-        return issue;
+        return issue.updateIssue(patchedIssue);
     }
 
     @GetMapping
