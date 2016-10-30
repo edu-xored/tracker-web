@@ -73,16 +73,16 @@ public class Issue {
 
     public Issue updateIssue(Issue other) {
         if (other.getSummary() != null) {
-            this.setSummary(other.getSummary());
+            setSummary(other.getSummary());
         }
         if (other.getDescription() != null) {
-            this.setDescription(other.getDescription());
+            setDescription(other.getDescription());
         }
         if (other.getStatus() != null) {
-            this.setStatus(other.getStatus());
+            setStatus(other.getStatus());
         }
         if (other.getComments() != null) {
-            this.addComments(other.getComments());
+            addComments(other.getComments());
         }
         return this;
     }
