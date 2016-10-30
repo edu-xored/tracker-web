@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+<script src="../js/allissues.js"></script>
+<body>
+
+<div ng-app="issuesApp" ng-controller="issuesController">
+
+  <table border="2" cellspacing="5">
+      <tr>
+      <th>Hash</th>
+      <th>Summary</th>
+      <th>Description</th>
+      <th>Status<th>
+      </tr>
+      <tr ng-repeat="issue in issues">
+        <td>
+          {{issue.hash}}
+        </td>
+        <td>
+          {{issue.summary}}
+        </td>
+        <td>
+          {{issue.description}}
+        </td>
+        <td>
+          {{issue.status}}
+        </td>
+      </tr>
+  </table>
+
+</div>
+
+</body>
+</html>
