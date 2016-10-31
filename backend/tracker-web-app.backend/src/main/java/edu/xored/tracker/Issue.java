@@ -13,7 +13,7 @@ public class Issue {
     private String summary;
     private String description;
     private Status status;
-    
+
     @JsonIgnore
     private List<Comment> comments = new ArrayList<>();
 
