@@ -110,8 +110,8 @@ public class IssueController {
                 .collect(Collectors.toList());
     }
 
-    @PostMapping(value = "{issueHash}/comments")
-    public void postComment(@RequestBody Comment comment, @PathVariable("issueHash") long hash) {
+    @PostMapping(value = "{hash}/comments")
+    public void postComment(@RequestBody Comment comment, @PathVariable("hash") long hash) {
         Issue issue = issueMap.get(hash);
         if (issue == null) {
             throw new IssueNotFoundException();
