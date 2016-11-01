@@ -9,14 +9,12 @@ public class Comment {
     private String content;
 
     public Comment() {
-        author = "Anonymous";
-        createdDateTime = LocalDateTime.now();
+        this("Anonymous", null);
     }
 
     public Comment(String author, String content) {
-        createdDateTime = LocalDateTime.now();
-
         this.author = author;
+        this.createdDateTime = LocalDateTime.now();
         this.content = content;
     }
 
@@ -30,10 +28,6 @@ public class Comment {
 
     public String getContent() {
         return content;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
     }
 
     public void setContent(String content) {
