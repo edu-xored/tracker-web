@@ -1,9 +1,9 @@
 # Web UI for Git-based distributed issue tracker
 
+This is a Web interface for [tracker](https://github.com/edu-xored/tracker).
+
 ### Build & Test Status
 [![Build Status](https://travis-ci.org/edu-xored/tracker-web.svg?branch=master)](https://travis-ci.org/edu-xored/tracker-web.svg?branch=master)
-
-This is a Web interface for [tracker](https://github.com/edu-xored/tracker).
 
 ### Overview
 The tracker should have a web application for convenient access. It should be deployed on some standalone server to be used as typical issue tracker.
