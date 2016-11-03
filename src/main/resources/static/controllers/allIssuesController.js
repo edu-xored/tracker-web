@@ -1,4 +1,4 @@
-angular.module('issuesApp', [])
+angular.module('trackerWebApp')
   .controller('issuesController', function($scope, $http) {
       $http.get('/issues').
       then(function(response) {

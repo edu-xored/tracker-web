@@ -1,24 +1,17 @@
-<!DOCTYPE html>
-<html>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
-<script src="/js/allIssues.js"></script>
-<body>
-
-<div ng-app="issuesApp" ng-controller="issuesController">
-
+<div>
   <table border="2" cellspacing="5">
       <tr>
       <th>Hash</th>
       <th>Summary</th>
       <th>Description</th>
-      <th>Status<th>
+      <th>Status</th>
       </tr>
       <tr ng-repeat="issue in issues">
         <td>
           {{issue.hash}}
         </td>
         <td>
-          {{issue.summary}}
+          <a href="/issues/{{issue.hash}}"> {{issue.summary}} </a>
         </td>
         <td>
           {{issue.description}}
@@ -28,8 +21,4 @@
         </td>
       </tr>
   </table>
-
 </div>
-
-</body>
-</html>
