@@ -1,12 +1,12 @@
 <div>
     <table border="2" cellspacing="5">
         <tr>
-            <th>Hash</th>
+            <th><a href="" ng-click="sort('hash')">Hash</a></th>
             <th>Summary</th>
             <th>Description</th>
             <th>Status</th>
         </tr>
-        <tr ng-repeat="issue in issues | filter:selectedStatus">
+        <tr ng-repeat="issue in issues | filter:selectedStatus | orderBy:sortField:reverse">
             <td>{{issue.hash}}</td>
             <td><a href="/issues/{{issue.hash}}">{{issue.summary}}</a></td>
             <td>{{issue.description}}</td>
