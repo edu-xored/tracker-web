@@ -8,7 +8,7 @@ angular
       })
       .when('/issues/:hash/postcomment', {
         templateUrl: '/views/postCommentView.html',
-        controller: 'postController'
+        controller: 'postCommentController'
       })
       .otherwise({
         templateUrl: '/views/allIssuesView.html',
