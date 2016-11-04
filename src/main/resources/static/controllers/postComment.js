@@ -1,6 +1,5 @@
-var postApp = angular.module('postApp', []);
-postApp.controller('postController', function($scope, $http)
-{
+angular.module('trackerWebApp', [])
+.postApp.controller('postController', function($scope, $http) {
 	$scope.comment = {};
 	$scope.submitForm = function() {
 		if ($scope.issueHash == undefined) {
