@@ -1,19 +1,26 @@
 package edu.xored.tracker;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.io.*;
 
 @RestController
 @RequestMapping(value = "/issues")
 public class IssueController {
     // TODO: temporary issues storage for testing purposes. Remove when implement access to real issues through CLI core.
     private static Map<Long, Issue> issueMap = new HashMap<Long, Issue>();
+
+    @Autowired(required = false)
+    private FileService fileService;
 
     static {
         Issue firstIssue = new Issue(
@@ -117,6 +124,18 @@ public class IssueController {
             throw new IssueNotFoundException();
         }
         issue.addComment(comment);
+    }
+
+    @RequestMapping(value="/{hash}/upload", method=RequestMethod.POST)
+    public String saveFile(   @PathVariable("hash") long hash,
+                              @RequestParam("file") MultipartFile file) {
+        return fileService.saveFile(hash, file);
+    }
+
+    @RequestMapping(value="/{hash}/upload", method=RequestMethod.GET)
+    public ResponseEntity<byte[]> getFile(@PathVariable("hash") long hash,
+                                          @RequestParam("name") String name) throws IOException {
+        return fileService.getFile(hash, name);
     }
 
     @ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "Issue not found")
