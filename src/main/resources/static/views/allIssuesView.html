@@ -1,24 +1,33 @@
 <div>
-  <table border="2" cellspacing="5">
-      <tr>
-      <th>Hash</th>
-      <th>Summary</th>
-      <th>Description</th>
-      <th>Status</th>
-      </tr>
-      <tr ng-repeat="issue in issues">
-        <td>
-          {{issue.hash}}
-        </td>
-        <td>
-          <a href="/issues/{{issue.hash}}"> {{issue.summary}} </a>
-        </td>
-        <td>
-          {{issue.description}}
-        </td>
-        <td>
-          {{issue.status}}
-        </td>
-      </tr>
-  </table>
+	<table border="2" cellspacing="5">
+    	<tr>
+      		<th>Hash</th>
+      		<th>Summary</th>
+      		<th>Description</th>
+      		<th>Status</th>
+      	</tr>
+      	<tr ng-repeat="issue in issues | startFrom:currentPage*pageSize | limitTo:pageSize">
+        	<td>
+          		{{issue.hash}}
+        	</td>
+        	<td>
+          		<a href="/issues/{{issue.hash}}"> {{issue.summary}} </a>
+        	</td>
+        	<td>
+	        	{{issue.description}}
+    	    </td>
+        	<td>
+          		{{issue.status}}
+        	</td>
+    	</tr>
+  	</table>
+	<button ng-disabled="currentPage == 0" ng-click="currentPage = currentPage-1">
+  		Previous
+  	</button>
+  	{{currentPage+1}}/{{numberOfPages()}}
+  	<button ng-disabled="currentPage >= issues.length/pageSize - 1" ng-click="currentPage=currentPage+1">
+  		Next
+  	</button>
+  	<select id="pageSizeSelect" ng-model="pageSizeSelect" ng-options="pageSizeSelect for pageSizeSelect in pageSizeSelects" ng-click="pageSize=pageSizeSelect" ng-init="pageSizeSelect = pageSize">
+  	</select>
 </div>
