@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class AngularJSForwardController {
 
-    @RequestMapping(value = {"/issue/{hash}"})
+    @RequestMapping(value = {"/issues/{hash}"})
     public String redirect() {
         return "forward:/";
     }

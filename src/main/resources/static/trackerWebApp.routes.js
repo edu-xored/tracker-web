@@ -2,7 +2,7 @@ angular
   .module('trackerWebApp')
   .config(function($routeProvider, $locationProvider) {
     $routeProvider
-      .when('/issue/:hash', {
+      .when('/issues/:hash', {
         templateUrl: '/views/issueView.html',
         controller: 'issueController'
       })
