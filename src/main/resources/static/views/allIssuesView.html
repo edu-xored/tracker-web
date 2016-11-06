@@ -1,5 +1,5 @@
 <div>
-    <input type="text" ng-model="test" placeholder="Search">
+    <input type="text" ng-model="search" placeholder="Search">
     <table border="2" cellspacing="5">
         <tr>
             <th>Hash</th>
@@ -7,7 +7,7 @@
             <th>Description</th>
             <th>Status</th>
         </tr>
-        <tr ng-repeat="issue in issues | filter : test">
+        <tr ng-repeat="issue in issues | filter : search">
             <td>
                 {{issue.hash}}
             </td>
