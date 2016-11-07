@@ -2,7 +2,7 @@ angular.module('trackerWebApp')
   .controller('issueController', function($scope, $http, $routeParams) {
     $http({
        method: 'GET',
-       url: "/issues/" + $routeParams.hash
+       url: "/api/issues/" + $routeParams.hash
      })
      .then(function(response) {
         $scope.issue = response.data;

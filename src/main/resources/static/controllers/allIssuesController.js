@@ -1,6 +1,6 @@
 angular.module('trackerWebApp')
 	.controller('issuesController', function($scope, $http) {
-		$http.get('api/issues').
+		$http.get('/api/issues').
 		then(function(response) {
 			$scope.issues = response.data;
 		}, function(response) {

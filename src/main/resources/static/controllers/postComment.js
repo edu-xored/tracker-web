@@ -13,7 +13,7 @@ postApp.controller('postController', function($scope, $http)
 		}
 		$http({
 			method	:	'POST',
-			url	:	'/issues/' + $scope.issueHash + '/comments',
+			url	:	'/api/issues/' + $scope.issueHash + '/comments',
 			data	:	$scope.comment
 		})
 			.success(function() {
