@@ -7,9 +7,9 @@ angular.module('trackerWebApp')
 				return;
 			}
 			$http({
-				method	:	'POST',
-				url	:	'/issues/' + $routeParams.hash + '/comments',
-				data	:	$scope.comment
+				method    :    'POST',
+				url       :    '/issues/' + $routeParams.hash + '/comments',
+				data      :    $scope.comment
 			})
 				.success(function() {
 					$scope.status = 'Comment posted.';
@@ -18,4 +18,4 @@ angular.module('trackerWebApp')
 					$scope.status = 'Comment didn\'t post.';
 				});
 		};
-});
+	});
