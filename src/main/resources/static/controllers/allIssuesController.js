@@ -18,4 +18,4 @@ angular.module('trackerWebApp')
 				$scope.reverse = false;
 			}
 		};
-});
+	});
