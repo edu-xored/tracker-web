@@ -5,7 +5,6 @@ public class User {
     private String email;
 
     public User() {
-        this(null, null);
     }
 
     public User(String name, String email) {
