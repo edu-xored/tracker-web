@@ -8,7 +8,7 @@ angular.module('trackerWebApp')
 			}
 			$http({
 				method    :    'POST',
-				url       :    '/issues/' + $routeParams.hash + '/comments',
+				url       :    '/api/issues/' + $routeParams.hash + '/comments',
 				data      :    $scope.comment
 			})
 				.success(function() {
