@@ -2,6 +2,7 @@ package edu.xored.tracker;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import java.io.BufferedReader;
@@ -10,6 +11,7 @@ import java.io.InputStreamReader;
 
 
 @RestController
+@RequestMapping(value = "/api")
 public class UserController {
     private static String getNameCommand = "git config user.name";
     private static String getEmailCommand = "git config user.email";
@@ -31,7 +33,7 @@ public class UserController {
         }
     }
 
-    @GetMapping(value = "/api/user")
+    @GetMapping(value = "user")
     public User getUser() {
         String name = getOutput(getNameCommand);
         String email = getOutput(getEmailCommand);
