@@ -1,10 +1,10 @@
 angular.module('trackerWebApp')
-	.controller('issuesController', function($scope, $http) {
-		$scope.currentPage = 0;
-		$scope.itemsPerPage = 10;
-		$scope.itemsPerPageSelects = [2, 5, 10, 20, 50];
-		$scope.issues = [];
-		$scope.firstPage = function() {
+    .controller('issuesController', function($scope, $http) {
+        $scope.currentPage = 0;
+        $scope.itemsPerPage = 10;
+        $scope.itemsPerPageSelects = [2, 5, 10, 20, 50];
+        $scope.issues = [];
+        $scope.firstPage = function() {
             return $scope.currentPage == 0;
         }
         $scope.lastPage = function() {
