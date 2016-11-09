@@ -7,19 +7,12 @@
             <th>Description</th>
             <th>Status</th>
         </tr>
-        <tr ng-repeat="issue in issues | filter : search">
-            <td>
-                {{issue.hash}}
-            </td>
-            <td>
-                <a href="/issues/{{issue.hash}}"> {{issue.summary}} </a>
-            </td>
-            <td>
-                {{issue.description}}
-            </td>
-            <td>
-                {{issue.status}}
-            </td>
+        <tr ng-repeat="issue in issues | filter:selectedStatus | filter:search">
+            <td>{{issue.hash}}</td>
+            <td><a href="/issues/{{issue.hash}}">{{issue.summary}}</a></td>
+            <td>{{issue.description}}</td>
+            <td>{{issue.status}}</td>
         </tr>
     </table>
 </div>
+<p>Status: <select ng-model="selectedStatus" ng-options="item for item in statusVariants"></select></p>

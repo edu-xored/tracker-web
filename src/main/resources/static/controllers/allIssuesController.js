@@ -6,4 +6,6 @@ angular.module('trackerWebApp')
 		}, function(response) {
 			$scope.error = response.status.Text;
 		});
+		$scope.selectedStatus = "";
+		$scope.statusVariants = ["", "OPEN", "CLOSED"];
 	});
