@@ -16,6 +16,13 @@ public class UserController {
     private static final String getNameCommand = "git config user.name";
     private static final String getEmailCommand = "git config user.email";
 
+    @GetMapping(value = "user")
+    public User getUser() {
+        String name = getOutput(getNameCommand);
+        String email = getOutput(getEmailCommand);
+        return new User(name, email);
+    }
+
     private String getOutput (String command) {
         Process theProcess;
         try {
@@ -32,13 +39,6 @@ public class UserController {
             e.printStackTrace();
             throw new ExecutionFailedException();
         }
-    }
-
-    @GetMapping(value = "user")
-    public User getUser() {
-        String name = getOutput(getNameCommand);
-        String email = getOutput(getEmailCommand);
-        return new User(name, email);
     }
 
     @ResponseStatus(value = HttpStatus.FORBIDDEN, reason = "Git not found")
