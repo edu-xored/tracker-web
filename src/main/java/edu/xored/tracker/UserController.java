@@ -13,23 +13,24 @@ import java.io.InputStreamReader;
 @RestController
 @RequestMapping(value = "/api")
 public class UserController {
-    private static String getNameCommand = "git config user.name";
-    private static String getEmailCommand = "git config user.email";
+    private static final String getNameCommand = "git config user.name";
+    private static final String getEmailCommand = "git config user.email";
 
-    String getOutput (String command) {
+    private String getOutput (String command) {
         Process theProcess;
-        // TODO: How to work with exceptions? How to log them?
         try {
             theProcess = Runtime.getRuntime().exec(command);
         } catch (IOException e) {
+            // TODO (Card #50): find better approach for exceptions logging
             e.printStackTrace();
             throw new GitNotFoundException();
         }
-        try (BufferedReader inStream = new BufferedReader(new InputStreamReader( theProcess.getInputStream() ))) {
+        try (BufferedReader inStream = new BufferedReader(new InputStreamReader(theProcess.getInputStream()))) {
             return inStream.readLine();
         } catch(IOException e) {
+            // TODO (Card #50): find better approach for exceptions logging
             e.printStackTrace();
-            throw new ReceiveOutputException();
+            throw new ExecutionFailedException();
         }
     }
 
@@ -44,7 +45,7 @@ public class UserController {
     private class GitNotFoundException extends RuntimeException {
     }
 
-    @ResponseStatus(value = HttpStatus.FAILED_DEPENDENCY, reason = "An error occurred while receiving the output")
-    private class ReceiveOutputException extends RuntimeException {
+    @ResponseStatus(value = HttpStatus.FAILED_DEPENDENCY, reason = "An error occurred while executing command")
+    private class ExecutionFailedException extends RuntimeException {
     }
 }
