@@ -33,13 +33,14 @@ angular.module('trackerWebApp')
         $scope.filteredPagination = function() {
             $scope.currentPage = 0;
         }
-		$http.get('/issues').
+		$http.get('/api/issues').
 		then(function(response) {
 			$scope.issues = response.data;
-			$scope.itemsSize = $scope.issues.length;
 		}, function(response) {
 			$scope.error = response.status.Text;
 		});
+		$scope.selectedStatus = "";
+        $scope.statusVariants = ["", "OPEN", "CLOSED"];
 	})
 	.filter('startFrom', function() {
 		return function(input, start) {

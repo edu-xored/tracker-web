@@ -10,7 +10,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping(value = "/issues")
+@RequestMapping(value = "/api/issues")
 public class IssueController {
     // TODO: temporary issues storage for testing purposes. Remove when implement access to real issues through CLI core.
     private static Map<Long, Issue> issueMap = new HashMap<Long, Issue>();
