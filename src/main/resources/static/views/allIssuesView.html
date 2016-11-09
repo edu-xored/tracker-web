@@ -1,5 +1,5 @@
 <div>
-    <input type="text" ng-model="search" ng-change="filteredPagination()" placeholder="Search">
+    <input type="text" ng-model="search" placeholder="Search">
     <table border="2" cellspacing="5">
         <tr>
             <th>Hash</th>
@@ -7,21 +7,12 @@
             <th>Description</th>
             <th>Status</th>
         </tr>
-        <tr ng-repeat="issue in filtered = (issues | filter:selectedStatus | filter:search) | startFrom:startingItem() | limitTo:itemsPerPage">
+        <tr ng-repeat="issue in issues | filter:selectedStatus | filter:search">
             <td>{{issue.hash}}</td>
             <td><a href="/issues/{{issue.hash}}">{{issue.summary}}</a></td>
             <td>{{issue.description}}</td>
             <td>{{issue.status}}</td>
         </tr>
     </table>
-    <button ng-disabled="firstPage()" ng-click="pageBack()">
-        Previous
-    </button>
-    {{currentPage+1}}/{{numberOfPages()}}
-    <button ng-disabled="lastPage()" ng-click="pageForward()">
-        Next
-    </button>
-    <select ng-model="itemsPerPageSelect" ng-options="itemsPerPageSelect for itemsPerPageSelect in itemsPerPageSelects" ng-change="changeItemsPerPage()" ng-init="initItemsPerPage()">
-    </select>
 </div>
-<p>Status: <select ng-model="selectedStatus" ng-options="item for item in statusVariants" ng-change="filteredPagination()"></select></p>
+<p>Status: <select ng-model="selectedStatus" ng-options="item for item in statusVariants"></select></p>
