@@ -14,14 +14,9 @@
             <td>{{issue.status}}</td>
         </tr>
     </table>
-    <button ng-disabled="firstPage()" ng-click="pageBack()">
-        Previous
-    </button>
+    <button ng-disabled="firstPage()" ng-click="pageBack()">Previous</button>
     {{currentPage+1}}/{{numberOfPages()}}
-    <button ng-disabled="lastPage()" ng-click="pageForward()">
-        Next
-    </button>
-    <select ng-model="itemsPerPageSelect" ng-options="itemsPerPageSelect for itemsPerPageSelect in itemsPerPageSelects" ng-change="changeItemsPerPage()" ng-init="initItemsPerPage()">
-    </select>
+    <button ng-disabled="lastPage()" ng-click="pageForward()">Next</button>
+    <select ng-model="itemsPerPageSelect" ng-options="itemsPerPageSelect for itemsPerPageSelect in itemsPerPageSelects" ng-change="changeItemsPerPage()" ng-init="initItemsPerPage()"></select>
 </div>
 <p>Status: <select ng-model="selectedStatus" ng-options="item for item in statusVariants" ng-change="filteredPagination()"></select></p>
