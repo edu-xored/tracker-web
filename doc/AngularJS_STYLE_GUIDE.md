@@ -402,10 +402,10 @@ function SessionsController() {
 ```javascript
 /* старайтесь избегать */
 function OrderController($http, $q, config, userInfo) {
-    var vm = this;
-    vm.checkCredit = checkCredit;
-    vm.isCreditOk;
-    vm.total = 0;
+    var viewModel = this;
+    viewModel.checkCredit = checkCredit;
+    viewModel.isCreditOk;
+    viewModel.total = 0;
 
     function checkCredit() {
         var settings = {};
@@ -418,7 +418,7 @@ function OrderController($http, $q, config, userInfo) {
             .then(function(data) {
              // Unpack JSON data in the response object
                // to find maxRemainingAmount
-               vm.isCreditOk = vm.total <= maxRemainingAmount
+               viewModel.isCreditOk = viewModel.total <= maxRemainingAmount
             })
             .catch(function(error) {
                // Interpret error
@@ -430,14 +430,14 @@ function OrderController($http, $q, config, userInfo) {
 ```javascript
 /* рекомендуется использовать */
 function OrderController(creditService) {
-    var vm = this;
-    vm.checkCredit = checkCredit;
-    vm.isCreditOk;
-    vm.total = 0;
+    var viewModel = this;
+    viewModel.checkCredit = checkCredit;
+    viewModel.isCreditOk;
+    viewModel.total = 0;
 
     function checkCredit() {
-       return creditService.isOrderTotalOk(vm.total)
-          .then(function(isOk) { vm.isCreditOk = isOk; })
+       return creditService.isOrderTotalOk(viewModel.total)
+          .then(function(isOk) { viewModel.isCreditOk = isOk; })
           .catch(showError);
     };
 }
