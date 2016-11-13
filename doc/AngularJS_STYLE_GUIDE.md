@@ -47,7 +47,7 @@
 /* стоит избегать */
 angular.module('app').controller('SomeController', SomeController);
 
-SomeController(){
+SomeController() {
     //some code here
 }
 ```
@@ -57,7 +57,7 @@ angular
     .module('app')
     .controller('SomeController', SomeController);
 
-SomeController(){
+SomeController() {
     //some code here
 }
 ```
