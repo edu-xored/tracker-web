@@ -80,7 +80,7 @@ angular.module('app', ['ngRoute', 'ngAnimate', 'app.shared', 'add.dashboard']);
 ```
 
 ```javascript
-/* стоит избегать */
+/* рекомендуется использовать */
 angular.module('app', [
 	'ngRoute',
 	'ngAnimate'
