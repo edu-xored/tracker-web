@@ -92,7 +92,7 @@ angular.module('app', [
 ```javascript
 /* рекомендуется использовать */
 $http({
-    method    :    'POST',
+	method    :    'POST',
 	url       :    '/api/issues/' + $routeParams.hash + '/comments',
 	data      :    viewModel.comment
 });
