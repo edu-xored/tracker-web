@@ -44,7 +44,7 @@ public class FileService {
         }
     }
 
-    public ResponseEntity<byte[]> getFile(long hash, String name) throws IOException {
+    public ByteArrayOutputStream getFile(long hash, String name) throws IOException {
         String path = "./files/" + String.valueOf(hash) + "/" + name;
         ByteArrayOutputStream out = null;
         InputStream input = null;
@@ -63,8 +63,6 @@ public class FileService {
                 out.close();
             }
         }
-        byte[] bytes = out.toByteArray();
-        HttpHeaders headers = new HttpHeaders();
-        return new ResponseEntity<byte[]>(bytes, headers, HttpStatus.CREATED);
+        return out;
     }
 }

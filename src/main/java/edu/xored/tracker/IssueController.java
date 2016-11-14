@@ -1,6 +1,7 @@
 package edu.xored.tracker;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
@@ -141,7 +142,9 @@ public class IssueController {
         if(!issueMap.containsKey(hash)) {
             throw new IssueNotFoundException();
         }
-        return fileService.getFile(hash, name);
+        byte[] bytes = fileService.getFile(hash, name).toByteArray();
+        HttpHeaders headers = new HttpHeaders();
+        return new ResponseEntity<byte[]>(bytes, headers, HttpStatus.CREATED);
     }
 
     @ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "Issue not found")
