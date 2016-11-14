@@ -6,15 +6,12 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
 
-import org.apache.tomcat.util.http.fileupload.FileUploadBase.SizeLimitExceededException;
-import java.sql.SQLException;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-import java.io.*;
-import java.util.zip.DataFormatException;
+import java.io.IOException;
 
 @RestController
 @RequestMapping(value = "/issues")
@@ -138,7 +135,7 @@ public class IssueController {
         return fileService.saveFile(hash, file);
     }
 
-    @RequestMapping(value="/{hash}/upload", method=RequestMethod.GET)
+    @RequestMapping(value="/{hash}/download", method=RequestMethod.GET)
     public ResponseEntity<byte[]> getFile(@PathVariable("hash") long hash,
                                           @RequestParam("name") String name) throws IOException {
         if(!issueMap.containsKey(hash)) {
@@ -149,9 +146,5 @@ public class IssueController {
 
     @ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "Issue not found")
     private class IssueNotFoundException extends RuntimeException {
-    }
-
-    @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR, reason = "File is too big")
-    private class FileIsTooBigException extends RuntimeException {
     }
 }

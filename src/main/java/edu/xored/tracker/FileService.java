@@ -1,14 +1,20 @@
 package edu.xored.tracker;
 
-import org.springframework.stereotype.Service;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.io.*;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 
-import org.springframework.web.multipart.MultipartFile;
 @Service
 public class FileService {
     public String saveFile(long hash, MultipartFile file) {
@@ -17,15 +23,19 @@ public class FileService {
         }
         String name = file.getOriginalFilename();
         try {
-            byte[] bites = file.getBytes();
             String path = "./files/" + String.valueOf(hash);
+            File newFile = new File(path + "/" + name);
+            if(newFile.exists()) {
+                return "File already exist";
+            }
             File dir = new File(path);
             if(!dir.exists()) {
                 dir.mkdirs();
             }
+            byte[] bytes = file.getBytes();
             BufferedOutputStream stream =
-                    new BufferedOutputStream(new FileOutputStream(new File(path + "/" + name)));
-            stream.write(bites);
+                    new BufferedOutputStream(new FileOutputStream(newFile));
+            stream.write(bytes);
             stream.flush();
             stream.close();
             return "Success!";
@@ -41,7 +51,7 @@ public class FileService {
         try {
             out = new ByteArrayOutputStream();
             input = new BufferedInputStream(new FileInputStream(path));
-            int data =0;
+            int data = 0;
             while((data = input.read())!=-1) {
                 out.write(data);
             }
@@ -58,4 +68,3 @@ public class FileService {
         return new ResponseEntity<byte[]>(bytes, headers, HttpStatus.CREATED);
     }
 }
-
