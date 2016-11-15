@@ -21,7 +21,7 @@ public class IssueController {
     private static Map<Long, Issue> issueMap = new HashMap<Long, Issue>();
 
     @Autowired(required = false)
-    private FileService fileService;
+    private AttachmentService attachmentService;
 
     static {
         Issue firstIssue = new Issue(
@@ -128,21 +128,22 @@ public class IssueController {
     }
 
     @RequestMapping(value="/{hash}/upload", method=RequestMethod.POST)
-    public String saveFile(   @PathVariable("hash") long hash,
-                              @RequestParam("file") MultipartFile file) {
+    public String saveAttachment(@PathVariable("hash") long hash,
+                                 @RequestParam("file") MultipartFile file) {
         if(!issueMap.containsKey(hash)) {
             throw new IssueNotFoundException();
         }
-        return fileService.saveFile(hash, file);
+        attachmentService.saveAttachment(hash, file);
+        return "Success!";
     }
 
     @RequestMapping(value="/{hash}/download", method=RequestMethod.GET)
-    public ResponseEntity<byte[]> getFile(@PathVariable("hash") long hash,
-                                          @RequestParam("name") String name) throws IOException {
+    public ResponseEntity<byte[]> getAttachment(@PathVariable("hash") long hash,
+                                                @RequestParam("name") String name) {
         if(!issueMap.containsKey(hash)) {
             throw new IssueNotFoundException();
         }
-        byte[] bytes = fileService.getFile(hash, name).toByteArray();
+        byte[] bytes = attachmentService.getAttachment(hash, name).toByteArray();
         HttpHeaders headers = new HttpHeaders();
         return new ResponseEntity<byte[]>(bytes, headers, HttpStatus.CREATED);
     }
