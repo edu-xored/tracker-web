@@ -1,0 +1,65 @@
+div.logo-div {
+    position: relative;
+    left: 23%;
+}
+
+.wrapper {
+    position: relative;
+}
+
+.left-container {
+    display: inline-block;
+    position: fixed;
+    height: 200px;
+    width: 20%;
+}
+
+.right-container {
+    display: inline-block;
+    position: absolute;
+    left: 23%;
+    right: 23%;
+}
+
+.page-container {
+    display: block;
+    position: absolute;
+    width: 20%;
+    left: 40%;
+    right: 40%;
+    padding: 10px 0px;
+}
+
+#all-issues-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+    background-color: whitesmoke;
+}
+
+#all-issues-table th, #all-issues-table td:first-child {
+    padding: 10px 20px;
+}
+
+#all-issues-table th, #all-issues-table td {
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    border-color: white;
+}
+
+#all-issues-table tr:first-child {
+    background-color: lavender;
+}
+
+#all-issues-table :visited, #all-issues-table :link {
+    color: black;
+    text-decoration: none;
+}
+
+#all-issues-table tr:nth-child(n+2):hover {
+    background-color: gainsboro;
+}
+
+.left-container div {
+    padding:0px 0px 5px 0px;
+}

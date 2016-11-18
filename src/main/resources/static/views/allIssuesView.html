@@ -1,10 +1,13 @@
+<div class="logo-div">
+    <img src="/assets/img/1512055(2).jpeg" alt="logo" width="140px">
+</div>
 <div class="wrapper">
     <div class="left-container">
-        <input type="text" ng-model="search" ng-change="filteredPagination()" placeholder="Search">
-        <p>Status: <select ng-model="selectedStatus" ng-options="item for item in statusVariants" ng-change="filteredPagination()"></select></p>
+        <div><input type="text" ng-model="search" ng-change="filteredPagination()" placeholder="Search"></div>
+        <div>Status: <select ng-model="selectedStatus" ng-options="item for item in statusVariants" ng-change="filteredPagination()"></select></div>
     </div>
     <div class="right-container">
-        <table>
+        <table id="all-issues-table">
             <tr>
                 <th>Hash</th>
                 <th>Summary</th>
@@ -18,11 +21,11 @@
                 <td>{{issue.status}}</td>
             </tr>
         </table>
-    </div>
-    <div class="bottom-container">
-        <button ng-disabled="firstPage()" ng-click="pageBack()">Previous</button>
-        {{currentPage+1}}/{{numberOfPages()}}
-        <button ng-disabled="lastPage()" ng-click="pageForward()">Next</button>
-        <select ng-model="itemsPerPageSelect" ng-options="itemsPerPageSelect for itemsPerPageSelect in itemsPerPageSelects" ng-change="changeItemsPerPage()" ng-init="initItemsPerPage()"></select>
+        <div class="page-container">
+            <button ng-disabled="firstPage()" ng-click="pageBack()"></button>
+            {{currentPage+1}}/{{numberOfPages()}}
+            <button ng-disabled="lastPage()" ng-click="pageForward()"></button>
+            <select ng-model="itemsPerPageSelect" ng-options="itemsPerPageSelect for itemsPerPageSelect in itemsPerPageSelects" ng-change="changeItemsPerPage()" ng-init="initItemsPerPage()"></select>
+        </div>
     </div>
 </div>
