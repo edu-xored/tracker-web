@@ -1,12 +1,14 @@
 package edu.xored.tracker;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.*;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -126,7 +128,7 @@ public class IssueController {
         issue.addComment(comment);
     }
 
-    @RequestMapping(value="/{hash}/upload", method=RequestMethod.POST)
+    @PostMapping(value="/{hash}/upload")
     public ResponseEntity<String> saveAttachment(@PathVariable("hash") long hash,
                                                  @RequestParam("file") MultipartFile file) {
         if(!issueMap.containsKey(hash)) {
@@ -137,15 +139,15 @@ public class IssueController {
         return new ResponseEntity<String>("Success!", headers, HttpStatus.CREATED);
     }
 
-    @RequestMapping(value="/{hash}/download", method=RequestMethod.GET)
-    public ResponseEntity<byte[]> getAttachment(@PathVariable("hash") long hash,
-                                                @RequestParam("name") String name) {
+    @GetMapping(value="/{hash}/download")
+    public ResponseEntity<InputStreamResource> getAttachment(@PathVariable("hash") long hash,
+                                                             @RequestParam("name") String name) {
         if(!issueMap.containsKey(hash)) {
             throw new IssueNotFoundException();
         }
-        byte[] bytes = attachmentService.getAttachment(hash, name).toByteArray();
+        InputStreamResource out = new InputStreamResource(new ByteArrayInputStream(attachmentService.getAttachment(hash, name).toByteArray()));
         HttpHeaders headers = new HttpHeaders();
-        return new ResponseEntity<byte[]>(bytes, headers, HttpStatus.CREATED);
+        return new ResponseEntity<InputStreamResource>(out, headers, HttpStatus.CREATED);
     }
 
     @ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "Issue not found")
