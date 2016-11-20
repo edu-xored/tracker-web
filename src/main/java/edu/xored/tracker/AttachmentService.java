@@ -11,6 +11,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
+import java.io.ByteArrayInputStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -41,7 +42,7 @@ public class AttachmentService {
         }
     }
 
-    public ByteArrayOutputStream getAttachment(long issueHash, String name) {
+    public ByteArrayInputStream getAttachment(long issueHash, String name) {
         Path path = getIssuePath(issueHash).resolve(name);
         try (ByteArrayOutputStream out = new ByteArrayOutputStream();
              InputStream input = new BufferedInputStream(new FileInputStream(path.toString()));) {
@@ -49,7 +50,7 @@ public class AttachmentService {
             while ((data = input.read()) != -1) {
                 out.write(data);
             }
-            return out;
+            return new ByteArrayInputStream(out.toByteArray());
         } catch (IOException e) {
             throw new AttachmentException(e);
         }

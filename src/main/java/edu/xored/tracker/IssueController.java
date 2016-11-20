@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.ByteArrayInputStream;
 
+import java.io.IOException;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -145,9 +146,13 @@ public class IssueController {
         if(!issueMap.containsKey(hash)) {
             throw new IssueNotFoundException();
         }
-        InputStreamResource out = new InputStreamResource(new ByteArrayInputStream(attachmentService.getAttachment(hash, name).toByteArray()));
-        HttpHeaders headers = new HttpHeaders();
-        return new ResponseEntity<InputStreamResource>(out, headers, HttpStatus.CREATED);
+        try (ByteArrayInputStream input =  attachmentService.getAttachment(hash,name)) {
+            InputStreamResource out = new InputStreamResource(input);
+            HttpHeaders headers = new HttpHeaders();
+            return new ResponseEntity<InputStreamResource>(out, headers, HttpStatus.CREATED);
+        } catch(IOException e) {
+            throw new AttachmentService.AttachmentException(e);
+        }
     }
 
     @ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "Issue not found")
