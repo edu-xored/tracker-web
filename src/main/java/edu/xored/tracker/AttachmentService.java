@@ -46,7 +46,7 @@ public class AttachmentService {
         Path path = getIssuePath(issueHash).resolve(name);
         try (ByteArrayOutputStream out = new ByteArrayOutputStream();
              InputStream input = new BufferedInputStream(new FileInputStream(path.toString()));) {
-            int data = 0;
+            int data;
             while ((data = input.read()) != -1) {
                 out.write(data);
             }
