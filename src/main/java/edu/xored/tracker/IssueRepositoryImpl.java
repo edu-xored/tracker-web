@@ -53,7 +53,11 @@ public class IssueRepositoryImpl implements IssueRepository {
     }
 
     public void delete(Long issueId) {
-        delete(findOne(issueId));
+        if (issueId == null) {
+            return;
+        }
+
+        issuesMap.remove(issueId);
     }
 
     public void delete(Issue issue) {
@@ -61,9 +65,7 @@ public class IssueRepositoryImpl implements IssueRepository {
             return;
         }
 
-        if (issuesMap.containsKey(issue.getHash())) {
-            issuesMap.remove(issue);
-        }
+        delete(issue.getHash());
     }
 
     public void delete(Iterable<? extends Issue> issuesId) {
