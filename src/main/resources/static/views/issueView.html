@@ -1,11 +1,8 @@
-<div>
-  <table border="2" cellspacing="5" ng-hide="issue.error">
-      <tr>
-      <th>Hash</th>
-      <th>Summary</th>
-      <th>Description</th>
-      </tr>
-      <tr><td>{{issue.hash}}</td><td>{{issue.summary}}</td><td>{{issue.description}}</td></tr>
-  </table>
-  <a href="/issues/{{issue.hash}}/postcomment">Add comment</a>
+<div class=issue-info>
+	#{{issue.hash}} {{issue.status}}
+	{{issue.summary}}
+	<table>
+		<tr><td>{{issue.description}}</td></tr>
+	</table>
+	<a href="/issues/{{issue.hash}}/postcomment">Add comment</a>
 </div>
