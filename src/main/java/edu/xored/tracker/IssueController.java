@@ -20,7 +20,7 @@ public class IssueController {
 
     @GetMapping(value = "/{hash}")
     public Issue getIssue(@PathVariable("hash") long hash) {
-        throwIfIssueNotFound(hash);
+        assertIssueExists(hash);
 
         return issueRepository.findOne(hash);
     }
@@ -28,14 +28,14 @@ public class IssueController {
     @PutMapping(value = "/{hash}")
     public Issue putIssue(@PathVariable("hash") long hash,
                           @RequestBody Issue issue) {
-        throwIfIssueNotFound(hash);
+        assertIssueExists(hash);
 
         return issueRepository.replace(hash, issue);
     }
 
     @DeleteMapping(value = "/{hash}")
     public void deleteIssue(@PathVariable("hash") long hash) {
-        throwIfIssueNotFound(hash);
+        assertIssueExists(hash);
 
         issueRepository.delete(hash);
     }
@@ -43,7 +43,7 @@ public class IssueController {
     @PatchMapping(value = "/{hash}")
     public Issue patchIssue(@PathVariable("hash") long hash,
                             @RequestBody Issue patchedIssue) {
-        throwIfIssueNotFound(hash);
+        assertIssueExists(hash);
 
         return issueRepository.replace(hash, issueRepository.findOne(hash).updateIssue(patchedIssue));
     }
@@ -57,13 +57,13 @@ public class IssueController {
     @PostMapping(value = "/{hash}/comments")
     public void postComment(@RequestBody Comment comment,
                             @PathVariable("hash") long hash) {
-        throwIfIssueNotFound(hash);
+        assertIssueExists(hash);
 
         issueRepository.postComment(comment, hash);
     }
 
-    private void throwIfIssueNotFound(long hash) {
-        if (issueRepository.exists(hash)) {
+    private void assertIssueExists(long hash) throws IssueNotFoundException {
+        if (!issueRepository.exists(hash)) {
             throw new IssueNotFoundException();
         }
     }
