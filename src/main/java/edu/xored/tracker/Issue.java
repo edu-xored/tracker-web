@@ -9,7 +9,7 @@ import java.util.List;
 
 public class Issue {
 
-    private long hash;
+    private String hash;
     private String summary;
     private String description;
     private Status status;
@@ -20,18 +20,18 @@ public class Issue {
     public Issue() {
     }
 
-    public Issue(long hash, String summary, String description, Status status) {
+    public Issue(String hash, String summary, String description, Status status) {
         this.hash = hash;
         this.summary = summary;
         this.description = description;
         this.status = status;
     }
 
-    public long getHash() {
+    public String getHash() {
         return hash;
     }
 
-    public void setHash(long hash) {
+    public void setHash(String hash) {
         this.hash = hash;
     }
 

@@ -1,19 +1,35 @@
 package edu.xored.tracker;
 
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.List;
+import java.io.*;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 public class IssueRepositoryImpl implements IssueRepository {
-    private static Map<Long, Issue> issuesMap = new HashMap<>();
+    private static final String bug = "git bug ";
+    private static final String bugNew = "git bug new ";
+    private static final String bugResolve = "git bug resolve";
+
+    private static Map<String, Issue> issuesMap = new HashMap<>();
 
     public <S extends Issue> S save(S issue) {
-        issue.setHash(getIssueId());
-        issuesMap.put(issue.getHash(), issue);
-
+        Process theProcess;
+        try {
+            theProcess = Runtime.getRuntime().exec(bugNew);
+        } catch(IOException e) {
+            throw new ExecutionFailedException();
+        }
+        try (BufferedWriter outStream = new BufferedWriter(new OutputStreamWriter(theProcess.getOutputStream()))) {
+            outStream.write("I");
+            outStream.write(issue.getSummary());
+            outStream.write("\n");
+            outStream.write(issue.getDescription());
+            outStream.write(27);
+            outStream.write(":wq");
+            outStream.write("\n");
+        } catch(IOException e) {
+            throw new ExecutionFailedException();
+        }
         return issue;
     }
 
@@ -21,28 +37,71 @@ public class IssueRepositoryImpl implements IssueRepository {
         if (issues == null) {
             return null;
         }
-
         return StreamSupport.stream(issues.spliterator(), false)
                 .map(this::save)
                 .collect(Collectors.toList());
     }
 
-    public Issue findOne(Long issueId) {
-        return issuesMap.getOrDefault(issueId, null);
+    public Issue findOne(String issueId) {
+        Process theProcess;
+        try {
+            theProcess = Runtime.getRuntime().exec(bug + issueId);
+        } catch(IOException e) {
+            throw new ExecutionFailedException();
+        }
+        String info;
+        Issue issue = new Issue();
+        issue.setHash(issueId);
+        try (BufferedReader inStream = new BufferedReader(new InputStreamReader(theProcess.getInputStream()))) {
+            inStream.readLine();
+            inStream.readLine();
+            info = inStream.readLine();
+            System.out.println(info.substring(8));
+            if(info.substring(8,12).equals("open")) {
+                issue.setStatus(Issue.Status.OPEN);
+            } else {
+                issue.setStatus(Issue.Status.CLOSED);
+            }
+            info = inStream.readLine();
+            System.out.println(info);
+            issue.setSummary(info.toString().substring(9));
+            char[] descriptionData = new char[200];
+            inStream.read(descriptionData,0,140);
+            System.out.println(descriptionData);
+            issue.setDescription(String.valueOf(descriptionData).substring(0,String.valueOf(descriptionData).indexOf("\u0000")));
+            return issue;
+        } catch(IOException e) {
+            throw new ExecutionFailedException();
+        }
     }
 
-    public boolean exists(Long issueId) {
-        return issuesMap.containsKey(issueId);
+    public boolean exists(String issueId) {
+        Process theProcess;
+        try {
+            theProcess = Runtime.getRuntime().exec(bug + issueId);
+        } catch(IOException e) {
+            throw new ExecutionFailedException();
+        }
+        String info;
+        try (BufferedReader inStream = new BufferedReader(new InputStreamReader(theProcess.getInputStream()))) {
+            info = inStream.readLine();
+            if(info.substring(0,5).equals("usage")) {
+                return false;
+            }
+            return true;
+        } catch(IOException e) {
+            throw new ExecutionFailedException();
+        }
     }
 
     public Iterable<Issue> findAll() {
-        return issuesMap.values();
+        Issue.Status a = null;
+        return findAll(a);
     }
 
-    public Iterable<Issue> findAll(Iterable<Long> issuesId) {
+    public Iterable<Issue> findAll(Iterable<String> issuesId) {
         List<Issue> result = new ArrayList<>();
         issuesId.forEach(issueId -> result.add(findOne(issueId)));
-
         return result;
     }
 
@@ -52,11 +111,10 @@ public class IssueRepositoryImpl implements IssueRepository {
                 : issuesMap.size();
     }
 
-    public void delete(Long issueId) {
+    public void delete(String issueId) {
         if (issueId == null) {
             return;
         }
-
         issuesMap.remove(issueId);
     }
 
@@ -64,7 +122,6 @@ public class IssueRepositoryImpl implements IssueRepository {
         if (issue == null) {
             return;
         }
-
         delete(issue.getHash());
     }
 
@@ -82,22 +139,37 @@ public class IssueRepositoryImpl implements IssueRepository {
                 .collect(Collectors.toList());
     }
 
-    public Issue replace(Long hash, Issue issue) {
+    public Issue replace(String hash, Issue issue) {
         return issuesMap.replace(hash, issue);
     }
 
     public Iterable<Issue> findAll(Issue.Status status) {
-        return issuesMap.entrySet().stream()
-                .map(Map.Entry::getValue)
-                .filter(entry -> entry.getStatus() == status)
-                .collect(Collectors.toList());
+        Process theProcess;
+        try {
+            theProcess = Runtime.getRuntime().exec(bug + "-a");
+        } catch(IOException e) {
+            throw new ExecutionFailedException();
+        }
+        HashSet<Issue> result = new HashSet<Issue>();
+        String info;
+        Issue issue;
+        try (BufferedReader inStream = new BufferedReader(new InputStreamReader(theProcess.getInputStream()))) {
+            while((info=inStream.readLine())!=null) {
+                issue = findOne(info.substring(0,40));
+                if(issue.getStatus()==status||status==null) {
+                    result.add(issue);
+                }
+            }
+        } catch(IOException e) {
+            throw new ExecutionFailedException();
+        }
+        return result;
     }
 
-    public void postComment(Comment comment, long hash) {
+    public void postComment(Comment comment, String hash) {
         findOne(hash).addComment(comment);
     }
 
-    private long getIssueId() {
-        return issuesMap.size();
+    private class ExecutionFailedException extends RuntimeException {
     }
 }

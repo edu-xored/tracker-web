@@ -2,10 +2,10 @@ package edu.xored.tracker;
 
 import org.springframework.data.repository.CrudRepository;
 
-public interface IssueRepository extends CrudRepository<Issue, Long> {
-    <S extends Issue> S replace(Long hash, S issue);
+public interface IssueRepository extends CrudRepository<Issue,String> {
+    <S extends Issue> S replace(String hash, S issue);
 
-    Iterable<Issue> findAll(Issue.Status status);
+    public Iterable<Issue> findAll(Issue.Status status);
 
-    void postComment(Comment comment, long hash);
+    void postComment(Comment comment, String hash);
 }
