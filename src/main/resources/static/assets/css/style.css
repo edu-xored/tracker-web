@@ -27,7 +27,7 @@ body {
 .search {
     height: 30px;
     width: 50%;
-    border: 2px solid grey;
+    border: 1px solid grey;
     border-radius: 5px;
     display: inline-block;
     position: relative;
@@ -60,20 +60,17 @@ body {
     position: relative;
 }
 
-.status div {
-    display: inline-block;
-    height: 19px;
-    width: 19px;
+.status img{
     position: relative;
-    top: 33%;
-    background: url('/assets/img/filtered-icon.svg') no-repeat;
+    top: 25%;
 }
 
 .status select {
     position: relative;
-    top: 15%;
+    top: 12%;
     outline: none;
     border-style: none;
+    border-bottom: 2px solid rgb(183, 85, 232);
 }
 
 .add-new {
@@ -83,7 +80,7 @@ body {
     display: inline-block;
     position: relative;
     background-color: rgb(100, 177, 15);
-    border: 2px solid rgb(100, 177, 15);
+    border: 1px solid rgb(100, 177, 15);
     border-radius: 5px;
 }
 
