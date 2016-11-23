@@ -1,3 +1,43 @@
-.issue-info {
-
+.hash {
+	color: grey;
+	line-height: 1.5;
+	font-weight: bold;
+	font-size: 200%;
+	display: inline;
+}
+.statusOpen, .statusClosed {
+    padding: 10px;
+    margin: 10px;
+    background-color: lightgrey;
+    width: 50px;
+    border: 1px solid black;
+    display: inline;
+}
+.statusOpen {
+      color: red;
+}
+.statusClosed {
+    color: green;
+}
+.summary {
+    color: black;
+	line-height: 0.1;
+	font-weight: bold;
+	font-size: 200%;
+	display: block;
+}
+.description {
+    padding: 10px;
+    margin: 10px;
+    background-color: lightgrey;
+    width: 350px;
+    height: 200px;
+    border: 4px solid black;
+    display: block;
+}
+.commentform {
+    display:inline;
+}
+.commentstatus {
+    display:inline;
 }
