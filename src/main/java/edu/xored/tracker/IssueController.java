@@ -50,7 +50,6 @@ public class IssueController {
 
     @GetMapping
     public Collection<Issue> getIssues(@RequestParam(value = "status", required = false) Issue.Status status) {
-        System.out.println(status);
         return StreamSupport.stream(issueRepository.findAll(status).spliterator(), false)
                 .collect(Collectors.toList());
     }
