@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="23" height="17" viewBox="0 0 23 17" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs>
+    <circle id="a" cx="13.953" cy="2.078" r="2.078"/>
+    <mask id="d" width="4.156" height="4.156" x="0" y="0" fill="white">
+      <use xlink:href="#a"/>
+    </mask>
+    <circle id="b" cx="5.641" cy="8.016" r="2.078"/>
+    <mask id="e" width="4.156" height="4.156" x="0" y="0" fill="white">
+      <use xlink:href="#b"/>
+    </mask>
+    <circle id="c" cx="15.141" cy="13.953" r="2.078"/>
+    <mask id="f" width="4.156" height="4.156" x="0" y="0" fill="white">
+      <use xlink:href="#c"/>
+    </mask>
+  </defs>
+  <g fill="none" fill-rule="evenodd" transform="translate(-7 -11)">
+    <rect width="19" height="19"/>
+    <g transform="translate(7.125 11.281)">
+      <g fill="#000000" transform="translate(0 1.188)">
+        <rect width="10.527" height="1.351" rx=".676"/>
+        <rect width="4.577" height="1.351" x="17.392" rx=".676"/>
+        <rect width="2.288" height="1.351" y="5.856" rx=".676"/>
+        <rect width="11.442" height="1.351" y="11.711" rx=".676"/>
+      </g>
+      <use stroke="#000000" stroke-width="2" mask="url(#d)" xlink:href="#a"/>
+      <use stroke="#000000" stroke-width="2" mask="url(#e)" xlink:href="#b"/>
+      <use stroke="#000000" stroke-width="2" mask="url(#f)" xlink:href="#c"/>
+      <rect width="13.063" height="1.188" x="8.906" y="7.125" fill="#000000" rx=".594"/>
+      <rect width="3.563" height="1.188" x="18.406" y="13.063" fill="#000000" rx=".594"/>
+    </g>
+  </g>
+</svg>

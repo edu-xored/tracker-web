@@ -1,0 +1,146 @@
+body {
+    margin: 0;
+}
+
+#logo-div {
+    background: rgb(183, 85, 232) url('/assets/img/logo.svg') center no-repeat;
+    width: 80px;
+    height: 150px;
+    position: absolute;
+    top: 0;
+    left: 15%;
+}
+
+#panel {
+    background-color: black;
+    height: 40px;
+    position: relative;
+}
+
+#wrapper {
+    margin: 20px 0px 0px 0px;
+    position: relative;
+    left: 23%;
+    width: 54%;
+    font-family: Sans-serif;
+}
+
+.search {
+    height: 30px;
+    width: 40%;
+    border: 1px solid grey;
+    border-radius: 5px;
+    display: inline-block;
+    position: relative;
+}
+
+.search img {
+    display: inline-block;
+    width: 10%;
+    height: 60%;
+    position: relative;
+    top: 20%;
+}
+
+.search input {
+    display: inline-block;
+    position: relative;
+    top: 10%;
+    width: 80%;
+    outline: none;
+    border-style: none;
+}
+
+.status {
+    margin-left: 30px;
+    height: 30px;
+    display: inline-block;
+    position: relative;
+}
+
+.status img{
+    position: relative;
+    top: 25%;
+}
+
+.status div{
+    display: inline-block;
+    position: relative;
+    top: 10%;
+    text-align: center;
+}
+
+.status select {
+    margin-left: 5px;
+    position: relative;
+    top: 10%;
+    outline: none;
+    background-color: white;
+    border-style: none;
+    border-bottom: 2px solid rgb(183, 85, 232);
+}
+
+.add-new {
+    float: right;
+    height: 30px;
+    width: 15%;
+    display: inline-block;
+    position: relative;
+    background-color: rgb(100, 177, 15);
+    border: 1px solid rgb(100, 177, 15);
+    border-radius: 5px;
+}
+
+.add-new div {
+    align: center;
+    color: white;
+    position: relative;
+    top: 15%;
+    text-align: center;
+}
+
+.page-container {
+    display: block;
+    position: absolute;
+    width: 50%;
+    left: 40%;
+    right: 40%;
+    padding: 10px 0px;
+}
+
+#all-issues-table {
+    margin: 20px 0px 0px 0px;
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    background-color: whitesmoke;
+}
+
+#all-issues-table th, #all-issues-table td {
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    border-color: white;
+    padding: 10px 20px;
+}
+
+#all-issues-table tr:first-child {
+    background-color: lavender;
+    font-weight: bold;
+}
+
+#all-issues-table td:first-child {
+    width: 10px;
+}
+
+#all-issues-table :visited, #all-issues-table :link {
+    color: black;
+    text-decoration: none;
+}
+
+#all-issues-table tr:nth-child(n+2):hover {
+    background-color: gainsboro;
+}
+
+.left-container div {
+    padding:0px 0px 5px 0px;
+}
