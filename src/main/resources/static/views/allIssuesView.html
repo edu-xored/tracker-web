@@ -4,12 +4,12 @@
 </div>
 <div id="wrapper">
     <div class="search">
-        <div></div>
+        <img src="/assets/img/search-icon.svg">
         <input type="text" ng-model="search" ng-change="filteredPagination()" placeholder="Search...">
     </div>
 
     <div class="status">
-        <img src="/assets/img/filtered-icon.svg">
+	<div> Status:</div>
         <select ng-model="selectedStatus" ng-options="item for item in statusVariants" ng-change="filteredPagination()"></select>
     </div>
 
