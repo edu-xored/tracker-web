@@ -1,3 +1,4 @@
+
 package edu.xored.tracker;
 
 import java.io.*;
@@ -6,16 +7,16 @@ import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 public class IssueRepositoryImpl implements IssueRepository {
-    private static final String bug = "git bug ";
-    private static final String bugNew = "git bug new ";
-    private static final String bugResolve = "git bug resolve";
+    private static final String GIT_BUG = "git bug ";
+    private static final String GIT_BUG_NEW = "git bug new ";
+    private static final String GIT_BUG_RESOLVE = "git bug resolve ";
 
     private static Map<String, Issue> issuesMap = new HashMap<>();
 
     public <S extends Issue> S save(S issue) {
         Process theProcess;
         try {
-            theProcess = Runtime.getRuntime().exec(bugNew);
+            theProcess = Runtime.getRuntime().exec(GIT_BUG_NEW);
         } catch(IOException e) {
             throw new ExecutionFailedException();
         }
@@ -45,7 +46,7 @@ public class IssueRepositoryImpl implements IssueRepository {
     public Issue findOne(String issueId) {
         Process theProcess;
         try {
-            theProcess = Runtime.getRuntime().exec(bug + issueId);
+            theProcess = Runtime.getRuntime().exec(GIT_BUG + issueId);
         } catch(IOException e) {
             throw new ExecutionFailedException();
         }
@@ -56,18 +57,15 @@ public class IssueRepositoryImpl implements IssueRepository {
             inStream.readLine();
             inStream.readLine();
             info = inStream.readLine();
-            System.out.println(info.substring(8));
             if(info.substring(8,12).equals("open")) {
                 issue.setStatus(Issue.Status.OPEN);
             } else {
                 issue.setStatus(Issue.Status.CLOSED);
             }
             info = inStream.readLine();
-            System.out.println(info);
             issue.setSummary(info.toString().substring(9));
             char[] descriptionData = new char[200];
             inStream.read(descriptionData,0,140);
-            System.out.println(descriptionData);
             issue.setDescription(String.valueOf(descriptionData).substring(0,String.valueOf(descriptionData).indexOf("\u0000")));
             return issue;
         } catch(IOException e) {
@@ -78,7 +76,7 @@ public class IssueRepositoryImpl implements IssueRepository {
     public boolean exists(String issueId) {
         Process theProcess;
         try {
-            theProcess = Runtime.getRuntime().exec(bug + issueId);
+            theProcess = Runtime.getRuntime().exec(GIT_BUG + issueId);
         } catch(IOException e) {
             throw new ExecutionFailedException();
         }
@@ -146,7 +144,7 @@ public class IssueRepositoryImpl implements IssueRepository {
     public Iterable<Issue> findAll(Issue.Status status) {
         Process theProcess;
         try {
-            theProcess = Runtime.getRuntime().exec(bug + "-a");
+            theProcess = Runtime.getRuntime().exec(GIT_BUG + "-a");
         } catch(IOException e) {
             throw new ExecutionFailedException();
         }

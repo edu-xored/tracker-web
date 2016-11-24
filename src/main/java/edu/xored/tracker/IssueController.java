@@ -20,7 +20,7 @@ public class IssueController {
 
     @GetMapping(value = "/{hash}")
     public Issue getIssue(@PathVariable("hash") String hash) {
-        //assertIssueExists(hash);
+        assertIssueExists(hash);
 
         return issueRepository.findOne(hash);
     }
@@ -28,7 +28,7 @@ public class IssueController {
     @PutMapping(value = "/{hash}")
     public Issue putIssue(@PathVariable("hash") String hash,
                           @RequestBody Issue issue) {
-        //assertIssueExists(hash);
+        assertIssueExists(hash);
 
         return issueRepository.replace(hash, issue);
     }
