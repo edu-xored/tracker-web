@@ -1,13 +1,13 @@
 .hash {
 	color: grey;
-	line-height: 2;
+	line-height: 3;
 	font-size: 120%;
 	font-weight: bold;
-    margin: 5px 5px 5px 5px;
+    margin: 5px 5px 5px 10px;
 	display: inline;
 }
 .statusOpen, .statusClosed {
-    line-height: 2;
+    line-height: 3;
 	font-size: 120%;
     padding: 2px;
     margin: 5px 5px 5px 5px;
@@ -24,7 +24,7 @@
 .summary {
     color: black;
     padding: 5px;
-    margin: 15px 5px 20px 5px;
+    margin: 5px 5px 20px 5px;
 	line-height: 0.1;
 	font-weight: bold;
 	font-size: 200%;
@@ -33,21 +33,31 @@
 .description {
     padding: 10px;
     margin: 10px;
-    background-color: white;
-    width: 350px;
+    background-color: whitesmoke;
+    width: 370px;
     height: 200px;
     border: 4px solid black;
     display: block;
 }
-.commentform[type=text] {
+.commentFormName[type=text] {
     width: 10%;
+    margin: 5px 0px 5px 10px;
+    display:inline;
+    resize: none;
+}
+.commentFormComment[type=text] {
+    width: 10%;
+    margin: 5px 0px 5px 5px;
+    display:inline;
+    resize: none;
+}
+.commentButton[type=button], input[type=submit] {
+    margin: 5px 5px 5px 5px;
     display:inline;
 }
-.commentbutton[type=button], input[type=submit] {
-    display:inline;
-}
-.commentstatus {
-    display:inline;
+.commentStatus {
+    margin: 10px 5px 5px 10px;
+    display:block;
 }
 .comment {
 

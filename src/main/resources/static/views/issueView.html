@@ -10,11 +10,11 @@
     <p class=summary>{{issue.summary}}</p>
     <p class=description>{{issue.description}}</p>
     <form ng-submit="submitForm()" name="commentForm">
-        <input class=commentform type="text" ng-model="comment.author" placeholder="Name" default=null>
-        <input class=commentform type="text" ng-model="comment.content" placeholder="Leave a comment">
-        <input class=commentbutton type="submit" value="Comment">
+        <input class=commentFormName type="text" ng-model="comment.author" placeholder="Name" default=null>
+        <input class=commentFormComment type="text" ng-model="comment.content" placeholder="Leave a comment">
+        <input class=commentButton type="submit" value="Comment">
     </form>
-    <label class=commentstatus>Status: {{status}}</label>
+    <label class=commentStatus>Status: {{status}}</label>
 </div>
 <div class=comment></div>
 <div class=attachments></div>
