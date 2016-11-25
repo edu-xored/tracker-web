@@ -1,5 +1,6 @@
 package edu.xored.tracker;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,8 +21,7 @@ public class IssueController {
 
     @GetMapping(value = "/{hash}")
     public Issue getIssue(@PathVariable("hash") String hash) {
-        assertIssueExists(hash);
-
+        //assertIssueExists(hash);
         return issueRepository.findOne(hash);
     }
 
@@ -29,14 +29,12 @@ public class IssueController {
     public Issue putIssue(@PathVariable("hash") String hash,
                           @RequestBody Issue issue) {
         assertIssueExists(hash);
-
         return issueRepository.replace(hash, issue);
     }
 
     @DeleteMapping(value = "/{hash}")
     public void deleteIssue(@PathVariable("hash") String hash) {
         assertIssueExists(hash);
-
         issueRepository.delete(hash);
     }
 
@@ -44,8 +42,7 @@ public class IssueController {
     public Issue patchIssue(@PathVariable("hash") String hash,
                             @RequestBody Issue patchedIssue) {
         assertIssueExists(hash);
-
-        return issueRepository.replace(hash, issueRepository.findOne(hash).updateIssue(patchedIssue));
+        return issueRepository.replace(hash, issueRepository.findOne(hash));
     }
 
     @GetMapping
@@ -58,7 +55,6 @@ public class IssueController {
     public void postComment(@RequestBody Comment comment,
                             @PathVariable("hash") String hash) {
         assertIssueExists(hash);
-
         issueRepository.postComment(comment, hash);
     }
 
@@ -69,6 +65,6 @@ public class IssueController {
     }
 
     @ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "Issue not found")
-    private class IssueNotFoundException extends RuntimeException {
+    public static class IssueNotFoundException extends RuntimeException {
     }
 }

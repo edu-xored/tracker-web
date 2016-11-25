@@ -1,4 +1,3 @@
-
 package edu.xored.tracker;
 
 import java.io.*;
@@ -16,18 +15,16 @@ public class IssueRepositoryImpl implements IssueRepository {
     public <S extends Issue> S save(S issue) {
         Process theProcess;
         try {
-            theProcess = Runtime.getRuntime().exec(GIT_BUG_NEW);
+            String command =  GIT_BUG_NEW  + "-m " + "" + issue.getSummary()
+                    + "\\n" + issue.getDescription() + "";
+            theProcess = Runtime.getRuntime().exec(command);
         } catch(IOException e) {
             throw new ExecutionFailedException();
         }
-        try (BufferedWriter outStream = new BufferedWriter(new OutputStreamWriter(theProcess.getOutputStream()))) {
-            outStream.write("I");
-            outStream.write(issue.getSummary());
-            outStream.write("\n");
-            outStream.write(issue.getDescription());
-            outStream.write(27);
-            outStream.write(":wq");
-            outStream.write("\n");
+        String info;
+        try (BufferedReader inStream = new BufferedReader(new InputStreamReader(theProcess.getInputStream()))) {
+            info = inStream.readLine();
+            issue.setHash(info);
         } catch(IOException e) {
             throw new ExecutionFailedException();
         }
@@ -83,7 +80,7 @@ public class IssueRepositoryImpl implements IssueRepository {
         String info;
         try (BufferedReader inStream = new BufferedReader(new InputStreamReader(theProcess.getInputStream()))) {
             info = inStream.readLine();
-            if(info.substring(0,5).equals("usage")) {
+            if(info.substring(0,5) == "usage") {
                 return false;
             }
             return true;
@@ -138,7 +135,26 @@ public class IssueRepositoryImpl implements IssueRepository {
     }
 
     public Issue replace(String hash, Issue issue) {
-        return issuesMap.replace(hash, issue);
+        Process theProcess;
+        try {
+            theProcess = Runtime.getRuntime().exec(GIT_BUG_RESOLVE + hash);
+            System.out.print(GIT_BUG_RESOLVE + hash);
+        } catch(IOException e) {
+            throw new ExecutionFailedException();
+        }
+        String info;
+        try (BufferedReader inStream = new BufferedReader(new InputStreamReader(theProcess.getInputStream()))) {
+            if(inStream == null) {
+                return findOne(hash);
+            }
+            info = inStream.readLine();
+            if(info.substring(0,5).equals("Error")) {
+                throw new IssueController.IssueNotFoundException();
+            }
+        } catch(IOException e) {
+            throw new ExecutionFailedException();
+        }
+        return findOne(hash);
     }
 
     public Iterable<Issue> findAll(Issue.Status status) {
