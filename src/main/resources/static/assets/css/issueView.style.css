@@ -1,15 +1,17 @@
 .hash {
 	color: grey;
-	line-height: 1.5;
+	line-height: 2;
+	font-size: 120%;
 	font-weight: bold;
-	font-size: 200%;
+    margin: 5px 5px 5px 5px;
 	display: inline;
 }
 .statusOpen, .statusClosed {
-    padding: 10px;
-    margin: 10px;
-    background-color: lightgrey;
-    width: 50px;
+    line-height: 2;
+	font-size: 120%;
+    padding: 2px;
+    margin: 5px 5px 5px 5px;
+    background-color: white;
     border: 1px solid black;
     display: inline;
 }
@@ -21,6 +23,8 @@
 }
 .summary {
     color: black;
+    padding: 5px;
+    margin: 15px 5px 20px 5px;
 	line-height: 0.1;
 	font-weight: bold;
 	font-size: 200%;
@@ -29,15 +33,36 @@
 .description {
     padding: 10px;
     margin: 10px;
-    background-color: lightgrey;
+    background-color: white;
     width: 350px;
     height: 200px;
     border: 4px solid black;
     display: block;
 }
-.commentform {
+.commentform[type=text] {
+    width: 10%;
+    display:inline;
+}
+.commentbutton[type=button], input[type=submit] {
     display:inline;
 }
 .commentstatus {
+    display:inline;
+}
+.comment {
+
+}
+.attachments {
+
+}
+.participants {
+
+}
+.error {
+    color: black;
+    line-height: 1;
+    font-weight: bold;
+    font-size: 200%;
+    margin: 10px;
     display:inline;
 }

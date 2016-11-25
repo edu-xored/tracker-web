@@ -8,7 +8,7 @@ angular.module('trackerWebApp')
         $scope.issue = response.data;
         $scope.error = null;
       }, function(response) {
-          $scope.error = "mem";
+          $scope.error = response.data.message;
       });
       $scope.comment = {};
       		$scope.submitForm = function() {
