@@ -39,8 +39,13 @@ angular.module('trackerWebApp')
             }, function(response) {
                 $scope.error = response.status.Text;
             });
-        $scope.selectedStatus = "";
-        $scope.statusVariants = ["", "OPEN", "CLOSED"];
+        $scope.selectedStatus = "ALL";
+        $scope.statusVariants = ["ALL", "OPEN", "CLOSED"];
+        $scope.statusFilter = function (issue) {
+            if((issue.status === $scope.selectedStatus) || ('ALL' === $scope.selectedStatus)) {
+                return issue;
+            }
+        };
     })
     .filter('startFrom', function() {
         return function(input, start) {
