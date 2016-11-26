@@ -7,5 +7,7 @@ public interface IssueRepository extends CrudRepository<Issue,String> {
 
     public Iterable<Issue> findAll(Issue.Status status);
 
+    public void replaceAll();
+
     void postComment(Comment comment, String hash);
 }

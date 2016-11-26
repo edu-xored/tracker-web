@@ -1,15 +1,20 @@
 package edu.xored.tracker;
 
+import org.springframework.stereotype.Service;
+
 import java.io.*;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
+@Service
 public class IssueRepositoryImpl implements IssueRepository {
     private static final String GIT_BUG = "git bug ";
     private static final String GIT_BUG_NEW = "git bug new ";
     private static final String GIT_BUG_RESOLVE = "git bug resolve ";
+    private static final int GIT_BUG_HASH_STATUS = 8;
 
+    // TODO: remove when git bug would implement all needed commands.
     private Map<String, Issue> issuesMap = new HashMap<>();
 
     public <S extends Issue> S save(S issue) {
@@ -60,13 +65,13 @@ public class IssueRepositoryImpl implements IssueRepository {
             inStream.readLine();
             inStream.readLine();
             info = inStream.readLine();
-            if(info.substring(8,12).equals("open")) {
+            if(info.substring(GIT_BUG_HASH_STATUS,GIT_BUG_HASH_STATUS + 4).equals("open")) {
                 issue.setStatus(Issue.Status.OPEN);
             } else {
                 issue.setStatus(Issue.Status.CLOSED);
             }
             info = inStream.readLine();
-            issue.setSummary(info.toString().substring(9));
+            issue.setSummary(info.substring(9));
             char[] descriptionData = new char[200];
             inStream.read(descriptionData,0,140);
             issue.setDescription(String.valueOf(descriptionData).substring(0,String.valueOf(descriptionData).indexOf("\u0000")));
@@ -135,7 +140,7 @@ public class IssueRepositoryImpl implements IssueRepository {
 
     public Issue replace(String hash, Issue issue) {
         Process theProcess;
-        Issue old = issue;
+        Issue oldIssue = findOne(hash);
         try {
             theProcess = Runtime.getRuntime().exec(GIT_BUG_RESOLVE + hash);
         } catch(IOException e) {
@@ -144,15 +149,22 @@ public class IssueRepositoryImpl implements IssueRepository {
         String info;
         try (BufferedReader inStream = new BufferedReader(new InputStreamReader(theProcess.getInputStream()))) {
             info = inStream.readLine();
-            if(info.substring(0,5).equals("Error")) {
+            if(info!=null && info.substring(0,5).equals("Error")) {
                 throw new IssueController.IssueNotFoundException();
             }
         } catch(IOException e) {
             throw new ExecutionFailedException();
         }
-        issue.setStatus(Issue.Status.CLOSED);
-        issuesMap.replace(hash,old,issue);
-        return findOne(hash);
+        Issue newIssue = findOne(hash);
+        issuesMap.replace(hash,oldIssue,newIssue);
+        return newIssue;
+    }
+
+    public void replaceAll() {
+        Iterable<Issue>  all = findAll();
+        for(Issue issue : all) {
+            replace(issue.getHash(),issue);
+        }
     }
 
     public Iterable<Issue> findAll(Issue.Status status) {
@@ -179,7 +191,10 @@ public class IssueRepositoryImpl implements IssueRepository {
     }
 
     public void postComment(Comment comment, String hash) {
-        issuesMap.get(hash).addComment(comment);
+        Issue oldIssue = findOne(hash);
+        Issue newIssue = oldIssue;
+        newIssue.addComment(comment);
+        issuesMap.replace(hash,oldIssue,newIssue);
     }
 
     private class ExecutionFailedException extends RuntimeException {

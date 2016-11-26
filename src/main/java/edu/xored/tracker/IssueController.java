@@ -12,7 +12,8 @@ import java.util.stream.StreamSupport;
 @RequestMapping(value = "/api/issues")
 public class IssueController {
 
-    private IssueRepository issueRepository = new IssueRepositoryImpl();
+    @Autowired
+    private IssueRepository issueRepository;
 
     @PostMapping
     public Issue postIssue(@RequestBody Issue issue) {
@@ -42,6 +43,11 @@ public class IssueController {
                             @RequestBody Issue patchedIssue) {
         assertIssueExists(hash);
         return issueRepository.replace(hash, patchedIssue);
+    }
+
+    @PatchMapping()
+    public void patchAll() {
+        issueRepository.replaceAll();
     }
 
     @GetMapping
