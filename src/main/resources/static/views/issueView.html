@@ -5,8 +5,10 @@
 </style>
 <div ng-hide="error">
     <p class=hash>#{{issue.hash}}</p>
-    <p ng-hide="issue.status=='OPEN'" class=statusClosed>{{issue.status}}</p>
-    <p ng-hide="issue.status=='CLOSED'" class=statusOpen>{{issue.status}}</p>
+    <p ng-class="{statusOpen : issue.status=='OPEN', statusClosed : issue.status=='CLOSED'}">{{issue.status}}</p>
+    <form class="resolveButton" ng-submit="resolveForm()" name="resForm">
+        <input ng-disabled="issue.status=='CLOSED'" type="submit" value="Resolve">
+    </form>
     <p class=summary>{{issue.summary}}</p>
     <p class=description>{{issue.description}}</p>
     <form ng-submit="submitForm()" name="commentForm">
