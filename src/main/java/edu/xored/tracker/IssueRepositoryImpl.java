@@ -64,10 +64,9 @@ public class IssueRepositoryImpl implements IssueRepository {
         try (BufferedReader inStream = new BufferedReader(new InputStreamReader(theProcess.getInputStream()))) {
             inStream.readLine(); //issue <hash>
             inStream.readLine(); //Author: <author>
-            inStream.readLine(); //Date: <date> or <resolver>
+            inStream.readLine(); //Date: <date>
             info = inStream.readLine();
-            if(!info.substring(0,6).equals("Status")) {
-                inStream.readLine();
+            while(!info.substring(0,6).equals("Status")) {
                 info = inStream.readLine();
             }
             if(info.substring(GIT_BUG_HASH_STATUS,GIT_BUG_HASH_STATUS + 4).equals("open")) {
@@ -77,10 +76,13 @@ public class IssueRepositoryImpl implements IssueRepository {
             }
             inStream.readLine(); //Empty space
             info = inStream.readLine();
-            issue.setSummary(info.substring(0));
-            char[] descriptionData = new char[200];
-            inStream.read(descriptionData,0,140);
-            issue.setDescription(String.valueOf(descriptionData).substring(0,String.valueOf(descriptionData).indexOf("\u0000")));
+            issue.setSummary(info);
+            int descriptionData;
+            String description = "";
+            while((descriptionData = inStream.read())!=-1) {
+                description += String.valueOf((char) descriptionData);
+            }
+            issue.setDescription(description);
             return issue;
         } catch(IOException e) {
             throw new ExecutionFailedException();
