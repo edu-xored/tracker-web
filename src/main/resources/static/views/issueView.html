@@ -1,8 +1,4 @@
-<style>
-   body {
-    background-color: white;
-   }
-</style>
+<link rel="stylesheet" href="assets/css/issueView.style.css">
 <div ng-hide="error">
     <p class=hash>#{{issue.hash}}</p>
     <p ng-class="{statusOpen : issue.status=='OPEN', statusClosed : issue.status=='CLOSED'}">{{issue.status}}</p>
