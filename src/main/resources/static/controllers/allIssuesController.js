@@ -4,6 +4,11 @@ angular.module('trackerWebApp')
         $scope.itemsPerPage = 10;
         $scope.itemsPerPageSelects = [2, 5, 10, 20, 50];
         $scope.issues = [];
+        $scope.modalShown = false;
+
+        $scope.toggleModal = function() {
+            $scope.modalShown = !$scope.modalShown;
+        };
         $scope.firstPage = function() {
             return $scope.currentPage == 0;
         }

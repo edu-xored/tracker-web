@@ -10,9 +10,12 @@
     <script src="/controllers/allIssuesController.js"></script>
     <script src="/controllers/issueController.js"></script>
     <script src="/controllers/postCommentController.js"></script>
+    <script src="/directives/modalDialog.directive.js"></script>
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/modalDialog.css">
   </head>
   <body>
-    <div ng-view></div>
+  <ng-include src="'/views/allIssuesView.html'">
+  </ng-include>
   </body>
 </html>
