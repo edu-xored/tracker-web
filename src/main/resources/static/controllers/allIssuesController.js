@@ -36,6 +36,9 @@ angular.module('trackerWebApp')
         $http.get('/api/issues').
             then(function(response) {
                 $scope.issues = response.data;
+                $scope.issues.forEach(function (issue) {
+                    issue.hash = issue.hash.substring(0,6);
+                });
             }, function(response) {
                 $scope.error = response.status.Text;
             });
