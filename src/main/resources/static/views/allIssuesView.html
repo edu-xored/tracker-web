@@ -1,4 +1,7 @@
 ﻿<ng-controller ng-controller="issuesController">
+	<modal-dialog show='modalShown' width='400px' height='60%'>
+		<div ng-view></div>
+	</modal-dialog>
 	<div id="panel">
 	</div>
 	<div id="logo-div">
@@ -41,7 +44,4 @@
 			<select ng-model="itemsPerPageSelect" ng-options="itemsPerPageSelect for itemsPerPageSelect in itemsPerPageSelects" ng-change="changeItemsPerPage()" ng-init="initItemsPerPage()"></select>
 		</div>
 	</div>
-	<modal-dialog show='modalShown' width='400px' height='60%'>
-		<div ng-view></div>
-	</modal-dialog>
 </ng-controller>
