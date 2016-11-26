@@ -21,7 +21,7 @@ public class AttachmentService {
     // TODO: store attachments via git core API.
     private static final Path ATTACHMENTS_ROOT_DIR = Paths.get(".").resolve("files");
 
-    public void saveAttachment(long issueHash, MultipartFile file) {
+    public void saveAttachment(String issueHash, MultipartFile file) {
         if(file.isEmpty()) {
             throw new FileIsEmptyException();
         }
@@ -42,7 +42,7 @@ public class AttachmentService {
         }
     }
 
-    public ByteArrayInputStream getAttachment(long issueHash, String name) {
+    public ByteArrayInputStream getAttachment(String issueHash, String name) {
         Path path = getIssuePath(issueHash).resolve(name);
         try (ByteArrayOutputStream out = new ByteArrayOutputStream();
              InputStream input = new BufferedInputStream(new FileInputStream(path.toString()));) {
@@ -56,7 +56,7 @@ public class AttachmentService {
         }
     }
 
-    private Path getIssuePath (long issueHash) {
+    private Path getIssuePath (String issueHash) {
         return ATTACHMENTS_ROOT_DIR.resolve(String.valueOf(issueHash));
     }
 
