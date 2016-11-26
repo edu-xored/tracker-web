@@ -1,11 +1,24 @@
-<div>
-  <table border="2" cellspacing="5" ng-hide="issue.error">
-      <tr>
-      <th>Hash</th>
-      <th>Summary</th>
-      <th>Description</th>
-      </tr>
-      <tr><td>{{issue.hash}}</td><td>{{issue.summary}}</td><td>{{issue.description}}</td></tr>
-  </table>
-  <a href="/issues/{{issue.hash}}/postcomment">Add comment</a>
+<style>
+   body {
+    background-color: white;
+   }
+</style>
+<div ng-hide="error">
+    <p class=hash>#{{issue.hash}}</p>
+    <p ng-hide="issue.status=='OPEN'" class=statusClosed>{{issue.status}}</p>
+    <p ng-hide="issue.status=='CLOSED'" class=statusOpen>{{issue.status}}</p>
+    <p class=summary>{{issue.summary}}</p>
+    <p class=description>{{issue.description}}</p>
+    <form ng-submit="submitForm()" name="commentForm">
+        <input class=commentFormName type="text" ng-model="comment.author" placeholder="Name" default=null>
+        <input class=commentFormComment type="text" ng-model="comment.content" placeholder="Leave a comment">
+        <input class=commentButton type="submit" value="Comment">
+    </form>
+    <label class=commentStatus>Status: {{status}}</label>
+</div>
+<div class=comment></div>
+<div class=attachments></div>
+<div class=participants></div>
+<div ng-show="error">
+    <p class="error">{{error}}</p>
 </div>
