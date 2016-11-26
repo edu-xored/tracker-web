@@ -10,7 +10,9 @@
 
     <div class="status">
 	<div> Status:</div>
-        <select ng-model="selectedStatus" ng-options="item for item in statusVariants" ng-change="filteredPagination()"></select>
+        <select ng-model="selectedStatus" ng-options="item for item in statusVariants" ng-change="filteredPagination()">
+            <option value="">ALL</option>
+        </select>
     </div>
 
     <div class="add-new">
@@ -24,7 +26,7 @@
             <th>Description</th>
             <th>Status</th>
         </tr>
-        <tr ng-repeat="issue in filtered = (issues | filter: statusFilter | filter:search) | startFrom:startingItem() | limitTo:itemsPerPage">
+        <tr ng-repeat="issue in filtered = (issues | filter:selectedStatus | filter:search) | startFrom:startingItem() | limitTo:itemsPerPage">
             <td>{{issue.hash}}</td>
             <td><a href="/issues/{{issue.hash}}">{{issue.summary}}</a></td>
             <td>{{issue.description}}</td>
