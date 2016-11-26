@@ -21,15 +21,14 @@ public class IssueController {
 
     @GetMapping(value = "/{hash}")
     public Issue getIssue(@PathVariable("hash") String hash) {
-        //assertIssueExists(hash);
+        assertIssueExists(hash);
         return issueRepository.findOne(hash);
     }
 
     @PutMapping(value = "/{hash}")
     public Issue putIssue(@PathVariable("hash") String hash,
                           @RequestBody Issue issue) {
-        assertIssueExists(hash);
-        return issueRepository.replace(hash, issue);
+        throw new IssueRepositoryImpl.IssueNotImplementedException();
     }
 
     @DeleteMapping(value = "/{hash}")
@@ -42,7 +41,7 @@ public class IssueController {
     public Issue patchIssue(@PathVariable("hash") String hash,
                             @RequestBody Issue patchedIssue) {
         assertIssueExists(hash);
-        return issueRepository.replace(hash, issueRepository.findOne(hash));
+        return issueRepository.replace(hash, patchedIssue);
     }
 
     @GetMapping

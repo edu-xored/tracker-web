@@ -10,14 +10,19 @@ public class IssueRepositoryImpl implements IssueRepository {
     private static final String GIT_BUG_NEW = "git bug new ";
     private static final String GIT_BUG_RESOLVE = "git bug resolve ";
 
-    private static Map<String, Issue> issuesMap = new HashMap<>();
+    private Map<String, Issue> issuesMap = new HashMap<>();
 
     public <S extends Issue> S save(S issue) {
         Process theProcess;
+        String commands =  GIT_BUG_NEW + "-m "  + '\"' + issue.getSummary()
+                + "\\n" + issue.getDescription() + '\"' + "\n";
         try {
-            String command =  GIT_BUG_NEW  + "-m " + "" + issue.getSummary()
-                    + "\\n" + issue.getDescription() + "";
-            theProcess = Runtime.getRuntime().exec(command);
+            theProcess = Runtime.getRuntime().exec("/bin/bash");
+        } catch(IOException e) {
+            throw new ExecutionFailedException();
+        }
+        try (BufferedWriter outStream = new BufferedWriter(new OutputStreamWriter(theProcess.getOutputStream()))) {
+            outStream.write(commands);
         } catch(IOException e) {
             throw new ExecutionFailedException();
         }
@@ -28,6 +33,7 @@ public class IssueRepositoryImpl implements IssueRepository {
         } catch(IOException e) {
             throw new ExecutionFailedException();
         }
+        issuesMap.put(issue.getHash(), issue);
         return issue;
     }
 
@@ -80,7 +86,7 @@ public class IssueRepositoryImpl implements IssueRepository {
         String info;
         try (BufferedReader inStream = new BufferedReader(new InputStreamReader(theProcess.getInputStream()))) {
             info = inStream.readLine();
-            if(info.substring(0,5) == "usage") {
+            if(info.substring(0,5).equals("usage")) {
                 return false;
             }
             return true;
@@ -107,46 +113,36 @@ public class IssueRepositoryImpl implements IssueRepository {
     }
 
     public void delete(String issueId) {
-        if (issueId == null) {
-            return;
-        }
-        issuesMap.remove(issueId);
+        throw new IssueNotImplementedException();
     }
 
     public void delete(Issue issue) {
-        if (issue == null) {
-            return;
-        }
-        delete(issue.getHash());
+        throw new IssueNotImplementedException();
     }
 
     public void delete(Iterable<? extends Issue> issuesId) {
-        issuesId.forEach(this::delete);
+        throw new IssueNotImplementedException();
     }
 
     public void deleteAll() {
-        issuesMap.clear();
+        throw new IssueNotImplementedException();
     }
 
     public List<Issue> list() {
-        return issuesMap.entrySet().stream()
-                .map(Map.Entry::getValue)
+        return StreamSupport.stream(findAll().spliterator(), false)
                 .collect(Collectors.toList());
     }
 
     public Issue replace(String hash, Issue issue) {
         Process theProcess;
+        Issue old = issue;
         try {
             theProcess = Runtime.getRuntime().exec(GIT_BUG_RESOLVE + hash);
-            System.out.print(GIT_BUG_RESOLVE + hash);
         } catch(IOException e) {
             throw new ExecutionFailedException();
         }
         String info;
         try (BufferedReader inStream = new BufferedReader(new InputStreamReader(theProcess.getInputStream()))) {
-            if(inStream == null) {
-                return findOne(hash);
-            }
             info = inStream.readLine();
             if(info.substring(0,5).equals("Error")) {
                 throw new IssueController.IssueNotFoundException();
@@ -154,6 +150,8 @@ public class IssueRepositoryImpl implements IssueRepository {
         } catch(IOException e) {
             throw new ExecutionFailedException();
         }
+        issue.setStatus(Issue.Status.CLOSED);
+        issuesMap.replace(hash,old,issue);
         return findOne(hash);
     }
 
@@ -181,9 +179,11 @@ public class IssueRepositoryImpl implements IssueRepository {
     }
 
     public void postComment(Comment comment, String hash) {
-        findOne(hash).addComment(comment);
+        issuesMap.get(hash).addComment(comment);
     }
 
     private class ExecutionFailedException extends RuntimeException {
+    }
+    public static class IssueNotImplementedException extends RuntimeException {
     }
 }
