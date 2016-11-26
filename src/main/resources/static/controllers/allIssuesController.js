@@ -9,10 +9,15 @@ angular.module('trackerWebApp')
         }
         $scope.lastPage = function() {
             var lastPageNum = Math.ceil($scope.filtered.length / $scope.itemsPerPage - 1);
+            if (lastPageNum == -1)
+                lastPageNum = 0;
             return $scope.currentPage == lastPageNum;
         }
         $scope.numberOfPages = function(){
-            return Math.ceil($scope.filtered.length / $scope.itemsPerPage);
+            var pages = Math.ceil($scope.filtered.length / $scope.itemsPerPage);
+            if (pages == 0)
+                pages = 1;
+            return pages;
         }
         $scope.startingItem = function() {
             return $scope.currentPage * $scope.itemsPerPage;
