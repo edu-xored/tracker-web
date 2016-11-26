@@ -10,6 +10,20 @@ angular.module('trackerWebApp')
       }, function(response) {
           $scope.error = response.data.message;
       });
+      $scope.resolveForm = function() {
+          $http({
+              method    :    'PATCH',
+              url       :    '/api/issues/' + $routeParams.hash,
+              data      :    $scope.issue
+          })
+              .success(function() {
+                  $scope.issue.status = 'CLOSED';
+                  $scope.status = 'Resolved';
+               })
+               .error(function() {
+                  $scope.status = 'Failed to resolve';
+               });
+      };
       $scope.comment = {};
       		$scope.submitForm = function() {
       			if (!$scope.comment.content) {

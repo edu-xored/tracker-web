@@ -1,13 +1,13 @@
 .hash {
+    float: left;
 	color: grey;
-	line-height: 3;
 	font-size: 120%;
 	font-weight: bold;
     margin: 5px 5px 5px 10px;
 	display: inline;
 }
 .statusOpen, .statusClosed {
-    line-height: 3;
+    float: left;
 	font-size: 120%;
     padding: 2px;
     margin: 5px 5px 5px 5px;
@@ -24,7 +24,7 @@
 .summary {
     color: black;
     padding: 5px;
-    margin: 5px 5px 20px 5px;
+    margin: 10px 5px 20px 5px;
 	line-height: 0.1;
 	font-weight: bold;
 	font-size: 200%;
@@ -58,6 +58,10 @@
 .commentStatus {
     margin: 10px 5px 5px 10px;
     display:block;
+}
+.resolveButton input[type=submit] {
+    display: inline-block;
+    margin: 5px 5px 5px 5px;
 }
 .comment {
 
