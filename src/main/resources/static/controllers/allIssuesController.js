@@ -9,7 +9,7 @@ angular.module('trackerWebApp')
         }
         $scope.lastPage = function() {
             var lastPageNum = Math.ceil($scope.filtered.length / $scope.itemsPerPage - 1);
-            if (lastPageNum == -1)
+            if (lastPageNum < 0)
                 lastPageNum = 0;
             return $scope.currentPage == lastPageNum;
         }
