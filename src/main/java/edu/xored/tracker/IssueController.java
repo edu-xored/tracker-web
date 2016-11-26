@@ -1,9 +1,15 @@
 package edu.xored.tracker;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.multipart.MultipartFile;
+import java.io.ByteArrayInputStream;
 
+import java.io.IOException;
 import java.util.Collection;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -14,6 +20,8 @@ public class IssueController {
 
     @Autowired
     private IssueRepository issueRepository;
+    @Autowired
+    private AttachmentService attachmentService;
 
     @PostMapping
     public Issue postIssue(@RequestBody Issue issue) {
@@ -66,6 +74,28 @@ public class IssueController {
     private void assertIssueExists(String hash) throws IssueNotFoundException {
         if (!issueRepository.exists(hash)) {
             throw new IssueNotFoundException();
+        }
+    }
+
+    @PostMapping(value="/{hash}/upload")
+    public ResponseEntity<String> saveAttachment(@PathVariable("hash") String hash,
+                                                 @RequestParam("file") MultipartFile file) {
+        assertIssueExists(hash);
+        attachmentService.saveAttachment(hash, file);
+        HttpHeaders headers = new HttpHeaders();
+        return new ResponseEntity<String>("Success!", headers, HttpStatus.CREATED);
+    }
+
+    @GetMapping(value="/{hash}/download")
+    public ResponseEntity<InputStreamResource> getAttachment(@PathVariable("hash") String hash,
+                                                             @RequestParam("name") String name) {
+        assertIssueExists(hash);
+        try (ByteArrayInputStream input =  attachmentService.getAttachment(hash,name)) {
+            InputStreamResource out = new InputStreamResource(input);
+            HttpHeaders headers = new HttpHeaders();
+            return new ResponseEntity<InputStreamResource>(out, headers, HttpStatus.CREATED);
+        } catch(IOException e) {
+            throw new AttachmentService.AttachmentException(e);
         }
     }
 
