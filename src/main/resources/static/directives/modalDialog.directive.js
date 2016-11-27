@@ -3,10 +3,9 @@ angular.module('trackerWebApp')
 
 function modalDialog() {
 	return {
-		compile: function compile(temaplateElement, templateAttrs) {
+		/*compile: function compile(temaplateElement, templateAttrs) {
 			return {
 				pre: function (scope, element, attrs) {
-					scope.dialogStyle = {};
 				},
 				post: function(scope, element, attrs) {
 					scope.hideModal = function() {
@@ -15,7 +14,7 @@ function modalDialog() {
 					};
 				}
 			}
-		},
+		},*/
 		restrict: 'E',
 		scope: {
 			show: '='
@@ -23,10 +22,15 @@ function modalDialog() {
 		replace: true,
 		transclude: true,
 		link: function(scope, element, attrs) {
+            scope.dialogStyle = {};
 			if (attrs.width)
 				scope.dialogStyle.width = attrs.width;
 			if (attrs.height)
 				scope.dialogStyle.height = attrs.height;
+            scope.hideModal = function() {
+                scope.show = false;
+                element["0"].ownerDocument.head.ownerDocument.body.style.overflowY = "";
+            };
 		},
 		template:
 			"<div class='ng-modal' ng-show='show'>\
