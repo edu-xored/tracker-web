@@ -1,7 +1,8 @@
 angular.module('trackerWebApp')
-    .controller('addNewController', function($scope, $http, $routeParams) {
+    .controller('addNewController', function($scope, $http) {
         $scope.issue = {};
         $scope.issue.status = 'OPEN';
+        $scope.issue.description = '';
         $scope.submitForm = function() {
             if (!$scope.issue.summary) {
                 $scope.status = 'Summary isn\'t filled!';
@@ -14,6 +15,8 @@ angular.module('trackerWebApp')
             })
                 .success(function(response) {
                     $scope.status = 'Issue added with hash: #' + response.hash;
+                    $scope.issue.summary = '';
+                    $scope.issue.description = '';
                 })
                 .error(function(response) {
                     $scope.status = 'Issue didn\'t add.';
