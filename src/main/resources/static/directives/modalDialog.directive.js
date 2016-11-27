@@ -3,24 +3,24 @@ angular.module('trackerWebApp')
 
 function modalDialog() {
 	return {
-        compile: function compile(temaplateElement, templateAttrs) {
-            return {
-                pre: function (scope, element, attrs) {
-                    scope.dialogStyle = {};
-                },
-                post: function(scope, element, attrs) {
-                    scope.hideModal = function() {
-                        scope.show = false;
-                        element["0"].ownerDocument.head.ownerDocument.body.style.overflowY = "";
-                    };
-                }
-            }
-        },
+		compile: function compile(temaplateElement, templateAttrs) {
+			return {
+				pre: function (scope, element, attrs) {
+					scope.dialogStyle = {};
+				},
+				post: function(scope, element, attrs) {
+					scope.hideModal = function() {
+						scope.show = false;
+						element["0"].ownerDocument.head.ownerDocument.body.style.overflowY = "";
+					};
+				}
+			}
+		},
 		restrict: 'E',
 		scope: {
 			show: '='
 		},
-        replace: true,
+		replace: true,
 		transclude: true,
 		link: function(scope, element, attrs) {
 			if (attrs.width)
