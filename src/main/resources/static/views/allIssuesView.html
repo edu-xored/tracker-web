@@ -27,7 +27,8 @@
 				<th>Description</th>
 				<th>Status</th>
 			</tr>
-			<tr ng-repeat="issue in filtered = (issues | filter: statusFilter | filter:search) | startFrom:startingItem() | limitTo:itemsPerPage">
+			<tr ng-repeat="issue in filtered = (issues | filter: statusFilter | filter:search) | orderBy : 'createdDateTime' : true
+			 | startFrom:startingItem() | limitTo:itemsPerPage">
             <td>{{issue.hash.substring(0,6)}}</td>
 				<td>
 					<a ng-click='showModal()' href="/issues/{{issue.hash}}">{{issue.summary}}</a>
