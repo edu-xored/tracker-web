@@ -154,3 +154,13 @@ body {
     text-overflow: ellipsis;
     white-space: nowrap;
 }
+
+#all-issues-table .active td{
+    overflow: visible;
+    white-space: normal;
+}
+
+#all-issues-table .disabled td{
+    overflow: hidden;
+    white-space: nowrap;
+}
