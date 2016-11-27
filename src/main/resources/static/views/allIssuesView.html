@@ -25,7 +25,7 @@
             <th>Status</th>
         </tr>
         <tr ng-repeat="issue in filtered = (issues | filter: statusFilter | filter:search) | startFrom:startingItem() | limitTo:itemsPerPage">
-            <td>{{issue.hash}}</td>
+            <td>{{issue.hash.substring(0,6)}}</td>
             <td><a href="/issues/{{issue.hash}}">{{issue.summary}}</a></td>
             <td>{{issue.description}}</td>
             <td>{{issue.status}}</td>
