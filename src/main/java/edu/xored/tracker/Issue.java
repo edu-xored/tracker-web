@@ -2,10 +2,8 @@ package edu.xored.tracker;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.time.LocalDateTime;
+import java.util.*;
 
 public class Issue {
 
@@ -13,6 +11,7 @@ public class Issue {
     private String summary;
     private String description;
     private Status status;
+    private LocalDateTime createdDateTime;
 
     @JsonIgnore
     private List<Comment> comments = new ArrayList<>();
@@ -25,6 +24,7 @@ public class Issue {
         this.summary = summary;
         this.description = description;
         this.status = status;
+        this.createdDateTime = LocalDateTime.now();
     }
 
     public String getHash() {
@@ -57,6 +57,14 @@ public class Issue {
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    public LocalDateTime getCreatedDateTime() {
+        return createdDateTime;
+    }
+
+    public void setCreatedDateTime(LocalDateTime createdDateTime) {
+        this.createdDateTime = createdDateTime;
     }
 
     public List<Comment> getComments() {

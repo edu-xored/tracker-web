@@ -3,9 +3,14 @@ package edu.xored.tracker;
 import org.springframework.stereotype.Service;
 
 import java.io.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
+
+import static java.time.format.FormatStyle.FULL;
 
 @Service
 public class IssueRepositoryImpl implements IssueRepository {
@@ -64,10 +69,18 @@ public class IssueRepositoryImpl implements IssueRepository {
         try (BufferedReader inStream = new BufferedReader(new InputStreamReader(theProcess.getInputStream()))) {
             inStream.readLine(); //issue <hash>
             inStream.readLine(); //Author: <author>
-            inStream.readLine(); //Date: <date> or <resolver>
+            info = inStream.readLine(); //Date: <date>
+            while(!info.substring(0,4).equals("Date")) {
+                info = inStream.readLine();
+            }
+            info = info.substring(11,31);
+            DateTimeFormatter dTF =
+                    new DateTimeFormatterBuilder().parseCaseInsensitive()
+                            .appendPattern("dd MMM yyyy HH:mm:ss")
+                            .toFormatter();
+            issue.setCreatedDateTime(LocalDateTime.parse(info, dTF));
             info = inStream.readLine();
-            if(!info.substring(0,6).equals("Status")) {
-                inStream.readLine();
+            while(!info.substring(0,6).equals("Status")) {
                 info = inStream.readLine();
             }
             if(info.substring(GIT_BUG_HASH_STATUS,GIT_BUG_HASH_STATUS + 4).equals("open")) {
@@ -180,7 +193,7 @@ public class IssueRepositoryImpl implements IssueRepository {
         } catch(IOException e) {
             throw new ExecutionFailedException();
         }
-        HashSet<Issue> result = new HashSet<Issue>();
+        List<Issue> result = new ArrayList<>();
         String info;
         Issue issue;
         try (BufferedReader inStream = new BufferedReader(new InputStreamReader(theProcess.getInputStream()))) {
