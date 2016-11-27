@@ -70,9 +70,6 @@ public class IssueRepositoryImpl implements IssueRepository {
             inStream.readLine(); //issue <hash>
             inStream.readLine(); //Author: <author>
             info = inStream.readLine(); //Date: <date>
-            while(!info.substring(0,4).equals("Date")) {
-                info = inStream.readLine();
-            }
             info = info.substring(11,31);
             DateTimeFormatter dTF =
                     new DateTimeFormatterBuilder().parseCaseInsensitive()
