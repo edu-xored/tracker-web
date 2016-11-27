@@ -45,7 +45,7 @@ angular.module('trackerWebApp')
                 $scope.error = response.status.Text;
             });
         $scope.selectedStatus = "ALL";
-        $scope.statusVariants = ["ALL", "OPEN", "CLOSED"];
+        $scope.statusVariants = ["ALL", "OPEN", "RESOLVED"];
         $scope.statusFilter = function (issue) {
             if((issue.status === $scope.selectedStatus) || ('ALL' === $scope.selectedStatus)) {
                 return issue;
