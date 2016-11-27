@@ -91,12 +91,17 @@ body {
     border-radius: 5px;
 }
 
-.add-new div {
+.add-new div{
     align: center;
     color: white;
     position: relative;
     top: 15%;
     text-align: center;
+}
+
+.add-new :visited, .add-new :link {
+    color: white;
+    text-decoration: none;
 }
 
 .page-container {

@@ -1,0 +1,10 @@
+<div>
+    <form ng-submit="submitForm()" name="issueForm">
+        <input type="text" ng-model="issue.summary" placeholder="Leave a summary" default=null>
+        <input type="text" ng-model="issue.description" placeholder="Leave a description" default=null>
+        <select ng-model="issue.status" ng-options="item for item in statusVariants" ng-init="issue.status='OPEN'">
+        </select>
+        <input type="submit" value="Create Issue">
+    </form>
+    <label>Status: {{status}}</label>
+</div>
