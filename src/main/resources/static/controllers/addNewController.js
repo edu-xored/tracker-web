@@ -1,5 +1,5 @@
 angular.module('trackerWebApp')
-    .controller('addNewController', function($scope, $http) {
+    .controller('addNewController', function($scope, $http, $routeParams) {
         $scope.issue = {};
         $scope.issue.status = 'OPEN';
         $scope.submitForm = function() {
