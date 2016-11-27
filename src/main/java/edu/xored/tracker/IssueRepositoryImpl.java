@@ -70,10 +70,10 @@ public class IssueRepositoryImpl implements IssueRepository {
             inStream.readLine(); //issue <hash>
             inStream.readLine(); //Author: <author>
             info = inStream.readLine(); //Date: <date>
-            info = info.substring(11,31);
+            info = info.substring(6);
             DateTimeFormatter dTF =
                     new DateTimeFormatterBuilder().parseCaseInsensitive()
-                            .appendPattern("dd MMM yyyy HH:mm:ss")
+                            .appendPattern("EEE, dd MMM yyyy HH:mm:ss Z")
                             .toFormatter();
             issue.setCreatedDateTime(LocalDateTime.parse(info, dTF));
             info = inStream.readLine();
