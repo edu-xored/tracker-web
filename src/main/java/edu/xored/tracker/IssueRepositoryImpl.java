@@ -77,9 +77,6 @@ public class IssueRepositoryImpl implements IssueRepository {
                             .toFormatter();
             issue.setCreatedDateTime(LocalDateTime.parse(info, dTF));
             info = inStream.readLine();
-            while(!info.substring(0,6).equals("Status")) {
-                info = inStream.readLine();
-            }
             if(info.substring(GIT_BUG_HASH_STATUS,GIT_BUG_HASH_STATUS + 4).equals("open")) {
                 issue.setStatus(Issue.Status.OPEN);
             } else {
@@ -87,10 +84,13 @@ public class IssueRepositoryImpl implements IssueRepository {
             }
             inStream.readLine(); //Empty space
             info = inStream.readLine();
-            issue.setSummary(info.substring(0));
-            char[] descriptionData = new char[200];
-            inStream.read(descriptionData,0,140);
-            issue.setDescription(String.valueOf(descriptionData).substring(0,String.valueOf(descriptionData).indexOf("\u0000")));
+            issue.setSummary(info);
+            int descriptionData;
+            String description = "";
+            while((descriptionData = inStream.read())!=-1) {
+                description += String.valueOf((char) descriptionData);
+            }
+            issue.setDescription(description);
             return issue;
         } catch(IOException e) {
             throw new ExecutionFailedException();
