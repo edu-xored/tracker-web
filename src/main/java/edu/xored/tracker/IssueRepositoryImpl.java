@@ -80,7 +80,7 @@ public class IssueRepositoryImpl implements IssueRepository {
             if(info.substring(GIT_BUG_HASH_STATUS,GIT_BUG_HASH_STATUS + 4).equals("open")) {
                 issue.setStatus(Issue.Status.OPEN);
             } else {
-                issue.setStatus(Issue.Status.CLOSED);
+                issue.setStatus(Issue.Status.RESOLVED);
             }
             inStream.readLine(); //Empty space
             info = inStream.readLine();

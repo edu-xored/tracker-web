@@ -103,6 +103,6 @@ public class Issue {
     }
 
     public enum Status {
-        OPEN, CLOSED;
+        OPEN, RESOLVED;
     }
 }

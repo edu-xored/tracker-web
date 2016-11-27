@@ -1,5 +1,5 @@
 angular.module('trackerWebApp')
-  .controller('issueController', function($scope, $http, $routeParams) {
+  .controller('issueController', function(modalDialog, $scope, $http, $routeParams) {
     $http({
        method: 'GET',
        url: "/api/issues/" + $routeParams.hash
@@ -17,7 +17,7 @@ angular.module('trackerWebApp')
               data      :    $scope.issue
           })
               .success(function() {
-                  $scope.issue.status = 'CLOSED';
+                  $scope.issue.status = 'RESOLVED';
                   $scope.status = 'Resolved';
                })
                .error(function() {
