@@ -29,10 +29,10 @@
 				<th>Status</th>
 			</tr>
 			<tr ng-repeat="issue in filtered = (issues | filter: statusFilter | filter:search) |
-				startFrom:startingItem() | limitTo:itemsPerPage" ng-class="{'active': param[issue.hash]}"
-					ng-click="changeParam(issue.hash)">
+				startFrom:startingItem() | limitTo:itemsPerPage" ng-class="{'active': issueDisplay[issue.hash]}"
+					ng-click="changeIssueDisplay(issue.hash)">
 				<td>{{issue.hash.substring(0,6)}}</td>
-				<td>
+				<td ng-click="changeIssueDisplay(issue.hash)">
 					<a ng-click='showModal()' href="/issues/{{issue.hash}}">{{issue.summary}}</a>
 				</td>
 				<td>{{issue.description}}</td>

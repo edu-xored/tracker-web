@@ -4,9 +4,9 @@ angular.module('trackerWebApp')
         $scope.itemsPerPage = 10;
         $scope.itemsPerPageSelects = [2, 5, 10, 20, 50];
         $scope.issues = [];
-        $scope.param = [];
-        $scope.changeParam = function (hash) {
-            $scope.param[hash] = !$scope.param[hash];
+        $scope.issueDisplay = [];
+        $scope.changeIssueDisplay = function (hash) {
+            $scope.issueDisplay[hash] = !$scope.issueDisplay[hash];
         }
         $scope.firstPage = function() {
             return $scope.currentPage == 0;
