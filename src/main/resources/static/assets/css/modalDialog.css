@@ -9,16 +9,12 @@
 }
 .ng-modal-dialog {
 	z-index:10;
-	/*margin:0 auto;*/
 	position: fixed;
 	width: 60%;
 	height: 70%;
 
 	top: 15%;
 	left: 20%;
-	/*transform: translate(-50%, -50%);*/
-	/*-webkit-transform: translate(-50%, -50%);*/
-	/*-moz-transform: translate(-50%, -50%);*/
 
 	background-color: #fff;
 	box-shadow: 4px 4px 80px #444;
