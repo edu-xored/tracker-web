@@ -11,7 +11,7 @@ angular
 		controller: 'postCommentController'
 	})
 	.otherwise({
-		templateUrl: '/views/allIssuesView.html.html',
+		templateUrl: '/views/allIssuesView.html',
 		controller: 'issuesController'
 	});
 	$locationProvider.html5Mode(true);

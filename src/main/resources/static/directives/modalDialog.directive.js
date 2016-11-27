@@ -1,24 +1,9 @@
 angular.module('trackerWebApp')
 	.directive('modalDialog', modalDialog);
 
-function modalDialog($location) {
+function modalDialog($location, modalDialog) {
 	return {
-		/*compile: function compile(temaplateElement, templateAttrs) {
-			return {
-				pre: function (scope, element, attrs) {
-				},
-				post: function(scope, element, attrs) {
-					scope.hideModal = function() {
-						scope.show = false;
-						element["0"].ownerDocument.head.ownerDocument.body.style.overflowY = "";
-					};
-				}
-			}
-		},*/
 		restrict: 'E',
-		scope: {
-			show: '='
-		},
 		replace: true,
 		transclude: true,
 		link: function(scope, element, attrs) {
@@ -27,10 +12,21 @@ function modalDialog($location) {
 				scope.dialogStyle.width = attrs.width;
 			if (attrs.height)
 				scope.dialogStyle.height = attrs.height;
+			if ($location.path() != '/') {
+                scope.show = modalDialog.toggleOnModal();
+                element["0"].ownerDocument.head.ownerDocument.body.style.overflowY = "hidden";
+            }
+            else {
+                scope.show = modalDialog.modalShown;
+			}
             scope.hideModal = function() {
-                scope.show = false;
+                scope.show = modalDialog.toggleOffModal();
                 element["0"].ownerDocument.head.ownerDocument.body.style.overflowY = "";
                 $location.path('');
+            };
+            scope.showModal = function() {
+                scope.show = modalDialog.toggleOnModal();
+                element["0"].ownerDocument.head.ownerDocument.body.style.overflowY = "hidden";
             };
 		},
 		template:

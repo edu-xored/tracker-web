@@ -40,6 +40,7 @@
 	color: black;
 }
 
-.ng-modal-close a:hover {
+.ng-modal-close:hover,
+.ng-modal-close:focus {
 	color: rebeccapurple;
 }

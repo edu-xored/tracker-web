@@ -1,5 +1,5 @@
 ﻿<ng-controller ng-controller="issuesController">
-	<modal-dialog show='modalShown'>
+	<modal-dialog>
 		<div ng-view></div>
 	</modal-dialog>
 	<div id="panel">
@@ -31,7 +31,7 @@
 			<tr ng-repeat="issue in filtered = (issues | filter: statusFilter | filter:search) | startFrom:startingItem() | limitTo:itemsPerPage">
 				<td>{{issue.hash}}</td>
 				<td>
-					<a ng-click='toggleModal()' href="/issues/{{issue.hash}}">{{issue.summary}}</a>
+					<a ng-click='showModal()' href="/issues/{{issue.hash}}">{{issue.summary}}</a>
 				</td>
 				<td>{{issue.description}}</td>
 				<td>{{issue.status}}</td>

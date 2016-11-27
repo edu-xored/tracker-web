@@ -1,15 +1,9 @@
 angular.module('trackerWebApp')
-    .controller('issuesController', function($scope, $http, $element) {
+    .controller('issuesController', function(modalDialog, $scope, $http, $element) {
         $scope.currentPage = 0;
         $scope.itemsPerPage = 10;
         $scope.itemsPerPageSelects = [2, 5, 10, 20, 50];
         $scope.issues = [];
-        $scope.modalShown = false;
-
-        $scope.toggleModal = function() {
-            $element["0"].ownerDocument.head.ownerDocument.body.style.overflowY = "hidden";
-            $scope.modalShown = !$scope.modalShown;
-        };
         $scope.firstPage = function() {
             return $scope.currentPage == 0;
         }
