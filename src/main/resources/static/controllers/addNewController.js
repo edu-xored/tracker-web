@@ -3,8 +3,8 @@ angular.module('trackerWebApp')
         $scope.issue = {};
         $scope.issue.status = 'OPEN';
         $scope.submitForm = function() {
-            if (!$scope.issue.summary || !$scope.issue.description) {
-                $scope.status = 'Some fields are not filled!';
+            if (!$scope.issue.summary) {
+                $scope.status = 'Summary isn\'t filled!';
                 return;
             }
             $http({
