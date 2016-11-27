@@ -7,21 +7,21 @@ function modalDialog($location, modalDialog) {
 		replace: true,
 		transclude: true,
 		link: function(scope, element, attrs) {
-            scope.dialogStyle = {};
+			scope.dialogStyle = {};
 			if (attrs.width)
 				scope.dialogStyle.width = attrs.width;
 			if (attrs.height)
 				scope.dialogStyle.height = attrs.height;
 			scope.show = modalDialog.modalShown;
-            scope.hideModal = function() {
-                scope.show = modalDialog.toggleOffModal();
-                element["0"].ownerDocument.head.ownerDocument.body.style.overflowY = "";
-                $location.path('');
-            };
-            scope.showModal = function() {
-                scope.show = modalDialog.toggleOnModal();
-                element["0"].ownerDocument.head.ownerDocument.body.style.overflowY = "hidden";
-            };
+			scope.hideModal = function() {
+				scope.show = modalDialog.toggleOffModal();
+				element["0"].ownerDocument.head.ownerDocument.body.style.overflowY = "";
+				$location.path('');
+			};
+			scope.showModal = function() {
+				scope.show = modalDialog.toggleOnModal();
+				element["0"].ownerDocument.head.ownerDocument.body.style.overflowY = "hidden";
+			};
 		},
 		template:
 			"<div class='ng-modal' ng-show='show'>\
