@@ -39,7 +39,11 @@
 	font-family: 'arial', 'sans-serif';
 }
 
-.ng-modal-close:hover,
-.ng-modal-close:focus {
+.ng-modal-close a {
+	text-decoration: none;
+	color: black;
+}
+
+.ng-modal-close a:hover {
 	color: rebeccapurple;
 }
