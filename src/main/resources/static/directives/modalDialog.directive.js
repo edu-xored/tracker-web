@@ -12,13 +12,7 @@ function modalDialog($location, modalDialog) {
 				scope.dialogStyle.width = attrs.width;
 			if (attrs.height)
 				scope.dialogStyle.height = attrs.height;
-			if ($location.path() != '/') {
-                scope.show = modalDialog.toggleOnModal();
-                element["0"].ownerDocument.head.ownerDocument.body.style.overflowY = "hidden";
-            }
-            else {
-                scope.show = modalDialog.modalShown;
-			}
+			scope.show = modalDialog.modalShown;
             scope.hideModal = function() {
                 scope.show = modalDialog.toggleOffModal();
                 element["0"].ownerDocument.head.ownerDocument.body.style.overflowY = "";
