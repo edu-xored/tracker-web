@@ -12,10 +12,16 @@ angular.module('trackerWebApp')
 				data      :    $scope.comment
 			})
 				.success(function() {
-					$scope.status = 'Comment posted.';
+					$scope.status = 'Comment posted!';
 				})
 				.error(function() {
 					$scope.status = 'Comment didn\'t post.';
 				});
+		};
+
+		$scope.autoExpand = function(event) {
+			var element = typeof event === 'object' ? event.target : document.getElementById(event);
+			var scrollHeight = element.scrollHeight -60;
+			element.style.height =  scrollHeight + "px";
 		};
 	});

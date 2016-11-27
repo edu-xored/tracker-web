@@ -6,10 +6,6 @@ angular
         templateUrl: '/views/issueView.html',
         controller: 'issueController'
       })
-      .when('/issues/:hash/postcomment', {
-        templateUrl: '/views/postCommentView.html',
-        controller: 'postCommentController'
-      })
       .otherwise({
         templateUrl: '/views/allIssuesView.html',
         controller: 'issuesController'
