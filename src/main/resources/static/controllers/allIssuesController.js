@@ -9,10 +9,15 @@ angular.module('trackerWebApp')
         }
         $scope.lastPage = function() {
             var lastPageNum = Math.ceil($scope.filtered.length / $scope.itemsPerPage - 1);
+            if (lastPageNum < 0)
+                lastPageNum = 0;
             return $scope.currentPage == lastPageNum;
         }
         $scope.numberOfPages = function(){
-            return Math.ceil($scope.filtered.length / $scope.itemsPerPage);
+            var pages = Math.ceil($scope.filtered.length / $scope.itemsPerPage);
+            if (pages == 0)
+                pages = 1;
+            return pages;
         }
         $scope.startingItem = function() {
             return $scope.currentPage * $scope.itemsPerPage;
@@ -40,7 +45,7 @@ angular.module('trackerWebApp')
                 $scope.error = response.status.Text;
             });
         $scope.selectedStatus = "ALL";
-        $scope.statusVariants = ["ALL", "OPEN", "CLOSED"];
+        $scope.statusVariants = ["ALL", "OPEN", "RESOLVED"];
         $scope.statusFilter = function (issue) {
             if((issue.status === $scope.selectedStatus) || ('ALL' === $scope.selectedStatus)) {
                 return issue;

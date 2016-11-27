@@ -17,7 +17,7 @@ angular.module('trackerWebApp')
               data      :    $scope.issue
           })
               .success(function() {
-                  $scope.issue.status = 'CLOSED';
+                  $scope.issue.status = 'RESOLVED';
                   $scope.status = 'Resolved';
                })
                .error(function() {

@@ -6,7 +6,7 @@
     margin: 5px 5px 5px 10px;
 	display: inline;
 }
-.statusOpen, .statusClosed {
+.statusOpen, .statusResolved {
     float: left;
 	font-size: 120%;
     padding: 2px;
@@ -18,7 +18,7 @@
 .statusOpen {
       color: red;
 }
-.statusClosed {
+.statusResolved {
     color: green;
 }
 .summary {
@@ -31,6 +31,9 @@
 	display: block;
 }
 .description {
+    text-align: justify;
+    overflow-y: scroll;
+    word-wrap: break-word;
     padding: 10px;
     margin: 10px;
     background-color: whitesmoke;
