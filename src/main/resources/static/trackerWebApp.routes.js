@@ -4,11 +4,11 @@ angular
     $routeProvider
       .when('/issues/addNew', {
         templateUrl: '/views/addNewView.html',
-        controller: 'issueController'
+        controller: 'addNewController'
       })
       .when('/issues/:hash', {
         templateUrl: '/views/issueView.html',
-        controller: 'addNewController'
+        controller: 'issueController'
       })
       .when('/issues/:hash/postcomment', {
         templateUrl: '/views/postCommentView.html',
