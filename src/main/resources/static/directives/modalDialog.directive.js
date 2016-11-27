@@ -1,7 +1,7 @@
 angular.module('trackerWebApp')
 	.directive('modalDialog', modalDialog);
 
-function modalDialog() {
+function modalDialog($location) {
 	return {
 		/*compile: function compile(temaplateElement, templateAttrs) {
 			return {
@@ -30,14 +30,15 @@ function modalDialog() {
             scope.hideModal = function() {
                 scope.show = false;
                 element["0"].ownerDocument.head.ownerDocument.body.style.overflowY = "";
+                $location.path('');
             };
 		},
 		template:
 			"<div class='ng-modal' ng-show='show'>\
-				<div class='ng-modal-overlay' ng-click='hideModal()'></div>\
+				<div class='ng-modal-overlay' ng-click='hideModal()' href=' '></div>\
 				<div class='ng-modal-dialog' ng-style='dialogStyle'>\
 					<div class='ng-modal-close' ng-click='hideModal()'>\
-						<a href=' '>&#10060</a>\
+						&#10060\
 					</div>\
 					<div class='ng-modal-dialog-content' ng-transclude></div>\
 				</div>\
