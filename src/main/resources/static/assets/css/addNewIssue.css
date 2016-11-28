@@ -1,0 +1,46 @@
+.createText {
+    color: black;
+    padding: 5px;
+    margin: 30px 5px 20px 30px;
+	line-height: 0.1;
+	font-size: 200%;
+	display: block;
+}
+.summaryForm[type=text] {
+    width: 80%;
+    margin: 30px 0px 5px 30px;
+    display:block;
+    resize: none;
+}
+.descriptionForm[type=text] {
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    word-wrap: break-word;
+    word-break: break-all;
+    text-align: justify;
+    overflow-y: scroll;
+    padding: 5px;
+    height: 100px;
+    width: 80%;
+    margin: 20px 0px 5px 30px;
+    display:block;
+    resize: none;
+}
+
+.createIssueButton {
+    cursor:pointer;
+    color: white;
+    margin: 20px 0px 5px 30px;
+    height: 30px;
+    width: 15%;
+    display: inline-block;
+    position: relative;
+    background-color: rgb(100, 177, 15);
+    border: 1px solid rgb(100, 177, 15);
+    border-radius: 5px;
+}
+
+.addNewStatus {
+    margin: 20px 0px 5px 30px;
+}

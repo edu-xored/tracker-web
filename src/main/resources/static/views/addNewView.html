@@ -1,8 +1,9 @@
 <div>
+    <p class="createText">Create new issue</p>
     <form ng-submit="submitForm()" name="issueForm">
-        <input type="text" ng-model="issue.summary" placeholder="Leave a summary">
-        <input type="text" ng-model="issue.description" placeholder="Leave a description">
-        <input type="submit" value="Create Issue">
+        <input class="summaryForm" type="text" ng-model="issue.summary" placeholder="Leave a summary">
+        <textarea class="descriptionForm" type="text" ng-model="issue.description" placeholder="Leave a description"></textarea>
+        <input class="createIssueButton" type="submit" value="Create Issue">
     </form>
-    <label>Status: {{status}}</label>
+    <p class="addNewStatus">Status: {{status}}</p>
 </div>
