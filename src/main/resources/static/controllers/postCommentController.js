@@ -10,11 +10,12 @@ angular.module('trackerWebApp')
 				url       :    '/api/issues/' + $routeParams.hash + '/comments',
 				data      :    $scope.comment
 			})
-				.success(function() {
-					console.log('Comment posted.');
-				})
-				.error(function() {
-					console.log('Comment didn\'t post.');
-				});
+			.success(function() {
+				$scope.comment.content = null;
+				console.log('Comment posted.');
+			})
+			.error(function() {
+				console.log('Comment didn\'t post.');
+			});
 		};
 	});
