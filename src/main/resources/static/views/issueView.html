@@ -7,6 +7,7 @@
     </form>
     <p class=summary>{{issue.summary}}</p>
     <p class=description>{{issue.description}}</p>
+    <p>{{issue.author.name}}</p>
     <form ng-submit="submitForm()" name="commentForm">
         <input class=commentFormName type="text" ng-model="comment.author" placeholder="Name" default=null>
         <input class=commentFormComment type="text" ng-model="comment.content" placeholder="Leave a comment">
