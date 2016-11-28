@@ -1,14 +1,14 @@
 .createText {
     color: black;
     padding: 5px;
-    margin: 30px 5px 20px 30px;
+    margin: 30px 5px 20px 25px;
 	line-height: 0.1;
 	font-size: 200%;
 	display: block;
 }
 .summaryForm[type=text] {
     width: 90%;
-    margin: 30px 0px 5px 30px;
+    margin: 30px 0px 5px 25px;
     display:block;
     resize: none;
 }
@@ -23,7 +23,7 @@
     padding: 5px;
     height: 150px;
     width: 90%;
-    margin: 20px 0px 5px 30px;
+    margin: 20px 0px 5px 25px;
     display:block;
     resize: none;
 }
@@ -31,7 +31,7 @@
 .createIssueButton {
     cursor:pointer;
     color: white;
-    margin: 20px 0px 5px 30px;
+    margin: 20px 0px 5px 25px;
     height: 40px;
     width: 25%;
     display: inline-block;
