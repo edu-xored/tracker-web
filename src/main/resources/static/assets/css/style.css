@@ -62,19 +62,24 @@ body {
     display: inline-block;
     border: 1px solid white;
     border-radius: 5px;
-    background: white;
 }
 
 .status select {
     text-align: center;
     text-align-last: center;
+    font-weight: bold;
     height: 35px;
     overflow: hidden;
     background: white;
-    border: 1px solid white;
+    border: 0px white;
     -webkit-appearance: none;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+}
+
+.status select > option {
+    background: white;
+    color: black;
 }
 
 .status select:focus {

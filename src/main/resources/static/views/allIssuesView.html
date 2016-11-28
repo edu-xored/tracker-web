@@ -12,9 +12,10 @@
 			<input type="text" ng-model="search" ng-change="filteredPagination()" placeholder="Search...">
 		</div>
 
-		<div class="status">
+		<div class="status" ng-style="{'border-color': statusSelectBackground}">
 			<select ng-model="selectedStatus" ng-options="item for item in statusVariants"
-					ng-change="filteredPagination();changeStatusSelectBackground()" ng-style="{'background-color': statusSelectBackground}"></select>
+					ng-change="filteredPagination();changeStatusSelectBackground()"
+					ng-style="{'background-color': statusSelectBackground, 'color': statusSelectTextColor}"></select>
 		</div>
 
 		<div class="add-new">
