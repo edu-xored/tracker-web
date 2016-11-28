@@ -13,6 +13,7 @@ public class Issue {
     private String hash;
     private String summary;
     private String description;
+    private User author;
     private Status status;
     private LocalDateTime createdDateTime;
 
@@ -54,6 +55,14 @@ public class Issue {
         this.description = description;
     }
 
+    public User getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(User author) {
+        this.author = author;
+    }
+
     public Status getStatus() {
         return status;
     }
@@ -93,8 +102,14 @@ public class Issue {
         if (other.getDescription() != null) {
             setDescription(other.getDescription());
         }
+        if (other.getAuthor() != null) {
+            setAuthor(other.getAuthor());
+        }
         if (other.getStatus() != null) {
             setStatus(other.getStatus());
+        }
+        if (other.getCreatedDateTime() != null) {
+            setCreatedDateTime(other.getCreatedDateTime());
         }
         if (other.getComments() != null) {
             addComments(other.getComments());

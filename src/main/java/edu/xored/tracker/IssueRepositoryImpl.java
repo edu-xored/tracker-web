@@ -1,5 +1,6 @@
 package edu.xored.tracker;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.*;
@@ -22,6 +23,9 @@ public class IssueRepositoryImpl implements IssueRepository {
     // TODO: remove when git bug would implement all needed commands.
     private Map<String, Issue> issuesMap = new HashMap<>();
 
+    @Autowired
+    private UserController userController;
+
     public <S extends Issue> S save(S issue) {
         Process theProcess;
         String commands =  GIT_BUG_NEW + "-m "  + '\"' + issue.getSummary()
@@ -43,6 +47,7 @@ public class IssueRepositoryImpl implements IssueRepository {
         } catch(IOException e) {
             throw new ExecutionFailedException();
         }
+        issue.setAuthor(userController.getUser());
         issuesMap.put(issue.getHash(), issue);
         return issue;
     }
@@ -88,10 +93,11 @@ public class IssueRepositoryImpl implements IssueRepository {
                 description += String.valueOf((char) descriptionData);
             }
             issue.setDescription(description);
-            return issue;
         } catch(IOException e) {
             throw new ExecutionFailedException();
         }
+        issue.setAuthor(userController.getUser());
+        return issue;
     }
 
     public boolean exists(String issueId) {
