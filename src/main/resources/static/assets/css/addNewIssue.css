@@ -1,16 +1,27 @@
+.ng-modal-dialog {
+    width: 42%;
+    height: 60%;
+    top: 15%;
+    left: 29%;
+}
 .createText {
     color: black;
     padding: 5px;
     margin: 30px 5px 20px 25px;
 	line-height: 0.1;
-	font-size: 200%;
+	font-size: xx-large;
 	display: block;
+    font-family: Sans-serif;
 }
 .summaryForm[type=text] {
     width: 90%;
     margin: 30px 0px 5px 25px;
     display:block;
     resize: none;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    border: 1px solid #d0d0d0;
 }
 .descriptionForm[type=text] {
     -webkit-border-radius: 5px;
@@ -42,6 +53,6 @@
 }
 
 .addNewStatus {
-    display:block;
+    display: inline-block;
     margin: 10px 0px 5px 30px;
 }
