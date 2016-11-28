@@ -55,19 +55,23 @@ body {
 }
 
 .status {
-    margin-left: 10%;
+    float: right;
+    margin-right: 0;
+    position: relative;
     height: 35px;
     display: inline-block;
-    position: relative;
+    border: 1px solid white;
+    border-radius: 5px;
+    background: white;
 }
 
 .status select {
     text-align: center;
     text-align-last: center;
-    background: white;
     height: 35px;
     overflow: hidden;
-    border: 5px solid white;
+    background: white;
+    border: 1px solid white;
     -webkit-appearance: none;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
@@ -124,7 +128,9 @@ body {
     border-color: #ffffff;
     padding: 10px 20px;
 }
-
+#all-issues-table th:last-child {
+    border-width: 0 0px 2px 0;
+}
 #all-issues-table tr:first-child {
     background-color: #c1c6c8;
     font-weight: bold;
