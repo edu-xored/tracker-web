@@ -74,6 +74,7 @@ body {
     border: 0px white;
     -webkit-appearance: none;
     -webkit-border-radius: 2px;
+    -moz-appearance: none;
     -moz-border-radius: 2px;
 }
 
@@ -86,7 +87,6 @@ body {
     outline: none;
     background-color: white;
     border-style: none;
-    border-bottom: 2px solid rgb(183, 85, 232);
 }
 
 .add-new {
