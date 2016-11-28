@@ -1,7 +1,5 @@
 <div ng-controller="postCommentController">
 	<form ng-submit="submitForm()" name="commentForm">
-		<input class=commentFormName type="text" ng-model="comment.author" placeholder="Name" default=null>
-		<span id="commentStatus">Status: {{status}}</span>
 		<div>
 			<textarea class="commentTextArea" ng-model="comment.content" placeholder="Leave a comment"></textarea>
 		</div>
