@@ -7,7 +7,6 @@ angular.module('trackerWebApp')
         $scope.submitForm = function() {
             if (!$scope.issue.summary) {
                 $scope.status = 'Summary isn\'t filled!';
-                $scope.issue.hash = undefined;
                 return;
             }
             $http({
@@ -22,7 +21,6 @@ angular.module('trackerWebApp')
                 })
                 .error(function(response) {
                     $scope.status = 'Issue didn\'t add.';
-                    $scope.issue.hash = undefined;
                     alert(response.message);
                 });
         };
