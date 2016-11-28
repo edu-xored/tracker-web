@@ -4,6 +4,7 @@ angular.module('trackerWebApp')
         $scope.itemsPerPage = 10;
         $scope.itemsPerPageSelects = [2, 5, 10, 20, 50];
         $scope.issues = [];
+        $scope.statusSelectBackground = 'white';
         $scope.firstPage = function() {
             return $scope.currentPage == 0;
         }
@@ -37,6 +38,19 @@ angular.module('trackerWebApp')
         }
         $scope.filteredPagination = function() {
             $scope.currentPage = 0;
+        }
+        $scope.changeStatusSelectBackground = function () {
+            switch ($scope.selectedStatus) {
+                case "OPEN":
+                    $scope.statusSelectBackground = 'green';
+                    break
+                case "RESOLVED":
+                    $scope.statusSelectBackground = 'red';
+                    break
+                default:
+                    $scope.statusSelectBackground = 'white';
+                    break
+            }
         }
         $http.get('/api/issues').
             then(function(response) {

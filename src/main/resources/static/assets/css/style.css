@@ -128,7 +128,7 @@ body {
     border-color: #ffffff;
     padding: 10px 20px;
 }
-#all-issues-table th:last-child {
+#all-issues-table th:last-child, #all-issues-table td:last-child{
     border-width: 0 0px 2px 0;
 }
 #all-issues-table tr:first-child {
