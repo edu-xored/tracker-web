@@ -133,8 +133,16 @@ body {
     font-weight: bold;
 }
 
-#all-issues-table td:first-child {
+#all-issues-table td:first-child, #all-issues-table th:first-child {
     min-width: 30px;
+}
+
+#all-issues-table td:nth-child(2), #all-issues-table th:nth-child(2) {
+    min-width: 60px;
+}
+
+#all-issues-table td:nth-child(3), #all-issues-table th:nth-child(3) {
+    min-width: 150px;
 }
 
 #all-issues-table :visited, #all-issues-table :link {
@@ -155,6 +163,7 @@ body {
 }
 
 #all-issues-table td {
+    word-wrap: break-word;
     max-width: 0;
     overflow: hidden;
     text-overflow: ellipsis;
