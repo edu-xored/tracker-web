@@ -14,15 +14,19 @@
     font-family: Sans-serif;
 }
 .summaryForm[type=text] {
-    width: 90%;
-    margin: 30px 0px 5px 25px;
+    left: 7%;
+    width: 86%;
+    overflow: hidden;
     display:block;
     resize: none;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 5px;
     border: 1px solid #d0d0d0;
+    position: relative;
+    margin: 0px 0px 0px 0px;
 }
+
 .descriptionForm[type=text] {
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
@@ -30,13 +34,13 @@
     word-wrap: break-word;
     word-break: break-all;
     text-align: justify;
-    overflow-y: scroll;
-    padding: 5px;
     height: 150px;
-    width: 90%;
-    margin: 20px 0px 5px 25px;
-    display:block;
+    left: 7%;
+    width: 86%;
+    position: relative;
+    display: block;
     resize: none;
+    margin: 0px 0px 0px 0px;
 }
 
 .createIssueButton {
