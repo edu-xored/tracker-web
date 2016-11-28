@@ -17,6 +17,8 @@ function modalDialog($location, modalDialog) {
 				scope.show = modalDialog.toggleOffModal();
 				element["0"].ownerDocument.head.ownerDocument.body.style.overflowY = "";
 				$location.path('');
+				if (modalDialog.needReload)
+					location.reload();
 			};
 			scope.showModal = function() {
 				scope.show = modalDialog.toggleOnModal();

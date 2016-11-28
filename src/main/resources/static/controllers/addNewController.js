@@ -1,5 +1,5 @@
 angular.module('trackerWebApp')
-    .controller('addNewController', function($scope, $http) {
+    .controller('addNewController', function($scope, $http, modalDialog) {
         $scope.issue = {};
         $scope.issue.status = 'OPEN';
         $scope.issue.description = '';
@@ -17,6 +17,7 @@ angular.module('trackerWebApp')
                     $scope.status = 'Issue added with hash: #' + response.hash;
                     $scope.issue.summary = '';
                     $scope.issue.description = '';
+                    modalDialog.needReload = true;
                 })
                 .error(function(response) {
                     $scope.status = 'Issue didn\'t add.';
