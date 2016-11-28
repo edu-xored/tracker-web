@@ -1,17 +1,13 @@
 package edu.xored.tracker;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
-
-import static java.time.format.FormatStyle.FULL;
 
 @Service
 public class IssueRepositoryImpl implements IssueRepository {
@@ -41,8 +37,6 @@ public class IssueRepositoryImpl implements IssueRepository {
         try (BufferedReader inStream = new BufferedReader(new InputStreamReader(theProcess.getInputStream()))) {
             info = inStream.readLine();
             issue.setHash(info);
-            info = inStream.readLine();
-            issue.setAuthor(new User(info.substring(8),""));
         } catch(IOException e) {
             throw new ExecutionFailedException();
         }
@@ -92,10 +86,10 @@ public class IssueRepositoryImpl implements IssueRepository {
                 description += String.valueOf((char) descriptionData);
             }
             issue.setDescription(description);
+            return issue;
         } catch(IOException e) {
             throw new ExecutionFailedException();
         }
-        return issue;
     }
 
     public boolean exists(String issueId) {
