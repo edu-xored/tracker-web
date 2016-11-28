@@ -2,6 +2,7 @@ package edu.xored.tracker;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -12,7 +13,9 @@ public class Issue {
     private String hash;
     private String summary;
     private String description;
+    private User author;
     private Status status;
+    private LocalDateTime createdDateTime;
 
     @JsonIgnore
     private List<Comment> comments = new ArrayList<>();
@@ -25,6 +28,7 @@ public class Issue {
         this.summary = summary;
         this.description = description;
         this.status = status;
+        this.createdDateTime = LocalDateTime.now();
     }
 
     public String getHash() {
@@ -51,12 +55,28 @@ public class Issue {
         this.description = description;
     }
 
+    public User getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(User author) {
+        this.author = author;
+    }
+
     public Status getStatus() {
         return status;
     }
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    public LocalDateTime getCreatedDateTime() {
+        return createdDateTime;
+    }
+
+    public void setCreatedDateTime(LocalDateTime createdDateTime) {
+        this.createdDateTime = createdDateTime;
     }
 
     public List<Comment> getComments() {
@@ -82,8 +102,14 @@ public class Issue {
         if (other.getDescription() != null) {
             setDescription(other.getDescription());
         }
+        if (other.getAuthor() != null) {
+            setAuthor(other.getAuthor());
+        }
         if (other.getStatus() != null) {
             setStatus(other.getStatus());
+        }
+        if (other.getCreatedDateTime() != null) {
+            setCreatedDateTime(other.getCreatedDateTime());
         }
         if (other.getComments() != null) {
             addComments(other.getComments());

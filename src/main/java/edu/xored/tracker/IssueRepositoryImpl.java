@@ -3,6 +3,8 @@ package edu.xored.tracker;
 import org.springframework.stereotype.Service;
 
 import java.io.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -63,12 +65,13 @@ public class IssueRepositoryImpl implements IssueRepository {
         issue.setHash(issueId);
         try (BufferedReader inStream = new BufferedReader(new InputStreamReader(theProcess.getInputStream()))) {
             inStream.readLine(); //issue <hash>
-            inStream.readLine(); //Author: <author>
-            inStream.readLine(); //Date: <date>
+            info = inStream.readLine(); //Author: <author>
+            issue.setAuthor(new User(info.substring(8),""));
+            info = inStream.readLine(); //Date: <date>
+            info = info.substring(6);
+            DateTimeFormatter dTF = DateTimeFormatter.RFC_1123_DATE_TIME;
+            issue.setCreatedDateTime(LocalDateTime.parse(info, dTF));
             info = inStream.readLine();
-            while(!info.substring(0,6).equals("Status")) {
-                info = inStream.readLine();
-            }
             if(info.substring(GIT_BUG_HASH_STATUS,GIT_BUG_HASH_STATUS + 4).equals("open")) {
                 issue.setStatus(Issue.Status.OPEN);
             } else {
@@ -182,7 +185,7 @@ public class IssueRepositoryImpl implements IssueRepository {
         } catch(IOException e) {
             throw new ExecutionFailedException();
         }
-        HashSet<Issue> result = new HashSet<Issue>();
+        List<Issue> result = new ArrayList<>();
         String info;
         Issue issue;
         try (BufferedReader inStream = new BufferedReader(new InputStreamReader(theProcess.getInputStream()))) {

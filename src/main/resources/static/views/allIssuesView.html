@@ -1,40 +1,49 @@
-﻿<div id="panel">
-</div>
-<div id="logo-div">
-</div>
-<div id="wrapper">
-    <div class="search">
-        <img src="/assets/img/search-icon.svg">
-        <input type="text" ng-model="search" ng-change="filteredPagination()" placeholder="Search...">
-    </div>
+﻿<ng-controller ng-controller="issuesController">
+	<modal-dialog>
+		<div ng-view></div>
+	</modal-dialog>
+	<div id="panel">
+	</div>
+	<div id="logo-div">
+	</div>
+	<div id="wrapper">
+		<div class="search">
+			<img src="/assets/img/search-icon.svg">
+			<input type="text" ng-model="search" ng-change="filteredPagination()" placeholder="Search...">
+		</div>
 
-    <div class="status">
-	<div> Status:</div>
-        <select ng-model="selectedStatus" ng-options="item for item in statusVariants" ng-change="filteredPagination()"></select>
-    </div>
+		<div class="status">
+		<div> Status:</div>
+			<select ng-model="selectedStatus" ng-options="item for item in statusVariants" ng-change="filteredPagination()"></select>
+		</div>
 
-    <div class="add-new">
-        <div>+Add New</div>
-    </div>
-
-    <table id="all-issues-table">
-        <tr>
-            <th>#</th>
-            <th>Summary</th>
-            <th>Description</th>
-            <th>Status</th>
-        </tr>
-        <tr ng-repeat="issue in filtered = (issues | filter: statusFilter | filter:search) | startFrom:startingItem() | limitTo:itemsPerPage">
-            <td>{{issue.hash}}</td>
-            <td><a href="/issues/{{issue.hash}}">{{issue.summary}}</a></td>
-            <td>{{issue.description}}</td>
-            <td>{{issue.status}}</td>
-        </tr>
-    </table>
-    <div class="page-container">
-        <button ng-disabled="firstPage()" ng-click="pageBack()">&#9664</button>
-        {{currentPage+1}}/{{numberOfPages()}}
-        <button ng-disabled="lastPage()" ng-click="pageForward()">&#9654</button>
-        <select ng-model="itemsPerPageSelect" ng-options="itemsPerPageSelect for itemsPerPageSelect in itemsPerPageSelects" ng-change="changeItemsPerPage()" ng-init="initItemsPerPage()"></select>
-    </div>
-</div>
+		<div class="add-new">
+			<div>
+				<a ng-click='showModal()' href="/issues/addNew">+Add New</a>
+			</div>
+		</div>
+		<table id="all-issues-table">
+			<tr>
+				<th>#</th>
+				<th>Summary</th>
+				<th>Description</th>
+				<th>Status</th>
+			</tr>
+			<tr ng-repeat="issue in filtered = (issues | filter: statusFilter | filter:search) | orderBy : 'createdDateTime' : true
+			 | startFrom:startingItem() | limitTo:itemsPerPage">
+            <td>{{issue.hash.substring(0,6)}}</td>
+				<td>
+					<a ng-click='showModal()' href="/issues/{{issue.hash}}">{{issue.summary}}</a>
+				</td>
+				<td>{{issue.description}}</td>
+				<td>{{issue.status}}</td>
+			</tr>
+		</table>
+		<div class="page-container">
+			<button ng-disabled="firstPage()" ng-click="pageBack()">&#9664</button>
+			{{currentPage+1}}/{{numberOfPages()}}
+			<button ng-disabled="lastPage()" ng-click="pageForward()">&#9654</button>
+			<select ng-model="itemsPerPageSelect" ng-options="itemsPerPageSelect for itemsPerPageSelect in itemsPerPageSelects" ng-change="changeItemsPerPage()" ng-init="initItemsPerPage()"></select>
+		</div>
+	</div>
+</ng-controller>
