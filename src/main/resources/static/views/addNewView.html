@@ -1,3 +1,12 @@
+<style>
+.ng-modal-dialog {
+    top: 15%;
+	left: 25%;
+    background-color: whitesmoke;
+    width: 50%;
+	height: 65%;
+   }
+</style>
 <div>
     <p class="createText">Create new issue</p>
     <form ng-submit="submitForm()" name="issueForm">
@@ -5,5 +14,5 @@
         <textarea class="descriptionForm" type="text" ng-model="issue.description" placeholder="Leave a description"></textarea>
         <input class="createIssueButton" type="submit" value="Create Issue">
     </form>
-    <p class="addNewStatus">Status: {{status}}</p>
+    <p class="addNewStatus">{{status}}</p>
 </div>

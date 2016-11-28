@@ -7,7 +7,7 @@
 	display: block;
 }
 .summaryForm[type=text] {
-    width: 80%;
+    width: 90%;
     margin: 30px 0px 5px 30px;
     display:block;
     resize: none;
@@ -21,8 +21,8 @@
     text-align: justify;
     overflow-y: scroll;
     padding: 5px;
-    height: 100px;
-    width: 80%;
+    height: 150px;
+    width: 90%;
     margin: 20px 0px 5px 30px;
     display:block;
     resize: none;
@@ -32,8 +32,8 @@
     cursor:pointer;
     color: white;
     margin: 20px 0px 5px 30px;
-    height: 30px;
-    width: 15%;
+    height: 40px;
+    width: 25%;
     display: inline-block;
     position: relative;
     background-color: rgb(100, 177, 15);
@@ -42,5 +42,6 @@
 }
 
 .addNewStatus {
-    margin: 20px 0px 5px 30px;
+    display:block;
+    margin: 10px 0px 5px 30px;
 }
