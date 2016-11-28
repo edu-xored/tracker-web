@@ -27,8 +27,9 @@ body {
 }
 
 .search {
+    margin-left: 20px;
     height: 35px;
-    width: 40%;
+    width: 60%;
     border: 1px solid grey;
     border-radius: 5px;
     display: inline-block;
@@ -54,36 +55,30 @@ body {
 }
 
 .status {
-    margin-left: 30px;
+    margin-left: 10%;
     height: 35px;
     display: inline-block;
     position: relative;
 }
 
-.status img{
-    position: relative;
-    top: 25%;
-}
-
-.status div{
-    display: inline-block;
-    position: relative;
-    top: 10%;
-    text-align: center;
-}
-
 .status select {
-    margin-left: 5px;
-    position: relative;
-    top: 10%;
+    text-align: center;
+    text-align-last: center;
+    background: white;
+    height: 35px;
+    overflow: hidden;
+    border: 5px solid white;
+    -webkit-appearance: none;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+}
+
+.status select:focus {
     outline: none;
-    background-color: white;
-    border-style: none;
-    border-bottom: 2px solid rgb(183, 85, 232);
 }
 
 .add-new {
-    float: right;
+    float: left;
     height: 35px;
     width: 35px;
     display: inline-block;
