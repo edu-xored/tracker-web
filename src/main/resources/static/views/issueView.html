@@ -7,17 +7,12 @@
     </form>
     <p class=summary>{{issue.summary}}</p>
     <p class=description>{{issue.description}}</p>
-    <p>{{issue.author.name}}</p>
-    <form ng-submit="submitForm()" name="commentForm">
-        <input class=commentFormName type="text" ng-model="comment.author" placeholder="Name" default=null>
-        <input class=commentFormComment type="text" ng-model="comment.content" placeholder="Leave a comment">
-        <input class=commentButton type="submit" value="Comment">
-    </form>
-    <label class=commentStatus>Status: {{status}}</label>
-</div>
-<div class=comment></div>
-<div class=attachments></div>
-<div class=participants></div>
-<div ng-show="error">
-    <p class="error">{{error}}</p>
+
+    <ng-include src="'/views/postCommentView.html'"></ng-include>
+    <div class=comment></div>
+    <div class=attachments></div>
+    <div class=participants></div>
+    <div ng-show="error">
+        <p class="error">{{error}}</p>
+    </div>
 </div>

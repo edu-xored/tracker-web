@@ -23,6 +23,7 @@
 				<a ng-click='showModal()' href="/issues/addNew">+</a>
 			</div>
 		</div>
+
 		<table id="all-issues-table">
 			<tr>
 				<th>#</th>
@@ -30,11 +31,13 @@
 				<th>Description</th>
 				<th>Status</th>
 			</tr>
-			<tr ng-repeat="issue in filtered = (issues | filter: statusFilter | filter:search) | orderBy : 'createdDateTime' : true
-			 | startFrom:startingItem() | limitTo:itemsPerPage">
-            <td>{{issue.hash.substring(0,6)}}</td>
+			<tr ng-repeat="issue in filtered = (issues | filter: statusFilter | filter:search)
+			| orderBy : 'createdDateTime' : true | startFrom:startingItem() | limitTo:itemsPerPage"
+				ng-class="{'active': displayIssueExpanded[issue.hash]}"
+				ng-click="changeDisplayIssueExpanded(issue.hash)">
+			<td>{{issue.hash.substring(0,6)}}</td>
 				<td>
-					<a ng-click='showModal()' href="/issues/{{issue.hash}}">{{issue.summary}}</a>
+					<a ng-click="showModal(); changeDisplayIssueExpanded(issue.hash)" href="/issues/{{issue.hash}}">{{issue.summary}}</a>
 				</td>
 				<td>{{issue.description}}</td>
 				<td ng-if="issue.status == 'OPEN'" style="color: #529c00">{{issue.status}}</td>

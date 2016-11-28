@@ -42,31 +42,11 @@
     border: 4px solid black;
     display: block;
 }
-.commentFormName[type=text] {
-    width: 10%;
-    margin: 5px 0px 5px 10px;
-    display:inline;
-    resize: none;
-}
-.commentFormComment[type=text] {
-    width: 10%;
-    margin: 5px 0px 5px 5px;
-    display:inline;
-    resize: none;
-}
-.commentButton[type=button], input[type=submit] {
-    margin: 5px 5px 5px 5px;
-    display:inline;
-}
-.commentStatus {
-    margin: 10px 5px 5px 10px;
-    display:block;
-}
 .resolveButton input[type=submit] {
     display: inline-block;
     margin: 5px 5px 5px 5px;
 }
-.comment {
+.commentTextArea {
 
 }
 .attachments {

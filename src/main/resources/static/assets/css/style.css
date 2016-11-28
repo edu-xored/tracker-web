@@ -84,6 +84,9 @@ body {
 
 .status select:focus {
     outline: none;
+    background-color: white;
+    border-style: none;
+    border-bottom: 2px solid rgb(183, 85, 232);
 }
 
 .add-new {
@@ -133,20 +136,26 @@ body {
     border-color: #ffffff;
     padding: 10px 20px;
 }
+
 #all-issues-table th:last-child, #all-issues-table td:last-child{
     border-width: 0 0px 2px 0;
 }
+
 #all-issues-table tr:first-child {
     background-color: #c1c6c8;
     font-weight: bold;
 }
 
-#all-issues-table th:first-child {
-    text-align: center;
+#all-issues-table td:first-child, #all-issues-table th:first-child {
+    min-width: 30px;
 }
 
-#all-issues-table td:first-child {
-    width: 10px;
+#all-issues-table td:nth-child(2), #all-issues-table th:nth-child(2) {
+    min-width: 60px;
+}
+
+#all-issues-table td:nth-child(3), #all-issues-table th:nth-child(3) {
+    min-width: 150px;
 }
 
 #all-issues-table :visited, #all-issues-table :link {
@@ -160,4 +169,26 @@ body {
 
 .left-container div {
     padding:0px 0px 5px 0px;
+}
+
+#all-issues-table {
+    width: 100%;
+}
+
+#all-issues-table td {
+    word-wrap: break-word;
+    max-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+#all-issues-table .active td{
+    overflow: visible;
+    white-space: normal;
+}
+
+#all-issues-table .disabled td{
+    overflow: hidden;
+    white-space: nowrap;
 }

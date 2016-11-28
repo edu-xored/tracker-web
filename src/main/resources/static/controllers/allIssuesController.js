@@ -4,6 +4,10 @@ angular.module('trackerWebApp')
         $scope.itemsPerPage = 10;
         $scope.itemsPerPageSelects = [2, 5, 10, 20, 50];
         $scope.issues = [];
+        $scope.displayIssueExpanded = [];
+        $scope.changeDisplayIssueExpanded = function (hash) {
+            $scope.displayIssueExpanded[hash] = !$scope.displayIssueExpanded[hash];
+        }
         $scope.statusSelectBackground = 'white';
         $scope.statusSelectTextColor = 'black';
         $scope.firstPage = function() {
