@@ -29,13 +29,15 @@
 				<th>Status</th>
 			</tr>
 			<tr ng-repeat="issue in filtered = (issues | filter: statusFilter | filter:search) |
-				startFrom:startingItem() | limitTo:itemsPerPage" ng-class="{'active': issueDisplay[issue.hash]}">
-				<td ng-click="changeIssueDisplay(issue.hash)">{{issue.hash.substring(0,6)}}</td>
+				startFrom:startingItem() | limitTo:itemsPerPage"
+					ng-class="{'active': displayIssueExpanded[issue.hash]}"
+						ng-click="changeDisplayIssueExpanded(issue.hash)">
+				<td>{{issue.hash.substring(0,6)}}</td>
 				<td>
-					<a ng-click='showModal()' href="/issues/{{issue.hash}}">{{issue.summary}}</a>
+					<a ng-click="showModal(); changeDisplayIssueExpanded(issue.hash)" href="/issues/{{issue.hash}}">{{issue.summary}}</a>
 				</td>
-				<td ng-click="changeIssueDisplay(issue.hash)">{{issue.description}}</td>
-				<td ng-click="changeIssueDisplay(issue.hash)">{{issue.status}}</td>
+				<td>{{issue.description}}</td>
+				<td>{{issue.status}}</td>
 			</tr>
 		</table>
 		<div class="page-container">

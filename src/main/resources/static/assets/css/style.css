@@ -148,6 +148,7 @@ body {
 #all-issues-table {
     width: 100%;
 }
+
 #all-issues-table td {
     max-width: 0;
     overflow: hidden;
