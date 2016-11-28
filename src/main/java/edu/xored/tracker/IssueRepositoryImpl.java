@@ -71,10 +71,7 @@ public class IssueRepositoryImpl implements IssueRepository {
             inStream.readLine(); //Author: <author>
             info = inStream.readLine(); //Date: <date>
             info = info.substring(6);
-            DateTimeFormatter dTF =
-                    new DateTimeFormatterBuilder().parseCaseInsensitive()
-                            .appendPattern("EEE, dd MMM yyyy HH:mm:ss Z")
-                            .toFormatter();
+            DateTimeFormatter dTF = DateTimeFormatter.RFC_1123_DATE_TIME;
             issue.setCreatedDateTime(LocalDateTime.parse(info, dTF));
             info = inStream.readLine();
             if(info.substring(GIT_BUG_HASH_STATUS,GIT_BUG_HASH_STATUS + 4).equals("open")) {
