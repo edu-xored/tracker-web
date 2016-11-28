@@ -10,7 +10,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-@Service
 @RestController
 @RequestMapping(value = "/api")
 public class UserController {

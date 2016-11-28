@@ -23,9 +23,6 @@ public class IssueRepositoryImpl implements IssueRepository {
     // TODO: remove when git bug would implement all needed commands.
     private Map<String, Issue> issuesMap = new HashMap<>();
 
-    @Autowired
-    private UserController userController;
-
     public <S extends Issue> S save(S issue) {
         Process theProcess;
         String commands =  GIT_BUG_NEW + "-m "  + '\"' + issue.getSummary()
@@ -44,10 +41,11 @@ public class IssueRepositoryImpl implements IssueRepository {
         try (BufferedReader inStream = new BufferedReader(new InputStreamReader(theProcess.getInputStream()))) {
             info = inStream.readLine();
             issue.setHash(info);
+            info = inStream.readLine();
+            issue.setAuthor(new User(info.substring(8),""));
         } catch(IOException e) {
             throw new ExecutionFailedException();
         }
-        issue.setAuthor(userController.getUser());
         issuesMap.put(issue.getHash(), issue);
         return issue;
     }
@@ -73,7 +71,8 @@ public class IssueRepositoryImpl implements IssueRepository {
         issue.setHash(issueId);
         try (BufferedReader inStream = new BufferedReader(new InputStreamReader(theProcess.getInputStream()))) {
             inStream.readLine(); //issue <hash>
-            inStream.readLine(); //Author: <author>
+            info = inStream.readLine(); //Author: <author>
+            issue.setAuthor(new User(info.substring(8),""));
             info = inStream.readLine(); //Date: <date>
             info = info.substring(6);
             DateTimeFormatter dTF = DateTimeFormatter.RFC_1123_DATE_TIME;
@@ -96,7 +95,6 @@ public class IssueRepositoryImpl implements IssueRepository {
         } catch(IOException e) {
             throw new ExecutionFailedException();
         }
-        issue.setAuthor(userController.getUser());
         return issue;
     }
 
