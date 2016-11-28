@@ -1,5 +1,5 @@
 angular.module('trackerWebApp')
-	.controller('postCommentController', function($scope, $http, $routeParams) {
+	.controller('postCommentController', function($scope, $http, $timeout, $routeParams) {
 		$scope.comment = {};
 		$scope.submitForm = function() {
 			if (!$scope.comment.content) {
@@ -12,7 +12,7 @@ angular.module('trackerWebApp')
 				data      :    $scope.comment
 			})
 				.success(function() {
-					$scope.status = 'Comment posted.';
+					$scope.status = 'Comment posted!';
 				})
 				.error(function() {
 					$scope.status = 'Comment didn\'t post.';
