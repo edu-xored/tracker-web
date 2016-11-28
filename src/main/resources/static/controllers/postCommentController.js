@@ -3,7 +3,6 @@ angular.module('trackerWebApp')
 		$scope.comment = {};
 		$scope.submitForm = function() {
 			if (!$scope.comment.content) {
-				$scope.status = 'Enter a comment!';
 				return;
 			}
 			$http({
@@ -12,10 +11,10 @@ angular.module('trackerWebApp')
 				data      :    $scope.comment
 			})
 				.success(function() {
-					$scope.status = 'Comment posted!';
+					console.log('Comment posted.');
 				})
 				.error(function() {
-					$scope.status = 'Comment didn\'t post.';
+					console.log('Comment didn\'t post.');
 				});
 		};
 	});
