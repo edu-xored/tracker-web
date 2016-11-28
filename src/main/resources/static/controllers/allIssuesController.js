@@ -1,4 +1,4 @@
-angular.module('trackerWebApp')
+    angular.module('trackerWebApp')
     .controller('issuesController', function(modalDialog, $scope, $http, $element) {
         $scope.currentPage = 0;
         $scope.itemsPerPage = 10;

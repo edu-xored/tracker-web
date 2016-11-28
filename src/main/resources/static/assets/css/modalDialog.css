@@ -8,6 +8,7 @@
 	height: 100%;
 }
 .ng-modal-dialog {
+	/*font-family:  sans-serif, arial;*/
 	z-index:10;
 	position: fixed;
 	width: 60%;
