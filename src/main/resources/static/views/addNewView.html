@@ -1,0 +1,8 @@
+<div>
+    <form ng-submit="submitForm()" name="issueForm">
+        <input type="text" ng-model="issue.summary" placeholder="Leave a summary">
+        <input type="text" ng-model="issue.description" placeholder="Leave a description">
+        <input type="submit" value="Create Issue">
+    </form>
+    <label>Status: {{status}}</label>
+</div>

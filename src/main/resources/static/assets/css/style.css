@@ -91,6 +91,11 @@ body {
     border-radius: 5px;
 }
 
+.add-new :visited, .add-new :link {
+    color: white;
+    text-decoration: none;
+}
+
 .add-new div {
     align: center;
     color: white;
