@@ -1,0 +1,85 @@
+.ng-modal-dialog {
+    width: 42%;
+    height: 65%;
+    top: 15%;
+    left: 29%;
+    background-color: #fafafa;
+}
+.createText {
+    color: black;
+    padding: 5px;
+    margin: 30px 5px 20px 25px;
+	line-height: 0.1;
+	font-size: xx-large;
+	display: block;
+}
+
+.summaryForm[type=text] {
+    left: 7%;
+    width: 86%;
+    position: absolute;
+    top: 7px;
+    overflow: hidden;
+    display:block;
+    resize: none;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    border: 1px solid #d0d0d0;
+    position: relative;
+    margin: 30px 0px 5px 0px;
+}
+
+.descriptionForm[type=text] {
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    border: 1px solid #d0d0d0;
+    word-wrap: break-word;
+    word-break: break-all;
+    text-align: justify;
+    height: 150px;
+    left: 7%;
+    width: 86%;
+    position: relative;
+    display: block;
+    resize: none;
+    margin: 20px 0px 5px 0px;
+}
+
+.createIssueButton {
+    cursor: pointer;
+    color: white;
+    margin: 20px 0px 0px 0px;
+    height: 32px;
+    position: relative;
+    top: 20px;
+    left: 6%;
+    width: 22%;
+    font-weight: bold;
+    background-color: rgb(100, 177, 15);
+    border: 1px solid rgb(100, 177, 15);
+    border-radius: 5px;
+    display: inline-block;
+}
+
+.createIssueButton:focus {
+    outline: none;
+}
+
+.addNewStatus {
+    display: inline-block;
+    color: darkgray;
+    margin: 20px 0px 0px 0px;
+    height: 32px;
+    position: absolute;
+    left: 33%;
+    width: 59%;
+    font-size: 90%;
+}
+
+.addNewStatus a {
+    position: absolute;
+    top: 7px;
+    left: 3%;
+}

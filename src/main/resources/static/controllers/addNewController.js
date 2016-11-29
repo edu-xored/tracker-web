@@ -14,7 +14,7 @@ angular.module('trackerWebApp')
                 data      :    $scope.issue
             })
                 .success(function(response) {
-                    $scope.status = 'Issue added with hash: #' + response.hash;
+                    $scope.status = 'Issue created with hash: #' + response.hash;
                     $scope.issue.summary = '';
                     $scope.issue.description = '';
                 })
