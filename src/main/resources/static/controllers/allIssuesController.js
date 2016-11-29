@@ -1,5 +1,11 @@
 angular.module('trackerWebApp')
     .controller('issuesController', function(modalDialog, $scope, $http, $element) {
+        $scope.dateOrder = function (val) {
+                   return ('0' +val.createdDateTime[0]).slice(-2) + ('0' +val.createdDateTime[1]).slice(-2)
+                    					+ ('0' +val.createdDateTime[2]).slice(-2) + ('00' +val.createdDateTime[3]).slice(-2)
+                    					+ ('00' +val.createdDateTime[4]).slice(-2)
+                    					+ ((val.createdDateTime[5] == null) ? '00' : '00' + val.createdDateTime[5]).slice(-2);
+                }
         $scope.currentPage = 0;
         $scope.itemsPerPage = 10;
         $scope.itemsPerPageSelects = [2, 5, 10, 20, 50];
