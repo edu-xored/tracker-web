@@ -4,6 +4,12 @@ angular.module('trackerWebApp')
         $scope.itemsPerPage = 10;
         $scope.itemsPerPageSelects = [2, 5, 10, 20, 50];
         $scope.issues = [];
+        $scope.displayIssueExpanded = [];
+        $scope.changeDisplayIssueExpanded = function (hash) {
+            $scope.displayIssueExpanded[hash] = !$scope.displayIssueExpanded[hash];
+        }
+        $scope.statusSelectBackground = 'white';
+        $scope.statusSelectTextColor = 'black';
         $scope.firstPage = function() {
             return $scope.currentPage == 0;
         }
@@ -37,6 +43,22 @@ angular.module('trackerWebApp')
         }
         $scope.filteredPagination = function() {
             $scope.currentPage = 0;
+        }
+        $scope.changeStatusSelectBackground = function () {
+            switch ($scope.selectedStatus) {
+                case "OPEN":
+                    $scope.statusSelectBackground = 'rgb(100, 177, 15)';
+                    $scope.statusSelectTextColor = 'white';
+                    break
+                case "RESOLVED":
+                    $scope.statusSelectBackground = '#878787';
+                    $scope.statusSelectTextColor = 'white';
+                    break
+                default:
+                    $scope.statusSelectBackground = 'white';
+                    $scope.statusSelectTextColor = 'black';
+                    break
+            }
         }
         $http.get('/api/issues').
             then(function(response) {

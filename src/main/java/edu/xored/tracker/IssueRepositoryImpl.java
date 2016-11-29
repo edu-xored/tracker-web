@@ -5,12 +5,9 @@ import org.springframework.stereotype.Service;
 import java.io.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
-
-import static java.time.format.FormatStyle.FULL;
 
 @Service
 public class IssueRepositoryImpl implements IssueRepository {
@@ -68,7 +65,8 @@ public class IssueRepositoryImpl implements IssueRepository {
         issue.setHash(issueId);
         try (BufferedReader inStream = new BufferedReader(new InputStreamReader(theProcess.getInputStream()))) {
             inStream.readLine(); //issue <hash>
-            inStream.readLine(); //Author: <author>
+            info = inStream.readLine(); //Author: <author>
+            issue.setAuthor(new User(info.substring(8),""));
             info = inStream.readLine(); //Date: <date>
             info = info.substring(6);
             DateTimeFormatter dTF = DateTimeFormatter.RFC_1123_DATE_TIME;

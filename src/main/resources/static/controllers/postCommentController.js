@@ -1,9 +1,8 @@
 angular.module('trackerWebApp')
-	.controller('postCommentController', function($scope, $http, $routeParams) {
+	.controller('postCommentController', function($scope, $http, $timeout, $routeParams) {
 		$scope.comment = {};
 		$scope.submitForm = function() {
 			if (!$scope.comment.content) {
-				$scope.status = 'Enter a comment!';
 				return;
 			}
 			$http({
@@ -11,11 +10,12 @@ angular.module('trackerWebApp')
 				url       :    '/api/issues/' + $routeParams.hash + '/comments',
 				data      :    $scope.comment
 			})
-				.success(function() {
-					$scope.status = 'Comment posted.';
-				})
-				.error(function() {
-					$scope.status = 'Comment didn\'t post.';
-				});
+			.success(function() {
+				$scope.comment.content = null;
+				console.log('Comment posted.');
+			})
+			.error(function() {
+				console.log('Comment didn\'t post.');
+			});
 		};
 	});
