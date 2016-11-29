@@ -1,54 +1,81 @@
 .ng-modal-dialog {
-    height: 80%;
-    top: 10%;
-}
+     width: 40%;
+     height: 80%;
+     top: 10%;
+     left: 30%;
+     background-color: #fafafa;
+ }
 .hash {
     float: left;
 	color: grey;
-	font-size: 120%;
-	font-weight: bold;
-    margin: 5px 5px 5px 10px;
+    margin: 5px 5px 5px 15px;
 	display: inline;
 }
 .statusOpen, .statusResolved {
-    float: left;
-	font-size: 120%;
-    padding: 2px;
-    margin: 5px 5px 5px 5px;
-    background-color: white;
-    border: 1px solid black;
-    display: inline;
+    height: 25px;
+    position: static;
+    top: 20px;
+    left: 6%;
+    width: 18%;
+    border-radius: 5px;
+	font-size: 80%;
+	text-align: center;
+    padding: 3px 3px 3px 3px;
+    margin: 10px 25px 5px 5px;
+    float: right;
+    color: white;
 }
 .statusOpen {
-      color: red;
+    background-color: rgb(177, 50, 15);
+    border: 1px solid rgb(177, 50, 15);
 }
 .statusResolved {
-    color: green;
+    background-color: rgb(100, 177, 15);
+    border: 1px solid rgb(100, 177, 15);
 }
-.summary {
+#summary {
+    min-width: 60%;
+    max-width: 61%;
+    overflow-x: auto;
+    white-space: nowrap;
     color: black;
     padding: 5px;
-    margin: 10px 5px 20px 5px;
-	line-height: 0.1;
+    margin: 15px 5px 20px 15px;
 	font-weight: bold;
-	font-size: 200%;
-	display: block;
+	display: inline-block;
 }
+
+#summary::-webkit-scrollbar {
+    display: none;
+}
+
 .description {
     text-align: justify;
-    overflow-y: scroll;
+    overflow-y: auto;
     word-wrap: break-word;
     padding: 10px;
-    margin: 10px;
-    background-color: whitesmoke;
+    margin: 10px 10px 10px 10px;
     width: 370px;
-    height: 200px;
-    border: 4px solid black;
-    display: block;
+    height: 150px;
+    border: 0px solid black;
+    display: inline-block;
 }
 .resolveButton input[type=submit] {
-    display: inline-block;
-    margin: 5px 5px 5px 5px;
+    height: 32px;
+    position: static;
+    top: 20px;
+    left: 6%;
+    width: 22%;
+    background-color: rgb(100, 177, 15);
+    border: 1px solid rgb(100, 177, 15);
+    border-radius: 5px;
+	font-size: 120%;
+    padding: 2px;
+    margin: 5px 10px 5px 5px;
+    overflow:hidden;
+    position:relative;
+    top:-15px;
+    color: white;
 }
 .commentTextArea {
 
@@ -57,7 +84,7 @@
 
 }
 .participants {
-
+    margin: 10px 5px 20px 15px;
 }
 .error {
     color: black;

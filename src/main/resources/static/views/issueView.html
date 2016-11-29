@@ -1,13 +1,10 @@
 <link rel="stylesheet" href="assets/css/issueView.style.css">
 <div ng-hide="error">
-    <p class=hash>#{{issue.hash}}</p>
+    <p id=summary>{{issue.summary}}</p>
     <p ng-class="{statusOpen : issue.status=='OPEN', statusResolved : issue.status=='RESOLVED'}">{{issue.status}}</p>
-    <form class="resolveButton" ng-submit="resolveForm()" name="resForm">
-        <input ng-disabled="issue.status=='RESOLVED'" type="submit" value="Resolve">
-    </form>
-    <p class=summary>{{issue.summary}}</p>
+    <p class=hash>#{{issue.hash}}</p>
     <p class=description>{{issue.description}}</p>
-
+    <p class=participants>Added by: {{issue.author.name}}</p>
     <ng-include src="'/views/postCommentView.html'"></ng-include>
     <div class=comment></div>
     <div class=attachments></div>
@@ -15,4 +12,7 @@
     <div ng-show="error">
         <p class="error">{{error}}</p>
     </div>
+    <form class="resolveButton" ng-submit="resolveForm()" name="resForm">
+        <input ng-disabled="issue.status=='RESOLVED'" type="submit" value="Resolve">
+    </form>
 </div>
