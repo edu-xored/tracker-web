@@ -12,14 +12,15 @@
 			<input type="text" ng-model="search" ng-change="filteredPagination()" placeholder="Search...">
 		</div>
 
-		<div class="status">
-		<div> Status:</div>
-			<select ng-model="selectedStatus" ng-options="item for item in statusVariants" ng-change="filteredPagination()"></select>
+		<div class="status" ng-style="{'border-color': statusSelectBackground}">
+			<select ng-model="selectedStatus" ng-options="item for item in statusVariants"
+					ng-change="filteredPagination();changeStatusSelectBackground()"
+					ng-style="{'background-color': statusSelectBackground, 'color': statusSelectTextColor}"></select>
 		</div>
 
 		<div class="add-new">
 			<div>
-				<a ng-click='showModal()' href="/issues/addNew">+Add New</a>
+				<a ng-click='showModal()' href="/issues/addNew"><img src="/assets/img/plus.svg"></a>
 			</div>
 		</div>
 
@@ -39,7 +40,8 @@
 					<a ng-click="showModal(); changeDisplayIssueExpanded(issue.hash)" href="/issues/{{issue.hash}}">{{issue.summary}}</a>
 				</td>
 				<td>{{issue.description}}</td>
-				<td>{{issue.status}}</td>
+				<td ng-if="issue.status == 'OPEN'" style="color: #529c00">{{issue.status}}</td>
+				<td ng-if="issue.status == 'RESOLVED'" style="color: #878787">{{issue.status}}</td>
 			</tr>
 		</table>
 		<div class="page-container">
