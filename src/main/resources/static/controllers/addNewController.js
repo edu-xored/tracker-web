@@ -3,7 +3,6 @@ angular.module('trackerWebApp')
         $scope.issue = {};
         $scope.issue.status = 'OPEN';
         $scope.issue.description = '';
-        $scope.status = '#Information';
         $scope.submitForm = function() {
             if (!$scope.issue.summary) {
                 $scope.status = 'Summary isn\'t filled!';
@@ -15,7 +14,7 @@ angular.module('trackerWebApp')
                 data      :    $scope.issue
             })
                 .success(function(response) {
-                    $scope.status = '#' + response.hash;
+                    $scope.status = 'Issue created with hash: #' + response.hash;
                     $scope.issue.summary = '';
                     $scope.issue.description = '';
                 })

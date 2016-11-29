@@ -68,16 +68,13 @@
 
 .addNewStatus {
     display: inline-block;
-    color: white;
+    color: darkgray;
     margin: 20px 0px 0px 0px;
     height: 32px;
     position: absolute;
     left: 33%;
     width: 59%;
     font-size: 90%;
-    background-color: #25aae1;
-    border: 1px solid #25aae1;
-    border-radius: 5px;
 }
 
 .addNewStatus a {
