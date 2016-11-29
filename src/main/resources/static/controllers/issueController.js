@@ -20,6 +20,7 @@ angular.module('trackerWebApp')
 			  .success(function() {
 				  $scope.issue.status = 'RESOLVED';
 				  $scope.status = 'Resolved';
+				  modalDialog.needReload = true;
 			   })
 			   .error(function() {
 				  $scope.status = 'Failed to resolve';
