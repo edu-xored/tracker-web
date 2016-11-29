@@ -31,7 +31,7 @@
 				<th>Status</th>
 			</tr>
 			<tr ng-repeat="issue in filtered = (issues | filter: statusFilter | filter:search)
-			| orderBy : 'createdDateTime' : true | startFrom:startingItem() | limitTo:itemsPerPage"
+			| orderBy : dateOrder : true | startFrom:startingItem() | limitTo:itemsPerPage"
 				ng-class="{'active': displayIssueExpanded[issue.hash]}"
 				ng-click="changeDisplayIssueExpanded(issue.hash)">
 			<td>{{issue.hash.substring(0,6)}}</td>
