@@ -42,10 +42,10 @@ public class UserController {
     }
 
     @ResponseStatus(value = HttpStatus.FORBIDDEN, reason = "Git not found")
-    private class GitNotFoundException extends RuntimeException {
+    private static class GitNotFoundException extends RuntimeException {
     }
 
     @ResponseStatus(value = HttpStatus.FAILED_DEPENDENCY, reason = "An error occurred while executing command")
-    private class ExecutionFailedException extends RuntimeException {
+    private static class ExecutionFailedException extends RuntimeException {
     }
 }

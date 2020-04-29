@@ -1,5 +1,8 @@
 package edu.xored.tracker;
 
+import static java.util.Objects.requireNonNull;
+
+import edu.xored.tracker.IssueRepository.IssueNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
@@ -18,10 +21,14 @@ import java.util.stream.StreamSupport;
 @RequestMapping(value = "/api/issues")
 public class IssueController {
 
-    @Autowired
-    private IssueRepository issueRepository;
-    @Autowired
-    private AttachmentService attachmentService;
+    private final IssueRepository issueRepository;
+    private final AttachmentService attachmentService;
+
+    public IssueController(
+            IssueRepository issueRepository, AttachmentService attachmentService) {
+        this.issueRepository = requireNonNull(issueRepository);
+        this.attachmentService = requireNonNull(attachmentService);
+    }
 
     @PostMapping
     public Issue postIssue(@RequestBody Issue issue) {
@@ -37,7 +44,7 @@ public class IssueController {
     @PutMapping(value = "/{hash}")
     public Issue putIssue(@PathVariable("hash") String hash,
                           @RequestBody Issue issue) {
-        throw new IssueRepositoryImpl.IssueNotImplementedException();
+        throw new IssueRepository.IssueNotImplementedException();
     }
 
     @DeleteMapping(value = "/{hash}")
@@ -60,8 +67,8 @@ public class IssueController {
 
     @GetMapping
     public Collection<Issue> getIssues(@RequestParam(value = "status", required = false) Issue.Status status) {
-        return StreamSupport.stream(issueRepository.findAll(status).spliterator(), false)
-                .collect(Collectors.toList());
+        return issueRepository.findAll(status);
+
     }
 
     @PostMapping(value = "/{hash}/comments")
@@ -73,7 +80,7 @@ public class IssueController {
 
     private void assertIssueExists(String hash) throws IssueNotFoundException {
         if (!issueRepository.exists(hash)) {
-            throw new IssueNotFoundException();
+            throw new IssueNotFoundException(hash);
         }
     }
 
@@ -83,7 +90,7 @@ public class IssueController {
         assertIssueExists(hash);
         attachmentService.saveAttachment(hash, file);
         HttpHeaders headers = new HttpHeaders();
-        return new ResponseEntity<String>("Success!", headers, HttpStatus.CREATED);
+        return new ResponseEntity<>("Success!", headers, HttpStatus.CREATED);
     }
 
     @GetMapping(value="/{hash}/download")
@@ -93,13 +100,14 @@ public class IssueController {
         try (ByteArrayInputStream input =  attachmentService.getAttachment(hash,name)) {
             InputStreamResource out = new InputStreamResource(input);
             HttpHeaders headers = new HttpHeaders();
-            return new ResponseEntity<InputStreamResource>(out, headers, HttpStatus.CREATED);
+            return new ResponseEntity<>(out, headers, HttpStatus.CREATED);
         } catch(IOException e) {
             throw new AttachmentService.AttachmentException(e);
         }
     }
 
-    @ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "Issue not found")
-    public static class IssueNotFoundException extends RuntimeException {
+    @ExceptionHandler(IssueNotFoundException.class)
+    public String notFoundHandler(IssueNotFoundException ex) {
+        return ex.getMessage();
     }
 }
